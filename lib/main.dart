@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, device){
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'School Brain',
+        title: 'Tele Sağlık',
         theme: CustomTheme().baseTheme,
         //initial route is splash screen
         //mean first screen

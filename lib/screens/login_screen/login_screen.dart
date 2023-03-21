@@ -31,27 +31,31 @@ class _LoginScreenState extends State<LoginScreen> {
       //when user taps anywhere on the screen, keyboard hides
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        backgroundColor: Colors.cyan,
         body: Column(
+
           children: [
             Container(
+
               width: 100.w,
               height: 35.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
+
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hi Student',
+                      Text('Hoş Geldiniz',
                           style: Theme.of(context).textTheme.subtitle1),
-                      Text('Sign in to continue',
-                          style: Theme.of(context).textTheme.subtitle2),
+                      Text('Lütfen Giriş Yapınız',
+                          style: Theme.of(context).textTheme.subtitle1),
                       sizedBox,
                     ],
                   ),
                   Image.asset(
-                    'assets/images/splash.png',
+                    'assets/images/logobb.png',
                     height: 20.h,
                     width: 40.w,
                   ),
@@ -79,28 +83,50 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         buildPasswordField(),
                         sizedBox,
-                        DefaultButton(
+                        /*DefaultButton(
                           onPress: () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.pushNamedAndRemoveUntil(context,
                                   HomeScreen.routeName, (route) => false);
                             }
                           },
-                          title: 'SIGN IN',
+                          title: 'Giriş',
                           iconData: Icons.arrow_forward_outlined,
+
+                        ),*/
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+                            }
+                          },
+                          child: Text(
+                            'Giriş',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.cyan, // background
+                            onPrimary: Colors.white, // foreground
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                            fixedSize: Size(180, 50),
+
+                          ),
+                          //color: Colors.blue, // Burada butonun rengini değiştirdik
+                          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         ),
+
                         sizedBox,
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            'Forgot Password',
+                            'Şifremi Unuttum',
                             textAlign: TextAlign.end,
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle2!
+                                .subtitle1!
                                 .copyWith(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.w500),
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.w200),
                           ),
                         ),
                       ],
@@ -121,18 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
       keyboardType: TextInputType.emailAddress,
       style: kInputTextStyle,
       decoration: InputDecoration(
-        labelText: 'Mobile Number/Email',
+        labelText: 'Email Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: (value) {
         //for validation
         RegExp regExp = new RegExp(emailPattern);
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          return 'Lütfen Bir Mail Giriniz';
           //if it does not matches the pattern, like
           //it not contains @
         } else if (!regExp.hasMatch(value)) {
-          return 'Please enter a valid email address';
+          return 'Lütfen Geçerli Bir Mail Giriniz';
         }
       },
     );
@@ -145,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
       keyboardType: TextInputType.visiblePassword,
       style: kInputTextStyle,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: 'Şifre',
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: IconButton(
           onPressed: () {
@@ -163,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       validator: (value) {
         if (value!.length < 5) {
-          return 'Must be more than 5 characters';
+          return '5 Karakterden Daha Uzun Olmalı';
         }
       },
     );
