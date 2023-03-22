@@ -83,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     //we use future to go from one screen to other via duration time
-    Future.delayed(Duration(seconds: 10), (){
+    Future.delayed(Duration(seconds: 7), (){
       //no return when user is on login screen and press back, it will not return the
       //user to the splash screen
       Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
