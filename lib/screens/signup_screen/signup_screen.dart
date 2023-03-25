@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:telesaglikk/components/custom_buttons.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/screens/home_screen/home_screen.dart';
@@ -6,18 +7,20 @@ import 'package:sizer/sizer.dart';
 import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
 import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
 
+
 late bool _passwordVisible;
 
-class LoginScreen extends StatefulWidget {
-  static String routeName = 'LoginScreen';
-
+class SignupScreen extends StatefulWidget{
+  static String routeName = 'SignupScreen';
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<StatefulWidget> createState() {
+
+    return _SignupScreenState();
+  }
+
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  //validate our form now
-  final _formKey = GlobalKey<FormState>();
+class _SignupScreenState extends State<SignupScreen>{
 
   //changes current state
   @override
@@ -29,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       //when user taps anywhere on the screen, keyboard hides
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -49,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Hoş Geldiniz',
+                      Text('KAYIT OL',
                           style: Theme.of(context).textTheme.subtitle1),
                       Text('Lütfen Giriş Yapınız',
                           style: Theme.of(context).textTheme.subtitle1),
@@ -76,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: kTopBorderRadius,
                 ),
                 child: Form(
-                  key: _formKey,
+                  //key: _formKey,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -98,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),*/
                         ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
-                            }
+                            //if (_formKey.currentState!.validate()) {
+                             // Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+                            //}
                           },
                           child: Text(
                             'Giriş',
@@ -132,63 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         sizedBox,*/
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(context, RessetpasswordScreen.routeName, (route) => true);
-                            },
-                            child: Text(
-                              'Şifremi Unuttum',
-
-                              style: TextStyle(color: Colors.white,
-                                fontSize: 8,),
-                              textAlign: TextAlign.end,
 
 
-
-                            ),
-                            style: ElevatedButton.styleFrom(
-
-                              primary: Colors.cyan, // background
-                              onPrimary: Colors.white, // foreground
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              fixedSize: Size(100, 20),
-
-                            ),
-                            //color: Colors.blue, // Burada butonun rengini değiştirdik
-                            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          ),
-                        ),
-                        sizedBox,
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(context, SignupScreen.routeName, (route) => true);
-                            },
-                            child: Text(
-                              'Kayıt Ol',
-
-                              style: TextStyle(color: Colors.white,
-                                fontSize: 10,),
-                              textAlign: TextAlign.end,
-
-
-
-                            ),
-                            style: ElevatedButton.styleFrom(
-
-                              primary: Colors.cyan, // background
-                              onPrimary: Colors.white, // foreground
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                              fixedSize: Size(100, 20),
-
-                            ),
-                            //color: Colors.blue, // Burada butonun rengini değiştirdik
-                            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          ),
-                        )
 
 
                       ],
@@ -202,7 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
   TextFormField buildEmailField() {
     return TextFormField(
       textAlign: TextAlign.start,

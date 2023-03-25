@@ -1,4 +1,8 @@
+
+
 import 'package:telesaglikk/screens/login_screen/login_screen.dart';
+import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
+import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
 import 'package:telesaglikk/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'screens/assignment_screen/assignment_screen.dart';
@@ -16,4 +20,6 @@ Map<String, WidgetBuilder> routes = {
   FeeScreen.routeName: (context) => FeeScreen(),
   AssignmentScreen.routeName: (context) => AssignmentScreen(),
   DateSheetScreen.routeName: (context) => DateSheetScreen(),
+  SignupScreen.routeName: (context) => SignupScreen(),
+  RessetpasswordScreen.routeName: (context)=> RessetpasswordScreen(),
 };
