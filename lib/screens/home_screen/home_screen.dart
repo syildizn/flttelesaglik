@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBkrColor,
       body: Column(
         children: [
           //we will divide the screen into two parts
@@ -94,6 +95,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         HomeCard(
+
                           onPress: () {},
                           icon: 'assets/icons/quiz.svg',
                           title: 'Take Quiz',
@@ -217,7 +219,7 @@ class HomeCard extends StatelessWidget {
         width: 40.w,
         height: 20.h,
         decoration: BoxDecoration(
-          color: kPrimaryColor,
+          color: kBkrColor,
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
         ),
         child: Column(

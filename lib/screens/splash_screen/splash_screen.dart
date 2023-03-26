@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -83,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     //we use future to go from one screen to other via duration time
-    Future.delayed(Duration(seconds: 7), (){
+    Future.delayed(Duration(seconds: 3), (){
       //no return when user is on login screen and press back, it will not return the
       //user to the splash screen
       Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
@@ -92,6 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBkrColor,
       body: Stack(
         children: [
           // Arka plan resmi
@@ -123,14 +125,14 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: Theme.of(context)
                           .textTheme
                           .headline5
-                          ?.copyWith(color: Colors.cyan),
+                          ?.copyWith(color: kBkrColor),
                     ),
                     Text(
                       'SAGLIK',
                       style: Theme.of(context)
                           .textTheme
                           .headline5
-                          ?.copyWith(color: Colors.cyan),
+                          ?.copyWith(color: kBkrColor),
                     ),
                   ],
                 ),

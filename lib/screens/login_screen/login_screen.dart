@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //when user taps anywhere on the screen, keyboard hides
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: Colors.cyan,
+        backgroundColor: kBkrColor,
         body: Column(
 
           children: [
@@ -85,17 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         buildPasswordField(),
                         sizedBox,
-                        /*DefaultButton(
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(context,
-                                  HomeScreen.routeName, (route) => false);
-                            }
-                          },
-                          title: 'Giriş',
-                          iconData: Icons.arrow_forward_outlined,
 
-                        ),*/
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
@@ -107,31 +97,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(color: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.cyan, // background
+                            primary: kBkrColor, // background
                             onPrimary: Colors.white, // foreground
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                             fixedSize: Size(180, 50),
 
                           ),
-                          //color: Colors.blue, // Burada butonun rengini değiştirdik
-                          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+
                         ),
 
                         sizedBox,
-                        /*Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(
-                            'Şifremi Unuttum',
-                            textAlign: TextAlign.end,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1!
-                                .copyWith(
-                                color: Colors.cyan,
-                                fontWeight: FontWeight.w200),
-                          ),
-                        ),
-                        sizedBox,*/
+
                         Align(
                           alignment: Alignment.bottomRight,
                           child: ElevatedButton(
@@ -150,14 +126,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
 
-                              primary: Colors.cyan, // background
+                              primary: kBkrColor, //Colors.cyan, // background
                               onPrimary: Colors.white, // foreground
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               fixedSize: Size(100, 20),
 
                             ),
-                            //color: Colors.blue, // Burada butonun rengini değiştirdik
-                            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+
                           ),
                         ),
                         sizedBox,
@@ -179,14 +154,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             style: ElevatedButton.styleFrom(
 
-                              primary: Colors.cyan, // background
+                              primary: kBkrColor, // background
                               onPrimary: Colors.white, // foreground
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               fixedSize: Size(100, 20),
 
                             ),
-                            //color: Colors.blue, // Burada butonun rengini değiştirdik
-                            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+
                           ),
                         )
 

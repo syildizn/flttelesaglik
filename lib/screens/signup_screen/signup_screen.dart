@@ -4,8 +4,10 @@ import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:telesaglikk/screens/login_screen/login_screen.dart';
 import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
 import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 late bool _passwordVisible;
@@ -22,6 +24,8 @@ class SignupScreen extends StatefulWidget{
 
 class _SignupScreenState extends State<SignupScreen>{
 
+  final _formKey = GlobalKey<FormState>();
+
   //changes current state
   @override
   void initState() {
@@ -37,7 +41,7 @@ class _SignupScreenState extends State<SignupScreen>{
       //when user taps anywhere on the screen, keyboard hides
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: Colors.cyan,
+        backgroundColor: kBkrColor,
         body: Column(
 
           children: [
@@ -55,8 +59,10 @@ class _SignupScreenState extends State<SignupScreen>{
                     children: [
                       Text('KAYIT OL',
                           style: Theme.of(context).textTheme.subtitle1),
-                      Text('Lütfen Giriş Yapınız',
-                          style: Theme.of(context).textTheme.subtitle1),
+                      Text('Lütfen Bilgilerinizi Giriniz',
+                          style: //Theme.of(context).textTheme.bodyMedium,
+                        TextStyle(color: Colors.white,
+                          fontSize: 17),),
                       sizedBox,
                     ],
                   ),
@@ -81,6 +87,7 @@ class _SignupScreenState extends State<SignupScreen>{
                 ),
                 child: Form(
                   //key: _formKey,
+                  key: _formKey,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -89,32 +96,73 @@ class _SignupScreenState extends State<SignupScreen>{
                         sizedBox,
                         buildPasswordField(),
                         sizedBox,
-                        /*DefaultButton(
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(context,
-                                  HomeScreen.routeName, (route) => false);
-                            }
-                          },
-                          title: 'Giriş',
-                          iconData: Icons.arrow_forward_outlined,
+                        buildNameField(),
+                        sizedBox,
+                        buildLastNameField(),
+                        sizedBox,
+                        buildDepartmentField(),
+                        sizedBox,
+                        buildSchoolNumberField(),
+                        sizedBox,
 
-                        ),*/
                         ElevatedButton(
+
                           onPressed: () {
-                            //if (_formKey.currentState!.validate()) {
-                             // Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
-                            //}
+                            if(_formKey.currentState!.validate()){
+                              String message = "Hesabınız onaylandığında size e-mail gönderilecektir";
+                              var alert = AlertDialog(
+                                backgroundColor: kBkrColor,
+                                title: Text("Kayıt Başarılı",style: GoogleFonts.sourceSansPro(
+                                  textStyle: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal,
+                                    color: Colors.white,
+                                  ),
+                                ),),
+                                content: Text(
+                                  message,
+                                  style: GoogleFonts.sourceSansPro(
+                                    textStyle: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              );
+
+                              //print(message);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                                      );
+                                    },
+                                    child: Container(
+                                      //color: kBkrColor,
+                                      color: Colors.transparent,
+                                      child: alert,
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+
                           },
                           child: Text(
-                            'Giriş',
+                            'Kayıt Ol',
                             style: TextStyle(color: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.cyan, // background
+                            primary: kBkrColor, // background
                             onPrimary: Colors.white, // foreground
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-                            fixedSize: Size(180, 50),
+                            fixedSize: Size(180, 30),
 
                           ),
                           //color: Colors.blue, // Burada butonun rengini değiştirdik
@@ -122,20 +170,7 @@ class _SignupScreenState extends State<SignupScreen>{
                         ),
 
                         sizedBox,
-                        /*Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(
-                            'Şifremi Unuttum',
-                            textAlign: TextAlign.end,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1!
-                                .copyWith(
-                                color: Colors.cyan,
-                                fontWeight: FontWeight.w200),
-                          ),
-                        ),
-                        sizedBox,*/
+
 
 
 
@@ -199,9 +234,111 @@ class _SignupScreenState extends State<SignupScreen>{
       ),
       validator: (value) {
         if (value!.length < 5) {
+
           return '5 Karakterden Daha Uzun Olmalı';
         }
       },
     );
+  }
+
+  buildNameField() {
+    return TextFormField(
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.name,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Adınızı Giriniz',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        //RegExp regExp = new RegExp(emailPattern);
+        if (value == null || value.isEmpty) {
+          return 'Lütfen Bir Ad Giriniz';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (value.length<2) {
+          return 'Lütfen Geçerli Bir Ad Giriniz';
+        }
+      },
+    );
+
+
+
+
+  }
+
+  buildLastNameField() {
+    return TextFormField(
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.name,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Soyadınızı Giriniz',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        //RegExp regExp = new RegExp(emailPattern);
+        if (value == null || value.isEmpty) {
+          return 'Lütfen Bir Soyad Giriniz';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (value.length<2) {
+          return 'Lütfen Geçerli Bir Soyad Giriniz';
+        }
+      },
+    );
+
+
+  }
+
+  buildDepartmentField() {
+    return TextFormField(
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.name,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Bölümünüzü Giriniz',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        //RegExp regExp = new RegExp(emailPattern);
+        if (value == null || value.isEmpty) {
+          return 'Lütfen Bir Bölüm Giriniz';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (value.length<2) {
+          return 'Lütfen Geçerli Bir Bölüm Giriniz';
+        }
+      },
+    );
+
+  }
+
+  buildSchoolNumberField() {
+
+    return TextFormField(
+      textAlign: TextAlign.start,
+      keyboardType: TextInputType.number,
+      style: kInputTextStyle,
+      decoration: InputDecoration(
+        labelText: 'Okul Numaranızı Giriniz',
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+      validator: (value) {
+        //for validation
+        //RegExp regExp = new RegExp(emailPattern);
+        if (value == null || value.isEmpty) {
+          return 'Lütfen Bir Numara Giriniz';
+          //if it does not matches the pattern, like
+          //it not contains @
+        } else if (value.length<2) {
+          return 'Lütfen Geçerli Bir Numara Giriniz';
+        }
+      },
+    );
+
   }
 }
