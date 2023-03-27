@@ -9,7 +9,7 @@ class StudentName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Hi ', style: Theme.of(context).textTheme.subtitle1),
+        Text('Merhaba ', style: Theme.of(context).textTheme.subtitle1),
         Text(studentName, style: Theme.of(context).textTheme.subtitle1),
       ],
     );
@@ -21,7 +21,7 @@ class StudentClass extends StatelessWidget {
   final String studentClass;
   @override
   Widget build(BuildContext context) {
-    return Text(studentClass, style: Theme.of(context).textTheme.subtitle2);
+    return Text(studentClass, style: Theme.of(context).textTheme.subtitle2?.copyWith(fontWeight: FontWeight.bold));
   }
 }
 
@@ -96,13 +96,13 @@ class StudentDataCard extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: kTextBlackColor,
+                color: kTextBlackColor,fontSize: 18.0,
               ),
             ),
             Text(
               value,
-              style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                color: kTextLightColor,
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                color: kTextLightColor,fontWeight: FontWeight.bold,
               ),
             ),
           ],

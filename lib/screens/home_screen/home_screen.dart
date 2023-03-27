@@ -34,18 +34,18 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         StudentName(
-                          studentName: 'Aisha',
+                          studentName: 'Öğrenci X',
                         ),
                         kHalfSizedBox,
                         StudentClass(
-                            studentClass: 'Class X-II A | Roll no: 12'),
+                            studentClass: 'Biyomedikal Mühendisliği'),
                         kHalfSizedBox,
-                        StudentYear(studentYear: '2020-2021'),
+                        StudentYear(studentYear: '2022-2023'),
                       ],
                     ),
                     kHalfSizedBox,
                     StudentPicture(
-                        picAddress: 'assets/images/student_profile.jpeg',
+                        picAddress: 'assets/images/unknown.jpg',
                         onPress: () {
                           // go to profile detail screen here
                           Navigator.pushNamed(
@@ -61,16 +61,16 @@ class HomeScreen extends StatelessWidget {
                       onPress: () {
                         //go to attendance screen
                       },
-                      title: 'Attendance',
-                      value: '90.02%',
+                      title: 'Sağlık Kayıtlarım',
+                      value: '6 Adet',
                     ),
                     StudentDataCard(
                       onPress: () {
                         //go to fee due screen
                         Navigator.pushNamed(context, FeeScreen.routeName);
                       },
-                      title: 'Fees Due',
-                      value: '600\$',
+                      title: 'Görüşme Kayıtlarım',
+                      value: '3 Adet',
                     ),
                   ],
                 )
