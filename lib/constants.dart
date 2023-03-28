@@ -12,6 +12,17 @@ const Color kOtherColor = Color(0xFFF4F6F7);
 const Color kTextLightColor = Color(0xFFA5A5A5);
 const Color kErrorBorderColor = Color(0xFFE74C3C);
 const Color kBkrColor = Color.fromRGBO(0, 165, 181, 1.0);
+const Color homecard1 = Color.fromRGBO(104,209,169,1.0);
+const Color homecard2 = Color.fromRGBO(137,101,223,1.0);
+const Color homecard3 = Color.fromRGBO(255,203,67,1.0);
+const Color homecard4 = Color.fromRGBO(240,54,103,1.0);
+const Color homecard5 = Color.fromRGBO(104,121,225,1.0);
+const Color homecard6 = Color.fromRGBO(236,106,84,1.0);
+const Color homefont = Color.fromRGBO(250, 255, 255, 1);
+
+
+//rgba(104,209,169,255)
+
 //default value
 const kDefaultPadding = 20.0;
 

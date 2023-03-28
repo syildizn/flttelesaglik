@@ -63,7 +63,18 @@ class StudentPicture extends StatelessWidget {
       child: CircleAvatar(
         radius: SizerUtil.deviceType == DeviceType.tablet ? 12.w : 14.w,
         backgroundColor: kSecondaryColor,
-        backgroundImage: AssetImage(picAddress),
+        backgroundImage: AssetImage(picAddress,),
+        child: ClipOval(
+          child: Image.asset(
+            picAddress,
+            fit: BoxFit.cover,
+          ),
+        ),
+
+
+        // yeni eklendi
+
+
       ),
     );
   }
