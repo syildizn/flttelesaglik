@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         })],
 
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
 
       body: Column(
         children: [
@@ -237,11 +237,11 @@ class HomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,//.withOpacity(0.40),Colors.white,
           boxShadow: [
-            BoxShadow(
+           /* BoxShadow(
               offset: Offset(0,-10),
               blurRadius: 35,
               color: kBkrColor.withOpacity(0.38),
-            )
+            )*/
           ]
         ),
         child: Row(
@@ -286,11 +286,11 @@ class HomeCard extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
             boxShadow: [
-            BoxShadow(
+           /* BoxShadow(
             offset: Offset(0,-10),
         blurRadius: 35,
         color: kBkrColor.withOpacity(0.25),
-      )]
+      )*/]
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
