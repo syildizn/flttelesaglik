@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
+
+//mongoDb
+
+const DB_CONNECTION_STRING = "mongodb+srv://syzbakircayprojects:bakircay123@clustersyzproject.0fg8bny.mongodb.net/BakircayTeleSaglik?retryWrites=true&w=majority";
+const Collection_Name = "students";
+
+
+
 //colors
 const Color kPrimaryColor = Color(0xFF345FB4);
 const Color kSecondaryColor = Color(0xFF6789CA);
@@ -19,6 +27,8 @@ const Color homecard4 = Color.fromRGBO(240,54,103,1.0);
 const Color homecard5 = Color.fromRGBO(104,121,225,1.0);
 const Color homecard6 = Color.fromRGBO(236,106,84,1.0);
 const Color homefont = Color.fromRGBO(250, 255, 255, 1);
+
+
 
 
 //rgba(104,209,169,255)

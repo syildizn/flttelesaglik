@@ -1,3 +1,5 @@
+import 'package:telesaglikk/MongoDb.dart';
+import 'package:telesaglikk/constants.dart%20';
 import 'package:telesaglikk/routes.dart';
 import 'package:telesaglikk/screens/splash_screen/splash_screen.dart';
 
@@ -5,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:telesaglikk/theme.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await MongoDataBase.connect();
   runApp(MyApp());
 }
 

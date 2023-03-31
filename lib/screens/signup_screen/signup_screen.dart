@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/components/custom_buttons.dart';
 import 'package:telesaglikk/constants.dart';
+import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -26,11 +28,47 @@ class _SignupScreenState extends State<SignupScreen>{
 
   final _formKey = GlobalKey<FormState>();
 
+
+
+
+
+  String? _firstName;
+  String? _lastName;
+  String? _department;
+  String? _password;
+  String? _email;
+  int?    _studentno;
+
+
+  void _submitForm() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      final student = Student(firstName: _firstName,lastName: _lastName,department: _department,password: _password,email: _email,studentno: _studentno);
+
+
+
+
+
+
+
+
+
+
+      // Başarılı kayıt mesajı göster
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Kaydınız başarıyla tamamlandı!')),
+      );
+    }
+  }
+
+
   //changes current state
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _passwordVisible = true;
   }
 
@@ -191,6 +229,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: kInputTextStyle,
+      onSaved: (value) => _email = value,
       decoration: InputDecoration(
         labelText: 'Email Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -215,6 +254,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.visiblePassword,
       style: kInputTextStyle,
+      onSaved: (value) => _password = value,
       decoration: InputDecoration(
         labelText: 'Şifre',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -246,6 +286,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
+      onSaved: (value) => _firstName = value,
       decoration: InputDecoration(
         labelText: 'Adınızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -273,6 +314,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
+      onSaved: (value) => _lastName = value,
       decoration: InputDecoration(
         labelText: 'Soyadınızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -298,6 +340,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
+      onSaved: (value) => _department = value,
       decoration: InputDecoration(
         labelText: 'Bölümünüzü Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -323,6 +366,7 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.number,
       style: kInputTextStyle,
+      onSaved: (value) => _studentno = int.parse(value!)  ,
       decoration: InputDecoration(
         labelText: 'Okul Numaranızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
