@@ -1,33 +1,42 @@
 import 'dart:developer';
+//import 'dart:html';
 
 import 'package:telesaglikk/constants.dart ';
 import 'package:mongo_dart/mongo_dart.dart';
-class MongoDataBase{
 
- static connect() async{
+import 'models/students_model.dart';
 
+class MongoDataBase {
+  static var db, userCollection;
 
-  var db = await Db.create(DB_CONNECTION_STRING);
-  await db.open();
-  inspect(db);
-  var status = db.serverStatus();
-  print(status);
-  var collection = db.collection(Collection_Name);
-  print(await collection.find().toList());
+  static connect() async {
+    db = await Db.create(DB_CONNECTION_STRING);
+    await db.open();
+    inspect(db);
+    var status = db.serverStatus();
+    print(status);
+    userCollection = db.collection(Collection_Name);
+    print(await userCollection.find().toList());
+  }
 
+  static Future<String?> insert(Student data) async {
+    try {
+      var result = await userCollection.insertOne(data.toJson());
+      if (result.isSucces) {
+        return "Data İnserted";
+      } else {
+        return "Something wrong while İnserting data";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
 
- }
+  static Future<List<Map<String,dynamic>>> getQueryData() async{
 
+    final data = await userCollection.find().toList();
+    return data;
 
- void addStudent(Map<String, dynamic> studentData) async {
-   final db = await Db.create(DB_CONNECTION_STRING);
-   await db.open();
-   final collection = db.collection('students');
-   await collection.insert(studentData);
-   await db.close();
- }
-
- String get myFunctionResult => connect();
-
-
+  }
 }

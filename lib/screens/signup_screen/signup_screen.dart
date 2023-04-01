@@ -10,97 +10,97 @@ import 'package:telesaglikk/screens/login_screen/login_screen.dart';
 import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
 import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:mongo_dart/mongo_dart.dart' as M;
 
 late bool _passwordVisible;
 
-class SignupScreen extends StatefulWidget{
+class SignupScreen extends StatefulWidget {
   static String routeName = 'SignupScreen';
   @override
   State<StatefulWidget> createState() {
-
     return _SignupScreenState();
   }
-
 }
 
-class _SignupScreenState extends State<SignupScreen>{
+class _SignupScreenState extends State<SignupScreen> {
+  var firstNameControler = TextEditingController();
+  var lastNameControler = TextEditingController();
+  var departmentControler = TextEditingController();
+  var passwordControler = TextEditingController();
+  var emailControler = TextEditingController();
+  var studentnoControler = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  //final _mongodb = MongoDB();
+  //final _student = Student();
 
-
-
-
-
-  String? _firstName;
-  String? _lastName;
-  String? _department;
-  String? _password;
-  String? _email;
-  int?    _studentno;
-
-
-  void _submitForm() async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-
-      final student = Student(firstName: _firstName,lastName: _lastName,department: _department,password: _password,email: _email,studentno: _studentno);
-
-
-
-
-
-
-
-
-
-
-      // Başarılı kayıt mesajı göster
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Kaydınız başarıyla tamamlandı!')),
-      );
-    }
+  Future<void> _insertData(
+      String _firstName,
+      String _lastName,
+      String _department,
+      String _password,
+      String _email,
+      int _studentno) async {
+    var _id = M.ObjectId();
+    final data = Student(
+        id: _id,
+        firstName: _firstName,
+        lastName: _lastName,
+        department: _department,
+        password: _password,
+        email: _email,
+        studentno: _studentno);
+    var result = await MongoDataBase.insert(data);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Inserted ID' + _id.$oid)),
+    );
+    _clearAll();
   }
 
+  void _clearAll() {
+    firstNameControler.text = " ";
+    lastNameControler.text = " ";
+    departmentControler.text = " ";
+    passwordControler.text = " ";
+    emailControler.text = " ";
+    studentnoControler.text = " ";
+  }
 
   //changes current state
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    // _mongodb.openDb();
     _passwordVisible = true;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       //when user taps anywhere on the screen, keyboard hides
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: kBkrColor,
         body: Column(
-
           children: [
             Container(
-
               width: 100.w,
               height: 35.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
-
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('KAYIT OL',
                           style: Theme.of(context).textTheme.subtitle1),
-                      Text('Lütfen Bilgilerinizi Giriniz',
-                          style: //Theme.of(context).textTheme.bodyMedium,
-                        TextStyle(color: Colors.white,
-                          fontSize: 17),),
+                      Text(
+                        'Lütfen Bilgilerinizi Giriniz',
+                        style: //Theme.of(context).textTheme.bodyMedium,
+                            TextStyle(color: Colors.white, fontSize: 17),
+                      ),
                       sizedBox,
                     ],
                   ),
@@ -142,22 +142,31 @@ class _SignupScreenState extends State<SignupScreen>{
                         sizedBox,
                         buildSchoolNumberField(),
                         sizedBox,
-
                         ElevatedButton(
-
                           onPressed: () {
-                            if(_formKey.currentState!.validate()){
-                              String message = "Hesabınız onaylandığında size e-mail gönderilecektir";
+                            _insertData(
+                                firstNameControler.text,
+                                lastNameControler.text,
+                                departmentControler.text,
+                                passwordControler.text,
+                                emailControler.text,
+                                int.parse(studentnoControler.text));
+                            if (_formKey.currentState!.validate()) {
+                              String message =
+                                  "Hesabınız onaylandığında size e-mail gönderilecektir";
                               var alert = AlertDialog(
                                 backgroundColor: kBkrColor,
-                                title: Text("Kayıt Başarılı",style: GoogleFonts.sourceSansPro(
-                                  textStyle: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.normal,
-                                    color: Colors.white,
+                                title: Text(
+                                  "Kayıt Başarılı",
+                                  style: GoogleFonts.sourceSansPro(
+                                    textStyle: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),),
+                                ),
                                 content: Text(
                                   message,
                                   style: GoogleFonts.sourceSansPro(
@@ -178,7 +187,9 @@ class _SignupScreenState extends State<SignupScreen>{
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
                                       );
                                     },
                                     child: Container(
@@ -190,7 +201,6 @@ class _SignupScreenState extends State<SignupScreen>{
                                 },
                               );
                             }
-
                           },
                           child: Text(
                             'Kayıt Ol',
@@ -199,20 +209,14 @@ class _SignupScreenState extends State<SignupScreen>{
                           style: ElevatedButton.styleFrom(
                             primary: kBkrColor, // background
                             onPrimary: Colors.white, // foreground
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
                             fixedSize: Size(180, 30),
-
                           ),
                           //color: Colors.blue, // Burada butonun rengini değiştirdik
                           //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         ),
-
                         sizedBox,
-
-
-
-
-
                       ],
                     ),
                   ),
@@ -224,12 +228,14 @@ class _SignupScreenState extends State<SignupScreen>{
       ),
     );
   }
+
   TextFormField buildEmailField() {
     return TextFormField(
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: kInputTextStyle,
-      onSaved: (value) => _email = value,
+      controller: emailControler,
+      //onSaved: (value) => _student.email = value,
       decoration: InputDecoration(
         labelText: 'Email Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -254,7 +260,8 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.visiblePassword,
       style: kInputTextStyle,
-      onSaved: (value) => _password = value,
+      controller: passwordControler,
+      //onSaved: (value) => _student.password = value,
       decoration: InputDecoration(
         labelText: 'Şifre',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -274,7 +281,6 @@ class _SignupScreenState extends State<SignupScreen>{
       ),
       validator: (value) {
         if (value!.length < 5) {
-
           return '5 Karakterden Daha Uzun Olmalı';
         }
       },
@@ -286,7 +292,8 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
-      onSaved: (value) => _firstName = value,
+      controller: firstNameControler,
+      //onSaved: (value) => _student.firstName = value,
       decoration: InputDecoration(
         labelText: 'Adınızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -298,15 +305,11 @@ class _SignupScreenState extends State<SignupScreen>{
           return 'Lütfen Bir Ad Giriniz';
           //if it does not matches the pattern, like
           //it not contains @
-        } else if (value.length<2) {
+        } else if (value.length < 2) {
           return 'Lütfen Geçerli Bir Ad Giriniz';
         }
       },
     );
-
-
-
-
   }
 
   buildLastNameField() {
@@ -314,7 +317,8 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
-      onSaved: (value) => _lastName = value,
+      controller: lastNameControler,
+      //onSaved: (value) => _student.lastName = value,
       decoration: InputDecoration(
         labelText: 'Soyadınızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -326,13 +330,11 @@ class _SignupScreenState extends State<SignupScreen>{
           return 'Lütfen Bir Soyad Giriniz';
           //if it does not matches the pattern, like
           //it not contains @
-        } else if (value.length<2) {
+        } else if (value.length < 2) {
           return 'Lütfen Geçerli Bir Soyad Giriniz';
         }
       },
     );
-
-
   }
 
   buildDepartmentField() {
@@ -340,7 +342,8 @@ class _SignupScreenState extends State<SignupScreen>{
       textAlign: TextAlign.start,
       keyboardType: TextInputType.name,
       style: kInputTextStyle,
-      onSaved: (value) => _department = value,
+      controller: departmentControler,
+      //onSaved: (value) => _student.department = value,
       decoration: InputDecoration(
         labelText: 'Bölümünüzü Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -352,21 +355,20 @@ class _SignupScreenState extends State<SignupScreen>{
           return 'Lütfen Bir Bölüm Giriniz';
           //if it does not matches the pattern, like
           //it not contains @
-        } else if (value.length<2) {
+        } else if (value.length < 2) {
           return 'Lütfen Geçerli Bir Bölüm Giriniz';
         }
       },
     );
-
   }
 
   buildSchoolNumberField() {
-
     return TextFormField(
       textAlign: TextAlign.start,
       keyboardType: TextInputType.number,
       style: kInputTextStyle,
-      onSaved: (value) => _studentno = int.parse(value!)  ,
+      controller: studentnoControler,
+      //onSaved: (value) => _student.studentno = int.parse(value!),
       decoration: InputDecoration(
         labelText: 'Okul Numaranızı Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -378,11 +380,10 @@ class _SignupScreenState extends State<SignupScreen>{
           return 'Lütfen Bir Numara Giriniz';
           //if it does not matches the pattern, like
           //it not contains @
-        } else if (value.length<2) {
+        } else if (value.length < 2) {
           return 'Lütfen Geçerli Bir Numara Giriniz';
         }
       },
     );
-
   }
 }

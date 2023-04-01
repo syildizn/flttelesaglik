@@ -11,6 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await MongoDataBase.connect();
+
   runApp(MyApp());
 }
 
@@ -21,14 +22,13 @@ class MyApp extends StatelessWidget {
     //it requires 3 parameters
     //context, orientation, device
     //it always requires, see plugin documentation
-    return Sizer(builder: (context, orientation, device){
+    return Sizer(builder: (context, orientation, device) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
 
         title: 'Tele Sağlık',
 
-        theme: CustomTheme(
-        ).baseTheme,
+        theme: CustomTheme().baseTheme,
         //initial route is splash screen
         //mean first screen
         initialRoute: SplashScreen.routeName,
