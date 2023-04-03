@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
 import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 
 late bool _passwordVisible;
+
 
 class LoginScreen extends StatefulWidget {
   static String routeName = 'LoginScreen';
@@ -18,6 +20,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var loginPasswordControler = TextEditingController();
+  var loginEmailControler = TextEditingController();
+
   //validate our form now
   final _formKey = GlobalKey<FormState>();
 
@@ -37,24 +42,27 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: kBkrColor,
         body: Column(
-
           children: [
             Container(
-
               width: 100.w,
               height: 35.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
-
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Hoş Geldiniz',
-                          style: Theme.of(context).textTheme.subtitle1),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subtitle1),
                       Text('Lütfen Giriş Yapınız',
-                          style: Theme.of(context).textTheme.subtitle1),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subtitle1),
                       sizedBox,
                     ],
                   ),
@@ -78,7 +86,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   //reusable radius,
                   borderRadius: kTopBorderRadius,
                 ),
-
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -89,20 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizedBox,
                         buildPasswordField(),
                         sizedBox,
-
                         ElevatedButton(
                           onPressed: () {
-
-                            // try {
-                            //
-                            //   }
-                            // } catch (e) {
-                            //
-                            // }
-
-
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  HomeScreen.routeName, (route) => false);
                             }
                           },
                           child: Text(
@@ -112,40 +110,36 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: ElevatedButton.styleFrom(
                             primary: kBkrColor, // background
                             onPrimary: Colors.white, // foreground
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
                             fixedSize: Size(180, 50),
-
                           ),
-
                         ),
-
                         sizedBox,
-
                         Align(
                           alignment: Alignment.bottomRight,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(context, RessetpasswordScreen.routeName, (route) => true);
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  RessetpasswordScreen.routeName,
+                                      (route) => true);
                             },
                             child: Text(
                               'Şifremi Unuttum',
-
-                              style: TextStyle(color: Colors.white,
-                                fontSize: 8,),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                              ),
                               textAlign: TextAlign.end,
-
-
-
                             ),
                             style: ElevatedButton.styleFrom(
-
                               primary: kBkrColor, //Colors.cyan, // background
                               onPrimary: Colors.white, // foreground
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               fixedSize: Size(100, 20),
-
                             ),
-
                           ),
                         ),
                         sizedBox,
@@ -153,31 +147,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           alignment: Alignment.bottomRight,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(context, SignupScreen.routeName, (route) => true);
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  SignupScreen.routeName, (route) => true);
                             },
                             child: Text(
                               'Kayıt Ol',
-
-                              style: TextStyle(color: Colors.white,
-                                fontSize: 10,),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
                               textAlign: TextAlign.end,
-
-
-
                             ),
                             style: ElevatedButton.styleFrom(
-
                               primary: kBkrColor, // background
                               onPrimary: Colors.white, // foreground
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               fixedSize: Size(100, 20),
-
                             ),
-
                           ),
                         )
-
-
                       ],
                     ),
                   ),
@@ -195,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textAlign: TextAlign.start,
       keyboardType: TextInputType.emailAddress,
       style: kInputTextStyle,
+      controller: loginEmailControler,
       decoration: InputDecoration(
         labelText: 'Email Giriniz',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -219,6 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
       textAlign: TextAlign.start,
       keyboardType: TextInputType.visiblePassword,
       style: kInputTextStyle,
+      controller: loginPasswordControler,
       decoration: InputDecoration(
         labelText: 'Şifre',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -243,36 +234,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
-
-  // Widget _snapdata(){
-  //
-  //   return FutureBuilder(
-  //       future: MongoDataBase.getQueryData(),
-  //       builder: (context, AsyncSnapshot snapshot){
-  //         if(snapshot.connectionState == ConnectionState.waiting){
-  //           return Center (
-  //             child: CircularProgressIndicator(),
-  //           );
-  //         }else{
-  //           if(snapshot.hasData){
-  //             return ListView.builder(
-  //                 itemCount: snapshot.data.length,
-  //                 itemBuilder: (context,index){
-  //                   return dataSorgu(Student.fromJson(snapshot.data[index]));
-  //                 }
-  //             );
-  //           }
-  //         }
-  //       }
-  //   );
-  //
-  // }
-  //
-  // Widget dataSorgu(Student student) {
-  //
-  //
-  //
-  // }
-
-
 }
+
+
