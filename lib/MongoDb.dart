@@ -34,7 +34,6 @@ class MongoDataBase {
   }
 
   static Future<List<Map<String,dynamic>>> getQueryData() async{
-
     final data = await userCollection.find().toList();
     return data;
 

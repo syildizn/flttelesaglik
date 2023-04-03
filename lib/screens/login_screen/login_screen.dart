@@ -1,5 +1,7 @@
+import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/components/custom_buttons.dart';
 import 'package:telesaglikk/constants.dart';
+import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -67,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
+
             Expanded(
               child: Container(
                 padding: EdgeInsets.only(left: 5.w, right: 5.w),
@@ -75,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //reusable radius,
                   borderRadius: kTopBorderRadius,
                 ),
+
                 child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -88,6 +92,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         ElevatedButton(
                           onPressed: () {
+
+                            // try {
+                            //
+                            //   }
+                            // } catch (e) {
+                            //
+                            // }
+
+
                             if (_formKey.currentState!.validate()) {
                               Navigator.pushNamedAndRemoveUntil(context, HomeScreen.routeName, (route) => false);
                             }
@@ -230,4 +243,36 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
+
+  // Widget _snapdata(){
+  //
+  //   return FutureBuilder(
+  //       future: MongoDataBase.getQueryData(),
+  //       builder: (context, AsyncSnapshot snapshot){
+  //         if(snapshot.connectionState == ConnectionState.waiting){
+  //           return Center (
+  //             child: CircularProgressIndicator(),
+  //           );
+  //         }else{
+  //           if(snapshot.hasData){
+  //             return ListView.builder(
+  //                 itemCount: snapshot.data.length,
+  //                 itemBuilder: (context,index){
+  //                   return dataSorgu(Student.fromJson(snapshot.data[index]));
+  //                 }
+  //             );
+  //           }
+  //         }
+  //       }
+  //   );
+  //
+  // }
+  //
+  // Widget dataSorgu(Student student) {
+  //
+  //
+  //
+  // }
+
+
 }
