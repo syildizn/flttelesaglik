@@ -97,8 +97,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         buildPasswordField(),
                         sizedBox,
                         ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                          onPressed: () async{
+
+                            String? elma = await MongoDataBase.sorgu(loginEmailControler.text, loginPasswordControler.text);
+                            print("$elma + pa");
+                            if (_formKey.currentState!.validate() && elma == "bulundu") {
                               Navigator.pushNamedAndRemoveUntil(context,
                                   HomeScreen.routeName, (route) => false);
                             }

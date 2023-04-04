@@ -1,4 +1,8 @@
+import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
+import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/assignment_screen/assignment_screen.dart';
 import 'package:telesaglikk/screens/datesheet_screen/datesheet_screen.dart';
 import 'package:telesaglikk/screens/fee_screen/fee_screen.dart';
@@ -6,11 +10,39 @@ import 'package:telesaglikk/screens/my_profile/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import '../login_screen/login_screen.dart';
 import 'widgets/student_data.dart';
+import 'package:telesaglikk/MongoDb.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  //const HomeScreen({Key? key}) : super(key: key);
   static String routeName = 'HomeScreen';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // late String _firstname;
+  // late String _email;
+  //
+  // void initState() {
+  //   super.initState();
+  //   _loadStudentData();
+  // }
+  //
+  // Future<void> _loadStudentData() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? studentId = prefs.getString('studentId');
+  //   if (studentId != null) {
+  //     var res = await MongoDataBase.lalala;
+  //     setState(() {
+  //       _firstname = res['name'];
+  //       _email = res['email'];
+  //
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {  },
           icon: Icon(Icons.menu),),
-        title: Text("Merhaba Mahmut",textScaleFactor: 0.75,) ,
+        title: Text("Merhaba ",textScaleFactor: 0.75,) ,
         actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
         // go to profile detail screen here
         Navigator.pushNamed(
@@ -211,7 +243,9 @@ class HomeScreen extends StatelessWidget {
                           colortext: Colors.white,
                         ),
                         HomeCard(
-                          onPress: () {},
+                          onPress: () {
+                            Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+                          },
                           icon: 'assets/icons/logout.svg',
                           title: 'Çıkış',
                           color: homecard6,
@@ -250,7 +284,10 @@ class HomeScreen extends StatelessWidget {
             IconButton(onPressed: () {}, icon: Icon(Icons.home_outlined),),
             IconButton(onPressed: () {}, icon: Icon(Icons.folder_shared_outlined),),
             IconButton(onPressed: () {}, icon: Icon(Icons.forest_outlined ),),
-            IconButton(onPressed: () {}, icon: Icon(Icons.perm_identity_rounded),),
+            IconButton(onPressed: () {
+              Navigator.pushNamed(
+                  context, MyProfileScreen.routeName);
+            }, icon: Icon(Icons.perm_identity_rounded),),
           ],
         ),
       ),
