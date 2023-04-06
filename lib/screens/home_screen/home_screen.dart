@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesaglikk/MongoDb.dart';
@@ -13,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../login_screen/login_screen.dart';
 import 'widgets/student_data.dart';
 import 'package:telesaglikk/MongoDb.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   //const HomeScreen({Key? key}) : super(key: key);
@@ -23,42 +25,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // late String _firstname;
-  // late String _email;
-  //
-  // void initState() {
-  //   super.initState();
-  //   _loadStudentData();
-  // }
-  //
-  // Future<void> _loadStudentData() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? studentId = prefs.getString('studentId');
-  //   if (studentId != null) {
-  //     var res = await MongoDataBase.lalala;
-  //     setState(() {
-  //       _firstname = res['name'];
-  //       _email = res['email'];
-  //
-  //     });
-  //   }
-  // }
+  String? firstName = MongoDataBase.sfirstName;
+  String? lastName = MongoDataBase.slastName;
+  String? department = MongoDataBase.sdepartment;
+  String? email = MongoDataBase.semail;
+  int? studentno = MongoDataBase.sstudentno ;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kBkrColor,
+        backgroundColor: kOtherColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {  },
-          icon: Icon(Icons.menu),),
-        title: Text("Merhaba ",textScaleFactor: 0.75,) ,
-        actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
-        // go to profile detail screen here
-        Navigator.pushNamed(
-        context, MyProfileScreen.routeName);
-        })],
+          icon: Icon(Icons.menu_rounded,color: kBkrColor,),),
+        title: Text("Telesağlık",textScaleFactor: 1,style: GoogleFonts.sourceSansPro(textStyle:
+        TextStyle(
+          fontSize: 25.0,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.normal,
+          color: Colors.black,))) ,
+        // actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
+        // // go to profile detail screen here
+        // Navigator.pushNamed(
+        // context, MyProfileScreen.routeName);
+        // })],
 
       ),
       backgroundColor: Color.fromRGBO(255, 255, 255, 1),
@@ -104,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    /*StudentDataCard(
+                    StudentDataCard(
                       onPress: () {
                         //go to attendance screen
                       },
@@ -118,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       title: 'Görüşme Kayıtlarım',
                       value: '3 Adet',
-                    ),*/
+                    ),
                   ],
                 )
               ],
@@ -127,137 +123,179 @@ class _HomeScreenState extends State<HomeScreen> {
 
           //other will use all the remaining height of screen
           Expanded(
-            child: Container(
-              width: 100.w,
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                //borderRadius: kTopBorderRadius,
-              ),
-              child: SingleChildScrollView(
-                //for padding
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    sizedBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HomeCard(
+            child: Stack(
+              children:[
 
-                          onPress: () {},
-                          icon: 'assets/icons/ask.svg',
-                          title: 'Doktorlar',
-                          color: homecard1,
-                          colortext: Colors.white,
-                        ),
-                        HomeCard(
-                          onPress: () {
-                            //go to assignment screen here
-                            Navigator.pushNamed(
-                                context, AssignmentScreen.routeName);
-                          },
-                          icon: 'assets/icons/resume.svg',
-                          title: 'Sağlık\nKayıtlarım',
-                          color: homecard2,
-                          colortext: Colors.white,
-                        ),
-                      ],
-                    ),
-                    sizedBox,
-                    /*Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/holiday.svg',
-                          title: 'Holidays',
-                        ),
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/timetable.svg',
-                          title: 'Time Table',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/result.svg',
-                          title: 'Result',
-                        ),
-                        HomeCard(
-                          onPress: () {
-                            Navigator.pushNamed(
-                                context, DateSheetScreen.routeName);
-                          },
-                          icon: 'assets/icons/datesheet.svg',
-                          title: 'DateSheet',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/ask.svg',
-                          title: 'Ask',
-                        ),
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/gallery.svg',
-                          title: 'Gallery',
-                        ),
-                      ],
-                    ),*/
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/assignment.svg',
-                          title: 'Geçmiş\nGörüşmelerim',
-                          color: homecard3,
-                          colortext: Colors.white,
-                        ),
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/lock.svg',
-                          title: 'Şifreni\nDeğiştir',
-                          color: homecard4,
-                          colortext: Colors.white,
-                        ),
-                      ],
-                    ),
-                    sizedBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HomeCard(
-                          onPress: () {},
-                          icon: 'assets/icons/datesheet.svg',
-                          title: 'İstatistikler',
-                          color: homecard5,
-                          colortext: Colors.white,
-                        ),
-                        HomeCard(
-                          onPress: () {
-                            Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
-                          },
-                          icon: 'assets/icons/logout.svg',
-                          title: 'Çıkış',
-                          color: homecard6,
-                          colortext: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ],
+                Positioned(
+                  top: 10,
+                  left: 10,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    color: Colors.white,
+                    child:  Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
+                      fontWeight: FontWeight.normal,
+                      fontStyle: FontStyle.normal,
+                      color: Colors.black,),),
+                  ),
+                ),
+
+
+
+                Container(
+                width: 100.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  //borderRadius: kTopBorderRadius,
+                ),
+                child: SingleChildScrollView(
+                  //for padding
+
+                  scrollDirection: Axis.horizontal,
+                  //physics: BouncingScrollPhysics(),
+                   child: Column(
+                    children: [
+                      Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.black,),),
+                      sizedBox,
+                      Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          kWidthSizedBox,
+
+                          HomeCard(
+
+                            onPress: () {},
+                            icon: 'assets/icons/ask.svg',
+                            title: 'Doktorlar',
+                            color: Colors.white,
+                            colortext:  homecard1,
+                          ),
+                          kWidthSizedBox,
+                          HomeCard(
+                            onPress: () {
+                              //go to assignment screen here
+                              Navigator.pushNamed(
+                                  context, AssignmentScreen.routeName);
+                            },
+                            icon: 'assets/icons/resume.svg',
+                            title: 'Sağlık\nKayıtlarım',
+                            color: Colors.white,
+                            colortext:  homecard2,
+                          ),
+                          kWidthSizedBox,
+                          HomeCard(
+                                  onPress: () {},
+                                  icon: 'assets/icons/assignment.svg',
+                                  title: 'Geçmiş\nGörüşmelerim',
+                                  color: Colors.white,
+                                  colortext:  homecard3,
+                                ),
+                          kWidthSizedBox,
+                                HomeCard(
+                                  onPress: () {},
+                                  icon: 'assets/icons/lock.svg',
+                                  title: 'Şifreni\nDeğiştir',
+                                  color:  Colors.white,
+                                  colortext: homecard4,
+                                ),
+                          kWidthSizedBox,
+                          HomeCard(
+                            onPress: () {},
+                            icon: 'assets/icons/datesheet.svg',
+                            title: 'İstatistikler',
+                            color:  Colors.white,
+                            colortext: homecard5,
+                          ),
+                          kWidthSizedBox,
+                          HomeCard(
+                            onPress: () {
+                              Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+                            },
+                            icon: 'assets/icons/logout.svg',
+                            title: 'Çıkış',
+                            color:  Colors.white,
+                            colortext: homecard6,
+                          ),
+                        ],
+                      ),
+                      sizedBox,
+                      Stack(
+                        children:[
+                          Positioned(
+                            top: 0,
+                            left: 0,
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              color: Colors.white,
+                              child:  Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.normal,
+                                color: Colors.black,),),
+                            ),
+                          ),
+
+
+                          Container(
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              //borderRadius: kTopBorderRadius,
+                            ),
+                            child: SingleChildScrollView(
+                              //for padding
+
+                              scrollDirection: Axis.horizontal,
+                              physics: BouncingScrollPhysics(),
+                              child: Column(
+                                children: [
+
+                                  sizedBox,
+
+                                  sizedBox,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      StudentDataCard(
+                                        onPress: () {
+                                          //go to attendance screen
+                                        },
+                                        title: 'Sağlık Kayıtlarım',
+                                        value: '6 Adet',
+                                      ),
+                                      StudentDataCard(
+                                        onPress: () {
+                                          //go to fee due screen
+                                          Navigator.pushNamed(context, FeeScreen.routeName);
+                                        },
+                                        title: 'Görüşme Kayıtlarım',
+                                        value: '3 Adet',
+                                      ),
+                                    ],
+                                  )
+
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],),
+
+                    ],
+                  ),
                 ),
               ),
+                sizedBox,
+
+              ]
             ),
           ),
+          sizedBox,
+
+
+
         ],
       ),
       bottomNavigationBar: Container(
@@ -320,14 +358,15 @@ class HomeCard extends StatelessWidget {
         width: 40.w,
         height: 20.h,
         decoration: BoxDecoration(
+
           color: color,
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
             boxShadow: [
-           /* BoxShadow(
+            BoxShadow(
             offset: Offset(0,-10),
         blurRadius: 35,
-        color: kBkrColor.withOpacity(0.25),
-      )*/]
+        color: Colors.black12.withOpacity(0.17),
+      )]
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

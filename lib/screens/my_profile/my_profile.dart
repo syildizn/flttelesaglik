@@ -2,9 +2,16 @@ import 'package:telesaglikk/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../MongoDb.dart';
+
 class MyProfileScreen extends StatelessWidget {
-  const MyProfileScreen({Key? key}) : super(key: key);
+  //const MyProfileScreen({Key? key}) : super(key: key);
   static String routeName = 'MyProfileScreen';
+  String? firstName = MongoDataBase.sfirstName;
+  String? lastName = MongoDataBase.slastName;
+  String? department = MongoDataBase.sdepartment;
+  String? email = MongoDataBase.semail;
+  int? studentno = MongoDataBase.sstudentno ;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +57,7 @@ class MyProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
+
                     radius:
                     SizerUtil.deviceType == DeviceType.tablet ? 12.w : 13.w,
                     backgroundColor: kSecondaryColor,
@@ -57,15 +65,16 @@ class MyProfileScreen extends StatelessWidget {
                     AssetImage('assets/images/unknown.jpg'),
                   ),
                   kWidthSizedBox,
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Mahmut Tiryaki',
+                        '$firstName $lastName',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
-                      Text('Biyomedikal Mühendisliği',
+                      Text('$department',
                           style: Theme.of(context).textTheme.subtitle2?.copyWith(
                             fontWeight: FontWeight.w600,
                           )),
@@ -101,7 +110,7 @@ class MyProfileScreen extends StatelessWidget {
             sizedBox,
             ProfileDetailColumn(
               title: 'Email',
-              value: 'mahmuttiryaki@gmail.com',
+              value: '$email',
             ),
             ProfileDetailColumn(
               title: 'Öğrenci Bilgisi 2',

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 //import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
@@ -10,8 +11,9 @@ import 'models/students_model.dart';
 import 'package:bson/bson.dart';
 import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 
-
 class MongoDataBase {
+  static String? a,semail,sfirstName,slastName,sdepartment;
+  static int? sstudentno;
   static var db, userCollection;
   static ObjectId? addd;
   static Student? at;
@@ -39,11 +41,22 @@ class MongoDataBase {
     }
   }
 
-  static Future<String?> sorgu(String email, String password) async{
-
-     var res = await userCollection.findOne(where.eq('email', '$email').eq('password', "$password"));
-
-     // _toprofi(res);
+  static Future<String?> sorgu(String email, String password) async {
+    var res = await userCollection
+        .findOne(where.eq('email', '$email').eq('password', "$password"));
+       a = "${res["_id"]}";
+     sfirstName = "${res["firstName"]}";
+    // ahmet?.id = res["_id"] ;
+    // ahmet?.firstName = "${res["firstname"]}";
+    // ahmet?.lastName = "${res["lastname"]}";
+    // ahmet?.password = "${res["password"]}";
+    // ahmet?.email = "${res["email"]}";
+    // ahmet?.department = "${res["department"]}";
+    // ahmet?.studentno = int.parse("${res["studentno"]}") ;
+    print(a);
+    print(sfirstName);
+     //print(ahmet?.firstName);
+    // _toprofi(res);
 
     if (res == null) {
       print('bulunamadı');
@@ -51,19 +64,43 @@ class MongoDataBase {
     } else {
       print('Bulundu: '
           '${res['email']} - ${res['password']}  ');
+            //studentGonder('${res['email']}');
+
+           slastName= "${res["lastName"]}";
+           sdepartment= "${res["department"]}";
+           print("$sdepartment + $sstudentno");
+           semail='${res['email']}';
+           sstudentno = int.tryParse({res["studentNo"]}.toString());
       return "bulundu";
     } // Tom - active - 025456da-9e39-4e7c-b1f7-0f5a5e1cb212
   }
 
-
-
-
-  static Future<List<Map<String,dynamic>>> getQueryData() async{
+  static Future<List<Map<String, dynamic>>> getQueryData() async {
     final data = await userCollection.find().toList();
-    for(var product in data){
+    for (var product in data) {
       print(product);
     }
     return data;
+  }
+
+  static Future<Student?>? studentGonder(String s) async {
+    var at = await userCollection.findOne(where.eq('email', '$s'));
+
+    if(at== null){
+      print("hiçbir şey bulunamadı");
+    }else{
+      print("birşeyler bulduk");
+      final datayenii = Student(
+          id: at["_id"] ,
+          firstName: "${at["firstname"]}",
+          lastName: "${at["lastname"]}",
+          department: "${at["department"]}",
+          password: "${at["password"]}",
+          email: "${at["email"]}",
+          studentno: int.parse("${at["studentno"]}"));
+      return datayenii;
+    }
+
 
   }
 
@@ -87,7 +124,4 @@ class MongoDataBase {
   //   await userCollection.findOne(where.id(ObjectId.parse(studentId)));
   //   return studentId;
   // }
-
-  }
-
-
+}
