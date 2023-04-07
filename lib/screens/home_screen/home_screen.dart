@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? lastName = MongoDataBase.slastName;
   String? department = MongoDataBase.sdepartment;
   String? email = MongoDataBase.semail;
-  int? studentno = MongoDataBase.sstudentno ;
+  String? studentno = MongoDataBase.sstudentno ;
 
 
 

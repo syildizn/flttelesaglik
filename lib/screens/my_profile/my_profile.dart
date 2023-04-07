@@ -11,7 +11,7 @@ class MyProfileScreen extends StatelessWidget {
   String? lastName = MongoDataBase.slastName;
   String? department = MongoDataBase.sdepartment;
   String? email = MongoDataBase.semail;
-  int? studentno = MongoDataBase.sstudentno ;
+  String? studentno = MongoDataBase.sstudentno ;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,7 @@ class MyProfileScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ProfileDetailRow(title: 'Öğrenci No', value: '2023'),
+                ProfileDetailRow(title: 'Öğrenci No', value: '$studentno'),
                 ProfileDetailRow(title: 'Öğrenci Bilgisi 1', value: 'Null'),
               ],
             ),

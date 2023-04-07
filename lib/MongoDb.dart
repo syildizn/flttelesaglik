@@ -13,7 +13,7 @@ import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 
 class MongoDataBase {
   static String? a,semail,sfirstName,slastName,sdepartment;
-  static int? sstudentno;
+  static String? sstudentno;
   static var db, userCollection;
   static ObjectId? addd;
   static Student? at;
@@ -54,7 +54,7 @@ class MongoDataBase {
     // ahmet?.department = "${res["department"]}";
     // ahmet?.studentno = int.parse("${res["studentno"]}") ;
     print(a);
-    print(sfirstName);
+    print(sstudentno);
      //print(ahmet?.firstName);
     // _toprofi(res);
 
@@ -70,7 +70,7 @@ class MongoDataBase {
            sdepartment= "${res["department"]}";
            print("$sdepartment + $sstudentno");
            semail='${res['email']}';
-           sstudentno = int.tryParse({res["studentNo"]}.toString());
+           sstudentno = "${res["studentNo"]}";
       return "bulundu";
     } // Tom - active - 025456da-9e39-4e7c-b1f7-0f5a5e1cb212
   }
