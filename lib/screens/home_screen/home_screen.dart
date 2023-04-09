@@ -6,6 +6,7 @@ import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/assignment_screen/assignment_screen.dart';
 import 'package:telesaglikk/screens/datesheet_screen/datesheet_screen.dart';
+import 'package:telesaglikk/screens/doctors_page/doctors_page.dart';
 import 'package:telesaglikk/screens/fee_screen/fee_screen.dart';
 import 'package:telesaglikk/screens/my_profile/my_profile.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kOtherColor,
+        backgroundColor: homepagefont,
         elevation: 0,
         leading: IconButton(
           onPressed: () {  },
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           fontSize: 25.0,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.normal,
-          color: Colors.black,))) ,
+          color: kBkrColor,))) ,
         // actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
         // // go to profile detail screen here
         // Navigator.pushNamed(
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // })],
 
       ),
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: homepagefont,
 
       body: Column(
         children: [
@@ -122,29 +123,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ),*/
 
           //other will use all the remaining height of screen
-          Expanded(
-            child: Stack(
-              children:[
-
-                Positioned(
-                  top: 10,
-                  left: 10,
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    color: Colors.white,
-                    child:  Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
-                      fontWeight: FontWeight.normal,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.black,),),
-                  ),
-                ),
-
-
-
-                Container(
-                width: 100.w,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 10.0,),
+                Text("Menü",style: TextStyle(fontSize: 25.0,
+                  fontWeight: FontWeight.normal,
+                  fontStyle: FontStyle.normal,
+                  color: kBkrColor,),),
+              ],
+            ),
+            Container(
+                width: 90.w,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: homepagefont,
                   //borderRadius: kTopBorderRadius,
                 ),
                 child: SingleChildScrollView(
@@ -154,11 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //physics: BouncingScrollPhysics(),
                    child: Column(
                     children: [
-                      Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.normal,
-                        color: Colors.black,),),
-                      sizedBox,
+
                       Row(
 
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,7 +155,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           HomeCard(
 
-                            onPress: () {},
+                            onPress: () {
+                              Navigator.pushNamed(
+                                  context, DoctorsPage.routeName);
+                            },
                             icon: 'assets/icons/ask.svg',
                             title: 'Doktorlar',
                             color: Colors.white,
@@ -222,77 +213,87 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       sizedBox,
-                      Stack(
-                        children:[
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              color: Colors.white,
-                              child:  Text("Menü",style: GoogleFonts.allan(fontSize: 25.0,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FontStyle.normal,
-                                color: Colors.black,),),
-                            ),
-                          ),
 
-
-                          Container(
-                            width: 100.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              //borderRadius: kTopBorderRadius,
-                            ),
-                            child: SingleChildScrollView(
-                              //for padding
-
-                              scrollDirection: Axis.horizontal,
-                              physics: BouncingScrollPhysics(),
-                              child: Column(
-                                children: [
-
-                                  sizedBox,
-
-                                  sizedBox,
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      StudentDataCard(
-                                        onPress: () {
-                                          //go to attendance screen
-                                        },
-                                        title: 'Sağlık Kayıtlarım',
-                                        value: '6 Adet',
-                                      ),
-                                      StudentDataCard(
-                                        onPress: () {
-                                          //go to fee due screen
-                                          Navigator.pushNamed(context, FeeScreen.routeName);
-                                        },
-                                        title: 'Görüşme Kayıtlarım',
-                                        value: '3 Adet',
-                                      ),
-                                    ],
-                                  )
-
-
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],),
 
                     ],
                   ),
                 ),
               ),
-                sizedBox,
+          sizedBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 10.0,),
+              Text("Menü 2",style: TextStyle(fontSize: 25.0,
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.normal,
+                color: kBkrColor,),),
+            ],
+          ),
 
-              ]
+
+
+
+          Container(
+            width: 90.w,
+            decoration: BoxDecoration(
+              color: homepagefont,
+              //borderRadius: kTopBorderRadius,
+            ),
+            child: SingleChildScrollView(
+              //for padding
+
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+
+                  sizedBox,
+
+                  sizedBox,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      StudentDataCard(
+                        onPress: () {
+                          //go to attendance screen
+                        },
+                        title: 'Sağlık Kayıtlarım',
+                        value: '6 Adet',
+                      ),
+                      kWidthSizedBox,
+                      StudentDataCard(
+                        onPress: () {
+                          //go to attendance screen
+                        },
+                        title: 'Sağlık Kayıtlarım',
+                        value: '6 Adet',
+                      ),
+                      kWidthSizedBox,
+                      StudentDataCard(
+                        onPress: () {
+                          //go to attendance screen
+                        },
+                        title: 'Sağlık Kayıtlarım',
+                        value: '6 Adet',
+                      ),
+                      kWidthSizedBox,
+                      StudentDataCard(
+                        onPress: () {
+                          //go to fee due screen
+                          Navigator.pushNamed(context, FeeScreen.routeName);
+                        },
+                        title: 'Görüşme Kayıtlarım',
+                        value: '3 Adet',
+                      ),
+                    ],
+                  )
+
+
+                ],
+              ),
             ),
           ),
-          sizedBox,
 
 
 
@@ -307,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         height: 70,
         decoration: BoxDecoration(
-          color: Colors.white,//.withOpacity(0.40),Colors.white,
+          color: homepagefont,//.withOpacity(0.40),Colors.white,
           boxShadow: [
            /* BoxShadow(
               offset: Offset(0,-10),
@@ -361,12 +362,12 @@ class HomeCard extends StatelessWidget {
 
           color: color,
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-            boxShadow: [
-            BoxShadow(
-            offset: Offset(0,-10),
-        blurRadius: 35,
-        color: Colors.black12.withOpacity(0.17),
-      )]
+      //       boxShadow: [
+      //       BoxShadow(
+      //       offset: Offset(0,-10),
+      //   blurRadius: 35,
+      //   color: Colors.black12.withOpacity(0.17),
+      // )]
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

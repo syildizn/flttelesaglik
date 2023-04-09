@@ -98,7 +98,7 @@ class StudentDataCard extends StatelessWidget {
         width: 42.w,
         height: 12.h,
         decoration: BoxDecoration(
-          color: kOtherColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(kDefaultPadding),
         ),
         child: Column(

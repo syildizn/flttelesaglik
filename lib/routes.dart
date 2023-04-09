@@ -1,5 +1,7 @@
 
 
+import 'package:telesaglikk/screens/doctors_page/doctorProfile_page.dart';
+import 'package:telesaglikk/screens/doctors_page/doctors_page.dart';
 import 'package:telesaglikk/screens/login_screen/login_screen.dart';
 import 'package:telesaglikk/screens/resetpassword_screen/resetpassword_screen.dart';
 import 'package:telesaglikk/screens/signup_screen/signup_screen.dart';
@@ -22,4 +24,6 @@ Map<String, WidgetBuilder> routes = {
   DateSheetScreen.routeName: (context) => DateSheetScreen(),
   SignupScreen.routeName: (context) => SignupScreen(),
   RessetpasswordScreen.routeName: (context)=> RessetpasswordScreen(),
+  DoctorsPage.routeName : (context)=> DoctorsPage(),
+  DoctorProfilePage.routeName :(context)=> DoctorProfilePage(),
 };

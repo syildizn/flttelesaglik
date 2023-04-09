@@ -46,17 +46,10 @@ class MongoDataBase {
         .findOne(where.eq('email', '$email').eq('password', "$password"));
        a = "${res["_id"]}";
      sfirstName = "${res["firstName"]}";
-    // ahmet?.id = res["_id"] ;
-    // ahmet?.firstName = "${res["firstname"]}";
-    // ahmet?.lastName = "${res["lastname"]}";
-    // ahmet?.password = "${res["password"]}";
-    // ahmet?.email = "${res["email"]}";
-    // ahmet?.department = "${res["department"]}";
-    // ahmet?.studentno = int.parse("${res["studentno"]}") ;
+
     print(a);
     print(sstudentno);
-     //print(ahmet?.firstName);
-    // _toprofi(res);
+
 
     if (res == null) {
       print('bulunamadı');
@@ -72,7 +65,13 @@ class MongoDataBase {
            semail='${res['email']}';
            sstudentno = "${res["studentNo"]}";
       return "bulundu";
-    } // Tom - active - 025456da-9e39-4e7c-b1f7-0f5a5e1cb212
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> getData() async {
+    final dataDoctors = await userCollection.find().toList();
+
+    return dataDoctors;
   }
 
   static Future<List<Map<String, dynamic>>> getQueryData() async {
@@ -104,24 +103,5 @@ class MongoDataBase {
 
   }
 
-  // static void _toprofi(res) async{
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('studentId', res['_id'].toString());
-  //
-  //   // SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? studentId = prefs.getString('studentId');
-  //   if (studentId != null) {
-  //     Student a = await userCollection.findOne(where.id(ObjectId.parse(studentId)));
-  //
-  //     // burada öğrencinin bilgilerini kullanarak profil sayfanızı doldurun
-  //   }
-  //
-  //
-  //
-  // }
-  //
-  // Future<Student?> _lalaland(studentId) async{
-  //   await userCollection.findOne(where.id(ObjectId.parse(studentId)));
-  //   return studentId;
-  // }
+
 }
