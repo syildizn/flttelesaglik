@@ -6,6 +6,8 @@ import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
 
+import '../../jitsi.dart';
+
 class DoctorProfilePage extends StatefulWidget {
   static String routeName = 'DoctorProfilePage';
   static String? imageUrl;
@@ -64,36 +66,24 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                 fit: BoxFit.cover,
               ),
             ),
-            // child: Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     CircleAvatar(
-            //       radius: 50,
-            //       backgroundImage: AssetImage(imageUrl!),
-            //     ),
-            //     SizedBox(height: 16),
-            //     Text(
-            //       "${doctor.firstName} ${doctor.lastName}",
-            //       style: TextStyle(
-            //         color: Colors.white,
-            //         fontSize: 24,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ],
-            // ),
+
           ),
           sizedBox,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () {},
-                child: Text('Sesli Arama'),
+                onPressed: () {
+                  final secilenogrenci = '${doctor.firstName}_${doctor.lastName}';
+                  final roomName = RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
+
+                  Jitsi.joinMeeting(secilenogrenci!);
+                },
+                child: Text('Görüntülü Arama'),
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Görüntülü Arama'),
+                child: Text('Sesli Arama '),
               ),
               ElevatedButton(
                 onPressed: () {},

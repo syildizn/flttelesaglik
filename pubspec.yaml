@@ -40,6 +40,7 @@ dependencies:
   sizer: ^2.0.15
   mongo_dart: ^0.9.1
   shared_preferences: ^2.1.0
+  jitsi_meet:
 
 dev_dependencies:
   flutter_test:
