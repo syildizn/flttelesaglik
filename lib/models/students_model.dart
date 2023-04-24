@@ -40,8 +40,7 @@ class Student {
   Map<String, dynamic> toJson() {
     return {
       "_id": id,
-      'firstName': firstName,
-      "lastName": lastName,
+      'firstName': firstName,      "lastName": lastName,
       "department": department,
       'password': password,
       'email': email,
