@@ -5,8 +5,10 @@ class Jitsi {
     try {
       var options = JitsiMeetingOptions(room: roomName)
       //..room = roomName
-        ..audioMuted = true
-        ..videoMuted = true;
+        ..audioMuted = false
+        ..videoMuted = false;
+
+
 
       await JitsiMeet.joinMeeting(options);
     } catch (error) {

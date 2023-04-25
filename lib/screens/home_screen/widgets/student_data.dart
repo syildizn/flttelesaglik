@@ -110,8 +110,8 @@ class StudentDataCard extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-              width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+              height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 30.sp,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 30.sp,
               // color: colortext,
             ),
             Text(

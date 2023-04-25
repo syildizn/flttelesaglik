@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         title: 'Sağlık Kayıtlarım',
                         value: '6 Adet',
-                        icon: 'assets/images/beyin.png',
+                        icon: 'assets/icons/brain.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         title: 'Sağlık Kayıtlarım',
                         value: '6 Adet',
-                        icon: 'assets/images/beyin.png',
+                        icon: 'assets/icons/logout.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         title: 'Sağlık Kayıtlarım',
                         value: '6 Adet',
-                        icon: 'assets/images/beyin.png',
+                        icon: 'assets/icons/logout.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         title: 'Görüşme Kayıtlarım',
                         value: '3 Adet',
-                        icon: 'assets/images/beyin.png',
+                        icon: 'assets/icons/logout.svg',
                       ),
                     ],
                   )
