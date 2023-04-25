@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 const DB_CONNECTION_STRING =
     "mongodb+srv://syzbakircayprojects:bakircay123@clustersyzproject.0fg8bny.mongodb.net/BakircayTeleSaglik?retryWrites=true&w=majority";
 const Collection_Name = "students";
+const Collection_Doctor = "doctors";
 
 //colors
 const Color kPrimaryColor = Color(0xFF345FB4);

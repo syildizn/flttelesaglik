@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
@@ -26,12 +27,85 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
   late Student doctor;
   late String? imageUrl;
 
+  final ThemeData theme = ThemeData(
+    primarySwatch: Colors.cyan,
+    textTheme: TextTheme(
+      subtitle1: TextStyle(fontSize: 26),
+    ),
+  );
+
+  final List<String> appointmentTimes = ['09:00', '11:00', '13:00', '15:00', '17:00', '19:00'];
+
   @override
   void initState() {
     super.initState();
     doctor = DoctorProfilePage.doctor!;
     imageUrl = DoctorProfilePage.imageUrl;
     print(imageUrl);
+  }
+
+  // Randevu saatlerini gösteren widget
+  Widget buildAppointmentTimes(BuildContext context) {
+    return Column(
+      children: appointmentTimes.map((time) {
+        // Burada veritabanından randevu saatlerini kontrol edebilir ve eğer o saat doluysa butonu devre dışı bırakabilirsiniz.
+        final bool isTimeAvailable = true; // Örnek amaçlı her zaman true olarak ayarlandı.
+        return ElevatedButton(
+          onPressed: isTimeAvailable ? () => _createAppointment(time) : null,
+          child: Text(time),
+          style: ElevatedButton.styleFrom(
+            primary: kBkrColor, // background
+            onPrimary: Colors.white, // foreground
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+// Randevu oluşturma fonksiyonu
+  void _createAppointment(String time) {
+    // Burada seçilen saat bilgisini kullanarak randevu oluşturma işlemini gerçekleştirebilirsiniz.
+  }
+
+  Future<void> _selectDateAndTime(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: theme,
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      // final TimeOfDay? pickedTime = await showTimePicker(
+      //   context: context,
+      //   initialTime: TimeOfDay.now(),
+      // );
+      final TimeOfDay? pickedTime = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: buildAppointmentTimes(context),
+          );
+        },
+      );
+      print(pickedTime);
+      if (pickedTime != null) {
+        // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
+        // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
+        final String selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+        final String selectedTime = pickedTime.format(context);
+        // Burada MongoDB veritabanına bağlanarak randevu bilgilerini kaydedebilirsiniz.
+        // Örnek amaçlı burada sadece bir debug mesajı yazdırıyoruz.
+        print('Randevu oluşturuldu: $selectedDate $selectedTime');
+      }
+    }
   }
 
   @override
@@ -73,6 +147,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+
                 onPressed: () {
                   final secilenogrenci = '${doctor.firstName}_${doctor.lastName}';
                   final roomName = RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
@@ -80,16 +155,34 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                   Jitsi.joinMeeting(secilenogrenci!);
                 },
                 child: Text('Görüntülü Arama'),
+                style: ElevatedButton.styleFrom(
+                  primary: kBkrColor, // background
+                  onPrimary: Colors.white, // foreground
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Sesli Arama '),
+                style: ElevatedButton.styleFrom(
+                  primary: kBkrColor, // background
+                  onPrimary: Colors.white, // foreground
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+
               ),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Mesajlaşma'),
+                  style: ElevatedButton.styleFrom(
+                  primary: kBkrColor, // background
+                  onPrimary: Colors.white, // foreground
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               ),
-            ],
+              )],
           ),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -120,8 +213,16 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                 sizedBox,
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _selectDateAndTime(context);
+                    },
                     child: Text('Randevu Oluştur'),
+                    style: ElevatedButton.styleFrom(
+                      primary: kBkrColor, // background
+                      onPrimary: Colors.white, // foreground
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
                   ),
                 ),
               ],

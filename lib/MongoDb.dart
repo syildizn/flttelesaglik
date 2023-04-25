@@ -4,7 +4,8 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:telesaglikk/constants.dart ';
+import 'package:telesaglikk/constants.dart';
+
 import 'package:mongo_dart/mongo_dart.dart';
 
 import 'models/students_model.dart';
@@ -14,17 +15,20 @@ import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 class MongoDataBase {
   static String? a,semail,sfirstName,slastName,sdepartment;
   static String? sstudentno;
-  static var db, userCollection;
+  static var db, userCollection, doctorCollection , dbiki;
   static ObjectId? addd;
   static Student? at;
   static connect() async {
     db = await Db.create(DB_CONNECTION_STRING);
+   // dbiki = await Db.create(DB_CONNECTION_STRING);
     await db.open();
     inspect(db);
     var status = db.serverStatus();
     print(status);
     userCollection = db.collection(Collection_Name);
+    doctorCollection = db.collection(Collection_Doctor);
     print(await userCollection.find().toList());
+    print(await doctorCollection.find().toList());
   }
 
   static Future<String?> insert(Student data) async {
@@ -69,7 +73,7 @@ class MongoDataBase {
   }
 
   static Future<List<Map<String, dynamic>>> getData() async {
-    final dataDoctors = await userCollection.find().toList();
+    final dataDoctors = await doctorCollection.find().toList(); //await userCollection.find().toList();
 
     return dataDoctors;
   }
