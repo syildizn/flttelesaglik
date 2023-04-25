@@ -152,7 +152,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                   final secilenogrenci = '${doctor.firstName}_${doctor.lastName}';
                   final roomName = RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
 
-                  Jitsi.joinMeeting(secilenogrenci!);
+                  Jitsi.joinMeeting("benimodam");
                 },
                 child: Text('Görüntülü Arama'),
                 style: ElevatedButton.styleFrom(
