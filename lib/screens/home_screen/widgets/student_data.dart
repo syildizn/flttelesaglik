@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -85,11 +86,14 @@ class StudentDataCard extends StatelessWidget {
       {Key? key,
         required this.title,
         required this.value,
-        required this.onPress})
+        required this.onPress,
+        required this.icon
+      })
       : super(key: key);
   final String title;
   final String value;
   final VoidCallback onPress;
+  final String icon;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -104,6 +108,12 @@ class StudentDataCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            SvgPicture.asset(
+              icon,
+              height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+              // color: colortext,
+            ),
             Text(
               title,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(
