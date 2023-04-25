@@ -27,6 +27,7 @@ const Color homecard5 = Color.fromRGBO(104, 121, 225, 1.0);
 const Color homecard6 = Color.fromRGBO(236, 106, 84, 1.0);
 const Color homefont = Color.fromRGBO(250, 255, 255, 1);
 const Color homepagefont = Color.fromRGBO(230,237,247,1);
+
 //rgba(104,209,169,255)
 //rgba(230,237,247,255)
 //default value

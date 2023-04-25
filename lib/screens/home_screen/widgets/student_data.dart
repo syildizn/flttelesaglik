@@ -84,13 +84,13 @@ class StudentPicture extends StatelessWidget {
 class StudentDataCard extends StatelessWidget {
   const StudentDataCard(
       {Key? key,
-        required this.title,
+       // required this.title,
         required this.value,
         required this.onPress,
         required this.icon
       })
       : super(key: key);
-  final String title;
+  //final String title;
   final String value;
   final VoidCallback onPress;
   final String icon;
@@ -114,12 +114,12 @@ class StudentDataCard extends StatelessWidget {
               width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 30.sp,
               // color: colortext,
             ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: kTextBlackColor,fontSize: 18.0,
-              ),
-            ),
+            // Text(
+            //   title,
+            //   style: Theme.of(context).textTheme.subtitle1!.copyWith(
+            //     color: kTextBlackColor,fontSize: 18.0,
+      //),
+            // ),
             Text(
               value,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(

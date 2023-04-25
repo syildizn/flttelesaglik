@@ -159,10 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.pushNamed(
                                   context, DoctorsPage.routeName);
                             },
-                            icon: 'assets/icons/ask.svg',
+                            icon: 'assets/icons/doctorw.svg',
                             title: 'Doktorlar',
                             color: Colors.white,
-                            colortext:  homecard1,
+                            //colortext:  homecard1,
                           ),
                           kWidthSizedBox,
                           HomeCard(
@@ -171,44 +171,44 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.pushNamed(
                                   context, AssignmentScreen.routeName);
                             },
-                            icon: 'assets/icons/resume.svg',
+                            icon: 'assets/icons/health.svg',
                             title: 'Sağlık\nKayıtlarım',
                             color: Colors.white,
-                            colortext:  homecard2,
+                            //colortext:  homecard2,
                           ),
                           kWidthSizedBox,
                           HomeCard(
                                   onPress: () {},
-                                  icon: 'assets/icons/assignment.svg',
+                                  icon: 'assets/icons/meetingy.svg',
                                   title: 'Geçmiş\nGörüşmelerim',
                                   color: Colors.white,
-                                  colortext:  homecard3,
+                                  //colortext:  homecard3,
                                 ),
                           kWidthSizedBox,
                                 HomeCard(
                                   onPress: () {},
-                                  icon: 'assets/icons/lock.svg',
+                                  icon: 'assets/icons/passwordc.svg',
                                   title: 'Şifreni\nDeğiştir',
                                   color:  Colors.white,
-                                  colortext: homecard4,
+                                  //colortext: homecard4,
                                 ),
                           kWidthSizedBox,
                           HomeCard(
                             onPress: () {},
-                            icon: 'assets/icons/datesheet.svg',
+                            icon: 'assets/icons/infox.svg',
                             title: 'İstatistikler',
                             color:  Colors.white,
-                            colortext: homecard5,
+                            //colortext: homecard5,
                           ),
                           kWidthSizedBox,
                           HomeCard(
                             onPress: () {
                               Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
                             },
-                            icon: 'assets/icons/logout.svg',
+                            icon: 'assets/icons/exitk.svg',
                             title: 'Çıkış',
                             color:  Colors.white,
-                            colortext: homecard6,
+                            //colortext: homecard6,
                           ),
                         ],
                       ),
@@ -224,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: 10.0,),
-              Text("Menü 2",style: TextStyle(fontSize: 25.0,
+              Text("Hastalıklar",style: TextStyle(fontSize: 25.0,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,
                 color: kBkrColor,),),
@@ -258,27 +258,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPress: () {
                           //go to attendance screen
                         },
-                        title: 'Sağlık Kayıtlarım',
-                        value: '6 Adet',
-                        icon: 'assets/icons/brain.svg',
+                        //title: 'Sağlık Kayıtlarım',
+                        value: 'Nöroloji',
+                        icon: 'assets/icons/neurology.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
                         onPress: () {
                           //go to attendance screen
                         },
-                        title: 'Sağlık Kayıtlarım',
-                        value: '6 Adet',
-                        icon: 'assets/icons/logout.svg',
+                        //title: 'Sağlık Kayıtlarım',
+                        value: 'Psikoloji',
+                        icon: 'assets/icons/psychology.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
                         onPress: () {
                           //go to attendance screen
                         },
-                        title: 'Sağlık Kayıtlarım',
-                        value: '6 Adet',
-                        icon: 'assets/icons/logout.svg',
+                        //title: 'Sağlık Kayıtlarım',
+                        value: 'Kardiyoloji',
+                        icon: 'assets/icons/cardiology.svg',
                       ),
                       kWidthSizedBox,
                       StudentDataCard(
@@ -286,9 +286,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           //go to fee due screen
                           Navigator.pushNamed(context, FeeScreen.routeName);
                         },
-                        title: 'Görüşme Kayıtlarım',
-                        value: '3 Adet',
-                        icon: 'assets/icons/logout.svg',
+                        //title: 'Görüşme Kayıtlarım',
+                        value: 'Dahiliye',
+                        icon: 'assets/icons/internaldisease.svg',
                       ),
                     ],
                   )
@@ -298,6 +298,69 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          sizedBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 10.0,),
+              Text("Hastalıklar",style: TextStyle(fontSize: 25.0,
+                fontWeight: FontWeight.normal,
+                fontStyle: FontStyle.normal,
+                color: kBkrColor,),),
+            ],
+          ),
+          sizedBox,
+          Container(
+            width: 90.w,
+            decoration: BoxDecoration(
+              color: homepagefont,
+              //borderRadius: kTopBorderRadius,
+            ),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: (){},
+                  child: Container(
+                    margin: EdgeInsets.only(top: 1.h),
+                    width: 90.w,
+                    height: 20.h,
+                    decoration: BoxDecoration(
+
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+                      //       boxShadow: [
+                      //       BoxShadow(
+                      //       offset: Offset(0,-10),
+                      //   blurRadius: 35,
+                      //   color: Colors.black12.withOpacity(0.17),
+                      // )]
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/telesaglikk.svg',
+                          height: 86,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                          width: 90,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                          //color: null,
+                        ),
+                        Text(
+                          "Telesağlık Nedir",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: kTextLightColor,fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+                )
+              ],
+            ),
+          )
 
 
 
@@ -324,13 +387,29 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            IconButton(onPressed: () {}, icon: Icon(Icons.home_outlined),),
-            IconButton(onPressed: () {}, icon: Icon(Icons.folder_shared_outlined),),
-            IconButton(onPressed: () {}, icon: Icon(Icons.forest_outlined ),),
+            IconButton(onPressed: () {}, icon:SvgPicture.asset(
+              'assets/icons/homei.svg',
+              width: 50,
+              height: 50,
+            ), ), //Icon(Icons.home_outlined),),
+            IconButton(onPressed: () {}, icon: SvgPicture.asset(
+              'assets/icons/conferance.svg',
+              width: 50,
+              height: 50,
+            ),),
+            IconButton(onPressed: () {}, icon: SvgPicture.asset(
+              'assets/icons/icecream.svg',
+              width: 50,
+              height: 50,
+            ),),
             IconButton(onPressed: () {
               Navigator.pushNamed(
                   context, MyProfileScreen.routeName);
-            }, icon: Icon(Icons.perm_identity_rounded),),
+            }, icon: SvgPicture.asset(
+              'assets/icons/profilo.svg',
+              width: 50,
+              height: 50,
+            ),),
           ],
         ),
       ),
@@ -345,14 +424,14 @@ class HomeCard extends StatelessWidget {
         required this.icon,
         required this.title,
         required this.color,
-        required this.colortext
+        //required this.colortext
       })
       : super(key: key);
   final VoidCallback onPress;
   final String icon;
   final String title;
   final Color color;
-  final Color colortext;
+  //final Color colortext;
 
   @override
   Widget build(BuildContext context) {
@@ -381,12 +460,14 @@ class HomeCard extends StatelessWidget {
               icon,
               height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
               width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-              color: colortext,
+              //color: null,
             ),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.subtitle2?.copyWith(color: colortext, fontSize: 22, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                color: kTextLightColor,fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
