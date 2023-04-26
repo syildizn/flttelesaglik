@@ -303,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: 10.0,),
-              Text("Hastalıklar",style: TextStyle(fontSize: 25.0,
+              Text("Hakkımızda",style: TextStyle(fontSize: 25.0,
                 fontWeight: FontWeight.normal,
                 fontStyle: FontStyle.normal,
                 color: kBkrColor,),),
@@ -323,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     margin: EdgeInsets.only(top: 1.h),
                     width: 90.w,
-                    height: 20.h,
+                    height: 15.h,
                     decoration: BoxDecoration(
 
                       color: Colors.white,
@@ -341,8 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         SvgPicture.asset(
                           'assets/icons/telesaglikk.svg',
-                          height: 86,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-                          width: 90,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                          height: 81,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                          width: 85,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
                           //color: null,
                         ),
                         Text(
