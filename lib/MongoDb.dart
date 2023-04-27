@@ -49,12 +49,15 @@ class MongoDataBase {
 
   static Future<String?> appointment(String day, String time) async {
     try {
+      print("Buraya gelebildi.");
       final newAppointment = {
+        "id" : ObjectId(),
         'date': day,
         'time': time,
       };
 
-      var result = await userCollection.insertOne(newAppointment);
+      var result = await appointnmentCollection.insertOne(newAppointment);
+      print("Buraya bak :$result $day $time " );
       if (result.isSucces) {
         return "Data İnserted";
       } else {

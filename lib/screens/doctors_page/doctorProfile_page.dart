@@ -51,7 +51,16 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
         // Burada veritabanından randevu saatlerini kontrol edebilir ve eğer o saat doluysa butonu devre dışı bırakabilirsiniz.
         final bool isTimeAvailable = true; // Örnek amaçlı her zaman true olarak ayarlandı.
         return ElevatedButton(
-          onPressed: isTimeAvailable ? () => _createAppointment(time) : null,
+          onPressed:isTimeAvailable ? (){
+            final timeParts = time.split(':');
+            final hour = int.parse(timeParts[0]);
+            final minute = int.parse(timeParts[1]);
+            final selectedTime = TimeOfDay(hour: hour, minute: minute);
+            Navigator.of(context).pop(selectedTime);
+            //Navigator.of(context).pop(time);
+            print("$time şimdilik time");
+            _createAppointment(time);
+          }: null, //() => _createAppointment(time) : null,
           child: Text(time),
           style: ElevatedButton.styleFrom(
             primary: kBkrColor, // background
@@ -65,8 +74,9 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
   }
 
 // Randevu oluşturma fonksiyonu
-  void _createAppointment(String time) {
+  String _createAppointment(String time) {
     // Burada seçilen saat bilgisini kullanarak randevu oluşturma işlemini gerçekleştirebilirsiniz.
+    return time;
   }
 
   Future<void> _selectDateAndTime(BuildContext context) async {
@@ -82,6 +92,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
         );
       },
     );
+    print(pickedDate);
     if (pickedDate != null) {
       // final TimeOfDay? pickedTime = await showTimePicker(
       //   context: context,
@@ -95,7 +106,8 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
           );
         },
       );
-      print(pickedTime);
+
+     print("$pickedTime tarih");
       if (pickedTime != null) {
         // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
         // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
