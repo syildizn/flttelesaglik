@@ -15,7 +15,7 @@ import 'package:telesaglikk/screens/home_screen/home_screen.dart';
 class MongoDataBase {
   static String? a,semail,sfirstName,slastName,sdepartment;
   static String? sstudentno;
-  static var db, userCollection, doctorCollection , dbiki;
+  static var db, userCollection, doctorCollection , dbiki ,appointnmentCollection;
   static ObjectId? addd;
   static Student? at;
   static connect() async {
@@ -27,13 +27,34 @@ class MongoDataBase {
     print(status);
     userCollection = db.collection(Collection_Name);
     doctorCollection = db.collection(Collection_Doctor);
+    appointnmentCollection = db.collection(Collection_Appointment);
     print(await userCollection.find().toList());
     print(await doctorCollection.find().toList());
+    print(await appointnmentCollection.find().toList());
   }
 
   static Future<String?> insert(Student data) async {
     try {
       var result = await userCollection.insertOne(data.toJson());
+      if (result.isSucces) {
+        return "Data İnserted";
+      } else {
+        return "Something wrong while İnserting data";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
+  static Future<String?> appointment(String day, String time) async {
+    try {
+      final newAppointment = {
+        'date': day,
+        'time': time,
+      };
+
+      var result = await userCollection.insertOne(newAppointment);
       if (result.isSucces) {
         return "Data İnserted";
       } else {

@@ -34,7 +34,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     ),
   );
 
-  final List<String> appointmentTimes = ['09:00', '11:00', '13:00', '15:00', '17:00', '19:00'];
+  final List<String> appointmentTimes = ['09:00',"10:00", '11:00', "12:00" ,'13:00',"14:00", '15:00',"16:00" ,'17:00'];
 
   @override
   void initState() {
@@ -104,6 +104,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
         // Burada MongoDB veritabanına bağlanarak randevu bilgilerini kaydedebilirsiniz.
         // Örnek amaçlı burada sadece bir debug mesajı yazdırıyoruz.
         print('Randevu oluşturuldu: $selectedDate $selectedTime');
+        await MongoDataBase.appointment(selectedDate, selectedTime);
       }
     }
   }
