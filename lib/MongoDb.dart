@@ -51,9 +51,11 @@ class MongoDataBase {
     try {
       print("Buraya gelebildi.");
       final newAppointment = {
-        "id" : ObjectId(),
+
+        "doctorId" : ObjectId(),
         'date': day,
         'time': time,
+        // 'accepted' : "0"
       };
 
       var result = await appointnmentCollection.insertOne(newAppointment);

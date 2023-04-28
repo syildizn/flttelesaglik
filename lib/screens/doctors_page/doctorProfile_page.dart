@@ -19,6 +19,7 @@ class DoctorProfilePage extends StatefulWidget {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     print(doctor?.firstName);
+    print("doctor id: ${doctor?.id}");
     return _DoctorProfilePageState();
   }
 }
@@ -34,7 +35,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     ),
   );
 
-  final List<String> appointmentTimes = ['09:00',"10:00", '11:00', "12:00" ,'13:00',"14:00", '15:00',"16:00" ,'17:00'];
+  final List<String> appointmentTimes = ['09:00',"10:00", '11:00', "12:00" ,'13:00',"14:00", '15:00',"16:00" ];
 
   @override
   void initState() {
@@ -55,8 +56,11 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
             final timeParts = time.split(':');
             final hour = int.parse(timeParts[0]);
             final minute = int.parse(timeParts[1]);
-            final selectedTime = TimeOfDay(hour: hour, minute: minute);
+            var selectedTime = TimeOfDay(hour: hour, minute: minute);
+            print("selected time: $selectedTime");
             Navigator.of(context).pop(selectedTime);
+            //final elma = TimeOfDay(hour: hour, minute: minute),
+
             //Navigator.of(context).pop(time);
             print("$time şimdilik time");
             _createAppointment(time);
@@ -112,7 +116,25 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
         // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
         // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
         final String selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-        final String selectedTime = pickedTime.format(context);
+
+        var selectedTime = pickedTime.format(context);
+          if(selectedTime== "9:00 AM"){
+            selectedTime = "09:00";
+          }else if(selectedTime== "10:00 AM"){
+            selectedTime = "10:00";
+          }else if(selectedTime== "11:00 AM"){
+            selectedTime = "11:00";
+          }else if(selectedTime== "12:00 PM"){
+            selectedTime = "12:00";
+          }else if(selectedTime== "1:00 PM"){
+            selectedTime = "13:00";
+          }else if(selectedTime== "2:00 PM"){
+            selectedTime = "14:00";
+          }else if(selectedTime== "3:00 PM"){
+            selectedTime = "15:00";
+          }else if(selectedTime== "4:00 PM"){
+            selectedTime = "16:00";
+          }
         // Burada MongoDB veritabanına bağlanarak randevu bilgilerini kaydedebilirsiniz.
         // Örnek amaçlı burada sadece bir debug mesajı yazdırıyoruz.
         print('Randevu oluşturuldu: $selectedDate $selectedTime');
