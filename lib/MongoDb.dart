@@ -47,14 +47,19 @@ class MongoDataBase {
     }
   }
 
-  static Future<String?> appointment(String day, String time) async {
+  static Future<String?> appointment(String day, String time, String? doctorId) async {
     try {
       print("Buraya gelebildi.");
       final newAppointment = {
-
-        "doctorId" : ObjectId(),
+        "_id" : ObjectId(),
+        "doctorId" : doctorId,
+        "patientId" : sstudentno,
+        "patientFirstName": sfirstName,
+        "patientLastName": slastName,
         'date': day,
         'time': time,
+        "accepted": "1",
+
         // 'accepted' : "0"
       };
 
@@ -70,6 +75,22 @@ class MongoDataBase {
       return e.toString();
     }
   }
+
+  static Future<String?> appointmentsorgu(String day, String date) async {
+    var mamut = await appointnmentCollection.findOne(where.eq("patientId", "22356"));
+    print("mamut: $mamut");
+    var resi = await appointnmentCollection.findOne(where.eq('date', '$day').eq('time', "$date"));
+    a = "${resi["_id"]} randevu id";
+    print(a);
+    if (resi == null) {
+      print('randevu bulunamadı');
+      return "bulunamadi";
+    } else {
+      print('Bulundu: ${resi['date']} - ${resi['time']}  ');
+      return "bulundu";
+    }
+  }
+
 
   static Future<String?> sorgu(String email, String password) async {
     var res = await userCollection
@@ -94,6 +115,7 @@ class MongoDataBase {
            print("$sdepartment + $sstudentno");
            semail='${res['email']}';
            sstudentno = "${res["studentNo"]}";
+           print("$sstudentno ögrenci no");
       return "bulundu";
     }
   }

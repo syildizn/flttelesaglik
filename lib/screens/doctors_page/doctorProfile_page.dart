@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +21,8 @@ class DoctorProfilePage extends StatefulWidget {
   State<StatefulWidget> createState() {
     // TODO: implement createState
     print(doctor?.firstName);
-    print("doctor id: ${doctor?.id}");
+
+    print("doctor id: ${doctor?.id?.$oid}");
     return _DoctorProfilePageState();
   }
 }
@@ -27,6 +30,9 @@ class DoctorProfilePage extends StatefulWidget {
 class _DoctorProfilePageState extends State<DoctorProfilePage> {
   late Student doctor;
   late String? imageUrl;
+  var selectedTime;
+  var selectedDate;
+
 
   final ThemeData theme = ThemeData(
     primarySwatch: Colors.cyan,
@@ -45,12 +51,22 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     print(imageUrl);
   }
 
+
+
   // Randevu saatlerini gösteren widget
   Widget buildAppointmentTimes(BuildContext context) {
     return Column(
+
       children: appointmentTimes.map((time) {
         // Burada veritabanından randevu saatlerini kontrol edebilir ve eğer o saat doluysa butonu devre dışı bırakabilirsiniz.
-        final bool isTimeAvailable = true; // Örnek amaçlı her zaman true olarak ayarlandı.
+
+         bool isTimeAvailable = true;
+         randevusorgu().then((value) {
+           isTimeAvailable = value;
+         });
+
+       // final bool isTimeAvailable = true ; // Örnek amaçlı her zaman true olarak ayarlandı.
+       print("son durum: $isTimeAvailable");
         return ElevatedButton(
           onPressed:isTimeAvailable ? (){
             final timeParts = time.split(':');
@@ -58,6 +74,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
             final minute = int.parse(timeParts[1]);
             var selectedTime = TimeOfDay(hour: hour, minute: minute);
             print("selected time: $selectedTime");
+            print("portakal2: ");
             Navigator.of(context).pop(selectedTime);
             //final elma = TimeOfDay(hour: hour, minute: minute),
 
@@ -115,9 +132,9 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       if (pickedTime != null) {
         // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
         // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
-        final String selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+         selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
 
-        var selectedTime = pickedTime.format(context);
+         selectedTime = pickedTime.format(context);
           if(selectedTime== "9:00 AM"){
             selectedTime = "09:00";
           }else if(selectedTime== "10:00 AM"){
@@ -138,10 +155,24 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
         // Burada MongoDB veritabanına bağlanarak randevu bilgilerini kaydedebilirsiniz.
         // Örnek amaçlı burada sadece bir debug mesajı yazdırıyoruz.
         print('Randevu oluşturuldu: $selectedDate $selectedTime');
-        await MongoDataBase.appointment(selectedDate, selectedTime);
+        await MongoDataBase.appointment(selectedDate, selectedTime,doctor?.id?.$oid);
+
       }
     }
   }
+
+  Future<bool> randevusorgu() async{
+    var s = await MongoDataBase.appointmentsorgu(selectedDate, selectedTime);
+    if(s== "bulundu"){
+      print("bulundumu: $s");
+      return false;
+    }else {
+      print("bulundumu: nah bulundu");
+      return true;
+    }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -267,4 +298,5 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       ),
     );
   }
+
 }
