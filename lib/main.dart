@@ -11,7 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await MongoDataBase.connect();
-  await MongoDataBase.appointmentsorgu("2023-04-28", "12:00");
+  //await MongoDataBase.appointmentsorgu( "12:00");
 
   runApp(MyApp());
 }

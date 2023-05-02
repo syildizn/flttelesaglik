@@ -54,45 +54,86 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
 
 
   // Randevu saatlerini gösteren widget
+  // Widget buildAppointmentTimes(BuildContext context) {
+  //   return Column(
+  //
+  //     children: appointmentTimes.map((time) {
+  //       // Burada veritabanından randevu saatlerini kontrol edebilir ve eğer o saat doluysa butonu devre dışı bırakabilirsiniz.
+  //       bool isTimeAvailable = true ;
+  //
+  //         MongoDataBase.appointmentsorgu(time).then((value) {
+  //           print("value:$value");
+  //           print("time:$time");
+  //          //var  j=value;
+  //           if(time == value){
+  //             isTimeAvailable = false ;
+  //           } else {
+  //             isTimeAvailable = true ;
+  //           }
+  //           print("son durum: $isTimeAvailable");
+  //         });
+  //
+  //      print("son durum: $isTimeAvailable");
+  //       return ElevatedButton(
+  //         onPressed:isTimeAvailable ?  (){
+  //           final timeParts = time.split(':');
+  //           final hour = int.parse(timeParts[0]);
+  //           final minute = int.parse(timeParts[1]);
+  //           var selectedTime = TimeOfDay(hour: hour, minute: minute);
+  //           print("selected time: $selectedTime");
+  //           print("portakal2: ");
+  //           Navigator.of(context).pop(selectedTime);
+  //           //final elma = TimeOfDay(hour: hour, minute: minute),
+  //
+  //           //Navigator.of(context).pop(time);
+  //           print("$time şimdilik time");
+  //           _createAppointment(time);
+  //         }
+  //         : null, //() => _createAppointment(time) : null,
+  //         child: Text(time),
+  //         style: ElevatedButton.styleFrom(
+  //           primary: kBkrColor, // background
+  //           onPrimary: Colors.white, // foreground
+  //           shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(10)),
+  //         ),
+  //       );
+  //     }).toList(),
+  //   );
+  // }
+
   Widget buildAppointmentTimes(BuildContext context) {
     return Column(
-
       children: appointmentTimes.map((time) {
-        // Burada veritabanından randevu saatlerini kontrol edebilir ve eğer o saat doluysa butonu devre dışı bırakabilirsiniz.
-
-         bool isTimeAvailable = true;
-         randevusorgu().then((value) {
-           isTimeAvailable = value;
-         });
-
-       // final bool isTimeAvailable = true ; // Örnek amaçlı her zaman true olarak ayarlandı.
-       print("son durum: $isTimeAvailable");
-        return ElevatedButton(
-          onPressed:isTimeAvailable ? (){
-            final timeParts = time.split(':');
-            final hour = int.parse(timeParts[0]);
-            final minute = int.parse(timeParts[1]);
-            var selectedTime = TimeOfDay(hour: hour, minute: minute);
-            print("selected time: $selectedTime");
-            print("portakal2: ");
-            Navigator.of(context).pop(selectedTime);
-            //final elma = TimeOfDay(hour: hour, minute: minute),
-
-            //Navigator.of(context).pop(time);
-            print("$time şimdilik time");
-            _createAppointment(time);
-          }: null, //() => _createAppointment(time) : null,
-          child: Text(time),
-          style: ElevatedButton.styleFrom(
-            primary: kBkrColor, // background
-            onPrimary: Colors.white, // foreground
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)),
-          ),
+        return FutureBuilder(
+          future: MongoDataBase.appointmentsorgu(time),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            bool isTimeAvailable = snapshot.hasData ? snapshot.data == null : true;
+            print("selected datemiş $selectedDate");
+            return ElevatedButton(
+              onPressed: isTimeAvailable ? () {
+                final timeParts = time.split(':');
+                final hour = int.parse(timeParts[0]);
+                final minute = int.parse(timeParts[1]);
+                var selectedTime = TimeOfDay(hour: hour, minute: minute);
+                Navigator.of(context).pop(selectedTime);
+                _createAppointment(time);
+              } : null,
+              child: Text(time),
+              style: ElevatedButton.styleFrom(
+                primary: kBkrColor,
+                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            );
+          },
         );
       }).toList(),
     );
   }
+
 
 // Randevu oluşturma fonksiyonu
   String _createAppointment(String time) {
@@ -119,16 +160,91 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       //   context: context,
       //   initialTime: TimeOfDay.now(),
       // );
+      // final TimeOfDay? pickedTime = await showDialog(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return AlertDialog(
+      //       content: buildAppointmentTimes(context),
+      //     );
+      //   },
+      // );
+
+      // final TimeOfDay? pickedTime = await showDialog(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return AlertDialog(
+      //       contentPadding: EdgeInsets.all(10),
+      //       content: Container(
+      //         decoration: BoxDecoration(
+      //           color: Colors.white,
+      //           borderRadius: BorderRadius.circular(10),
+      //           boxShadow: [
+      //             BoxShadow(
+      //               color: Colors.black.withOpacity(0.5),
+      //               spreadRadius: 2,
+      //               blurRadius: 5,
+      //               offset: Offset(0, 3),
+      //             ),
+      //           ],
+      //         ),
+      //         child: buildAppointmentTimes(context),
+      //       ),
+      //     );
+      //   },
+      // );
+
+
+      // final TimeOfDay? pickedTime = await showDialog(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return Stack(
+      //       children: [
+      //         // Arkaplan için container
+      //         Container(
+      //           decoration: BoxDecoration(
+      //             color: Colors.transparent.withOpacity(0.5), // Şeffaflık değeri 0.5
+      //             boxShadow: [
+      //               BoxShadow(
+      //                 color: Colors.transparent.withOpacity(0.5), // Gölge rengi ve şeffaflık değeri
+      //                 spreadRadius: 5,
+      //                 blurRadius: 7,
+      //                 offset: Offset(1, 3), // Gölgenin yönü ve yoğunluğu
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //         // Dialog için container
+      //         AlertDialog(
+      //           content: buildAppointmentTimes(context),
+      //         ),
+      //       ],
+      //     );
+      //   },
+      // );
+
       final TimeOfDay? pickedTime = await showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            content: buildAppointmentTimes(context),
+          return Dialog(
+            backgroundColor: Colors.white.withOpacity(0.78),
+            elevation: 60.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.45,
+                width: MediaQuery.of(context).size.width*0.05,
+                child: buildAppointmentTimes(context),
+              ),
+            ),
           );
         },
       );
 
-     print("$pickedTime tarih");
+
+      print("$pickedTime tarih");
       if (pickedTime != null) {
         // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
         // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
@@ -161,14 +277,16 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     }
   }
 
-  Future<bool> randevusorgu() async{
-    var s = await MongoDataBase.appointmentsorgu(selectedDate, selectedTime);
-    if(s== "bulundu"){
+
+
+  Future<String> randevusorgu() async{
+    var s = await MongoDataBase.appointmentsorgu( selectedTime);
+    if(s != null && s == "bulundu"){
       print("bulundumu: $s");
-      return false;
+      return "a";
     }else {
       print("bulundumu: nah bulundu");
-      return true;
+      return "b";
     }
 
   }
