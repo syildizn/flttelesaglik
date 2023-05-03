@@ -234,7 +234,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.50,
                 width: MediaQuery.of(context).size.width*0.05,
                 child: buildAppointmentTimes(context),
               ),
