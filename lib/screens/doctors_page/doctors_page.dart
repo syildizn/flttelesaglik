@@ -7,6 +7,8 @@ import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/doctors_page/doctorProfile_page.dart';
 
+import '../../models/doctors_model.dart';
+
 class DoctorsPage extends StatefulWidget {
   static String routeName = 'DoctorPage';
   @override
@@ -68,7 +70,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                 child: DoctorCard(
                                   onPress: () {
                                     DoctorProfilePage.imageUrl = 'assets/images/doctorxx.jpg';
-                                    DoctorProfilePage.doctor = Student.fromJson(
+                                    DoctorProfilePage.doctor = Doctor.fromJson(
                                         snapshot.data[index * 2]);
                                     Navigator.pushNamed(
 
@@ -76,7 +78,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                   },
                                   color: Colors.white,
                                   colortext: Colors.black,
-                                  doctor: Student.fromJson(
+                                  doctor: Doctor.fromJson(
                                       snapshot.data[index * 2]),
                                   icon: 'assets/images/doctorxx.jpg',
                                 ),
@@ -87,14 +89,14 @@ class _DoctorPageState extends State<DoctorsPage> {
                                       child: DoctorCard(
                                         onPress: () {
                                           DoctorProfilePage.imageUrl = 'assets/images/doctorxy.jpg';
-                                          DoctorProfilePage.doctor = Student.fromJson(
+                                          DoctorProfilePage.doctor = Doctor.fromJson(
                                               snapshot.data[index * 2 + 1]);
                                           Navigator.pushNamed(
                                               context, DoctorProfilePage.routeName);
                                         },
                                         color: Colors.white,
                                         colortext: Colors.black,
-                                        doctor: Student.fromJson(
+                                        doctor: Doctor.fromJson(
                                             snapshot.data[index * 2 + 1]),
                                         icon: 'assets/images/doctorxy.jpg',
                                       ),
@@ -119,88 +121,88 @@ class _DoctorPageState extends State<DoctorsPage> {
 
 
 
-class DoctorCard extends StatelessWidget {
-  const DoctorCard({
-    Key? key,
-    required this.onPress,
-    required this.icon,
-    //required this.title,
-    required this.color,
-    required this.colortext,
-    required this.doctor,
-  }) : super(key: key);
-  final VoidCallback onPress;
-  final String icon;
-  //final String title;
-  final Color color;
-  final Color colortext;
-  final Student doctor;
+  class DoctorCard extends StatelessWidget {
+    const DoctorCard({
+      Key? key,
+      required this.onPress,
+      required this.icon,
+      //required this.title,
+      required this.color,
+      required this.colortext,
+      required this.doctor,
+    }) : super(key: key);
+    final VoidCallback onPress;
+    final String icon;
+    //final String title;
+    final Color color;
+    final Color colortext;
+    final Doctor doctor;
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Container(
-        margin: EdgeInsets.only(top: 1.h),
-        width: 40.w,
-        height: 30.h,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-          //       boxShadow: [
-          //       BoxShadow(
-          //       offset: Offset(0,-10),
-          //   blurRadius: 35,
-          //   color: Colors.black12.withOpacity(0.17),
-          // )]
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-            height: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
-            width: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
+    @override
+    Widget build(BuildContext context) {
+      return InkWell(
+        onTap: onPress,
+        child: Container(
+          margin: EdgeInsets.only(top: 1.h),
+          width: 40.w,
+          height: 30.h,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+            //       boxShadow: [
+            //       BoxShadow(
+            //       offset: Offset(0,-10),
+            //   blurRadius: 35,
+            //   color: Colors.black12.withOpacity(0.17),
+            // )]
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+              height: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
 
-              child:CircleAvatar(
-                backgroundColor: kSecondaryColor,
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(icon),
-                      fit: BoxFit.cover,
+                child:CircleAvatar(
+                  backgroundColor: kSecondaryColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(icon),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            // SvgPicture.asset(
-            //   icon,
-            //   height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-            //   width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-            //   color: colortext,
-            // ),
-            // Text(
-            //   title,
-            //   textAlign: TextAlign.left,
-            //   style: Theme.of(context).textTheme.subtitle2?.copyWith(color: colortext, fontSize: 22, fontWeight: FontWeight.bold),
-            // ),
-            Text(
-              "${doctor.firstName} ${doctor.lastName}",
-              textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                  color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "${doctor.department}",
-              textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                  color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-          ],
+              // SvgPicture.asset(
+              //   icon,
+              //   height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+              //   width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+              //   color: colortext,
+              // ),
+              // Text(
+              //   title,
+              //   textAlign: TextAlign.left,
+              //   style: Theme.of(context).textTheme.subtitle2?.copyWith(color: colortext, fontSize: 22, fontWeight: FontWeight.bold),
+              // ),
+              Text(
+                "${doctor.firstName} ${doctor.lastName}",
+                textAlign: TextAlign.left,
+                style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                    color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "${doctor.department}",
+                textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                    color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
-}

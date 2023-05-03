@@ -76,15 +76,14 @@ class MongoDataBase {
     }
   }
 
-  static Future<String?> appointmentsorgu(String date) async {
-    var mamut = await appointnmentCollection.findOne(where.eq("patientId", "22356"));
-    print("mamut: $mamut");
-    var resi = await appointnmentCollection.findOne(where.eq('time', "$date"));
+  static Future<String?> appointmentsorgu(String date,String day) async {
+
+    var resi = await appointnmentCollection.findOne(where.eq('time', "$date").eq("date","$day"));
     a = "${resi["_id"]} randevu id";
     print(a);
     if (resi != null) {
       print('randevu bulundu:${resi['date']} - ${resi['time']}');
-      return "${resi['time']}";
+      return "${resi['time']}-${resi["date"]}";
     } else {
       print('Randevu Bulunamadı');
       return null;
