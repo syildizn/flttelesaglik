@@ -57,7 +57,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     print(imageUrl);
   }
 
-  Widget buildAppointmentTimes(BuildContext context) {
+  Widget buildAppointmentTimes(BuildContext context, String tarihStr) {
     return Column(
       children: appointmentTimes.map((time) {
         return FutureBuilder(
@@ -98,13 +98,48 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
-      builder: (BuildContext context, Widget? child) {
+      builder: (BuildContext context, Widget? ListView/*child*/) {
         return Theme(
           data: theme,
-          child: child!,
+          child:ListView?.builder(
+            itemCount: 7,
+            itemBuilder: (context, index) {
+              // Burada her gün için ayrı bir tarih değeri hesaplanır.
+              // Örneğin bugünden itibaren 7 gün sonrasına kadar olan tarihler hesaplanır.
+              final tarih = DateTime.now().add(Duration(days: index));
+              final tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
+
+              return Column(
+                children: [
+                  Text(tarihStr), // Tarihi ekrana yazdırırız.
+                  buildAppointmentTimes(context, tarihStr), // Her gün için ayrı saat dilimi tuşları oluşturulur.
+                ],
+              );
+            },
+          ) ,//child!,
         );
       },
+      // builder: ListView.builder(
+      //   itemCount: 7,
+      //   itemBuilder: (context, index) {
+      //     // Burada her gün için ayrı bir tarih değeri hesaplanır.
+      //     // Örneğin bugünden itibaren 7 gün sonrasına kadar olan tarihler hesaplanır.
+      //     final tarih = DateTime.now().add(Duration(days: index));
+      //     final tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
+      //
+      //     return Column(
+      //       children: [
+      //         Text(tarihStr), // Tarihi ekrana yazdırırız.
+      //         buildAppointmentTimes(context, tarihStr), // Her gün için ayrı saat dilimi tuşları oluşturulur.
+      //       ],
+      //     );
+      //   },
+      //  );
+
     );
+
+    /* final DateTime? pickedDate = await*/
+
     print(pickedDate);
     if (pickedDate != null) {
       final TimeOfDay? pickedTime = await showDialog(
@@ -127,6 +162,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
           );
         },
       );
+
 
       print("$pickedTime tarih");
       if (pickedTime != null) {
