@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
+import 'package:telesaglikk/screens/appointment_screen/appointment_page.dart';
 import 'package:telesaglikk/screens/doctors_page/doctorProfile_page.dart';
 
 import '../../models/doctors_model.dart';
@@ -70,6 +71,8 @@ class _DoctorPageState extends State<DoctorsPage> {
                                 child: DoctorCard(
                                   onPress: () {
                                     DoctorProfilePage.imageUrl = 'assets/images/doctorxx.jpg';
+                                    AppointmentPage.doctor = Doctor.fromJson(
+                                        snapshot.data[index * 2 + 1]);
                                     DoctorProfilePage.doctor = Doctor.fromJson(
                                         snapshot.data[index * 2]);
                                     Navigator.pushNamed(
@@ -89,6 +92,8 @@ class _DoctorPageState extends State<DoctorsPage> {
                                       child: DoctorCard(
                                         onPress: () {
                                           DoctorProfilePage.imageUrl = 'assets/images/doctorxy.jpg';
+                                          AppointmentPage.doctor = Doctor.fromJson(
+                                              snapshot.data[index * 2 + 1]);
                                           DoctorProfilePage.doctor = Doctor.fromJson(
                                               snapshot.data[index * 2 + 1]);
                                           Navigator.pushNamed(

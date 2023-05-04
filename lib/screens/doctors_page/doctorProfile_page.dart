@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
+import 'package:telesaglikk/screens/appointment_screen/appointment_page.dart';
 import '../../jitsi.dart';
 import '../../models/doctors_model.dart';
 
@@ -28,6 +29,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
   late String? imageUrl;
   var selectedTime;
   var selectedDate;
+  var tarihStr;
 
   final ThemeData theme = ThemeData(
     primarySwatch: Colors.cyan,
@@ -98,49 +100,44 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
-      builder: (BuildContext context, Widget? ListView/*child*/) {
-        return Theme(
-          data: theme,
-          child:ListView?.builder(
-            itemCount: 7,
-            itemBuilder: (context, index) {
-              // Burada her gün için ayrı bir tarih değeri hesaplanır.
-              // Örneğin bugünden itibaren 7 gün sonrasına kadar olan tarihler hesaplanır.
-              final tarih = DateTime.now().add(Duration(days: index));
-              final tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
+      builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: theme,
+        child: ListView.builder(
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            // Burada her gün için ayrı bir tarih değeri hesaplanır.
+            // Örneğin bugünden itibaren 7 gün sonrasına kadar olan tarihler hesaplanır.
+            final tarih = DateTime.now().add(Duration(days: index));
+             tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
 
-              return Column(
-                children: [
-                  Text(tarihStr), // Tarihi ekrana yazdırırız.
-                  buildAppointmentTimes(context, tarihStr), // Her gün için ayrı saat dilimi tuşları oluşturulur.
-                ],
-              );
-            },
-          ) ,//child!,
-        );
-      },
-      // builder: ListView.builder(
-      //   itemCount: 7,
-      //   itemBuilder: (context, index) {
-      //     // Burada her gün için ayrı bir tarih değeri hesaplanır.
-      //     // Örneğin bugünden itibaren 7 gün sonrasına kadar olan tarihler hesaplanır.
-      //     final tarih = DateTime.now().add(Duration(days: index));
-      //     final tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
-      //
-      //     return Column(
-      //       children: [
-      //         Text(tarihStr), // Tarihi ekrana yazdırırız.
-      //         buildAppointmentTimes(context, tarihStr), // Her gün için ayrı saat dilimi tuşları oluşturulur.
-      //       ],
-      //     );
-      //   },
-      //  );
+            return Column(
+              children: [
+                // Text(tarihStr,style: TextStyle(
+                //   fontWeight: FontWeight.normal,
+                //   fontSize: 35,
+                //   color: Colors.white,
+                // ),),
+                TextButton(onPressed: (){
+                  buildAppointmentTimes(context,tarihStr);
+                }, child: Text(tarihStr,style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 35,
+                  color: Colors.white,
+                ),),)// Tarihi ekrana yazdırırız.
+                //buildAppointmentTimes(context, tarihStr), // Her gün için ayrı saat dilimi tuşları oluşturulur.
+              ],
+            );
+          },
+        ),
+      );
+    },
 
     );
 
     /* final DateTime? pickedDate = await*/
 
-    print(pickedDate);
+    print("pickedDate:$pickedDate");
     if (pickedDate != null) {
       final TimeOfDay? pickedTime = await showDialog(
         context: context,
@@ -156,7 +153,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.50,
                 width: MediaQuery.of(context).size.width * 0.05,
-                child: buildAppointmentTimes(context),
+                child: buildAppointmentTimes(context,tarihStr),
               ),
             ),
           );
@@ -164,7 +161,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       );
 
 
-      print("$pickedTime tarih");
+      //print("$pickedTime saat");
       if (pickedTime != null) {
         // Burada seçilen tarih ve saat bilgilerini MongoDB veritabanına kaydedebilirsiniz.
         // Ayrıca randevu saatlerinin dolu olup olmadığını kontrol etmek için de MongoDB veritabanındaki randevu bilgilerini sorgulayabilirsiniz.
@@ -410,7 +407,10 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      _selectDateAndTime(context);
+                     // _selectDateAndTime(context);
+                      Navigator.pushNamed(
+
+                          context, AppointmentPage.routeName);
                     },
                     child: Text('Randevu Oluştur'),
                     style: ElevatedButton.styleFrom(
