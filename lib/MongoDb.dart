@@ -76,9 +76,9 @@ class MongoDataBase {
     }
   }
 
-  static Future<String?> appointmentsorgu(String date,String day) async {
+  static Future<String?> appointmentsorgu(String date) async {
 
-    var resi = await appointnmentCollection.findOne(where.eq('time', "$date").eq("date","$day"));
+    var resi = await appointnmentCollection.findOne(where.eq('time', "$date"));
     a = "${resi["_id"]} randevu id";
     print(a);
     if (resi != null) {

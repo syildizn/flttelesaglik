@@ -24,6 +24,7 @@ class _AppointmentPage extends State<AppointmentPage>{
   late Doctor doctor;
   var tarihStr;
   var _selectedDateTime;
+  var timetwo;
 
   @override
   void initState() {
@@ -58,21 +59,36 @@ class _AppointmentPage extends State<AppointmentPage>{
           // Burada her gün için ayrı saat dilimleri oluşturulur.
           final saatDilimleri = List.generate(8, (index) => '${9 + index}:00')
               .map(
-                (saat) => InkWell(
-              onTap: () async {
-                await MongoDataBase.appointment(
-                    _selectedDateTime, "saat", doctor?.id?.$oid);
-                setState(() {
-                  _selectedDateTime = '$tarihStr $saat';
-                  print(_selectedDateTime);
-                });
-              },
-                  child: Text(
-                    saat,
-                    style: TextStyle(fontSize: 12,
-                    color: Colors.black),
-                  ),
-            ),
+                (saat) => FutureBuilder(
+                  future: MongoDataBase.appointmentsorgu(_selectedDateTime),
+                  builder: (context,snapshot) {
+                    if (snapshot.hasData) {
+                      bool variable = snapshot.hasData ? snapshot.data == null : true;
+                      return InkWell(
+                      onTap: variable ? () async {
+                        // await MongoDataBase.appointment(
+                        //     _selectedDateTime, "saat", doctor?.id?.$oid);
+                         setState(() async {
+                         timetwo = "$saat";
+                         _selectedDateTime = '$tarihStr $saat';
+                         print(_selectedDateTime);
+                         await MongoDataBase.appointment(
+                         _selectedDateTime, timetwo, doctor?.id?.$oid);
+                         });
+                        }: null,
+                        child: Text(
+                          saat,
+                          style: TextStyle(fontSize: 12,
+                          color: Colors.black),
+                        )
+
+                      );}
+                    else {
+                      return CircularProgressIndicator();
+                    }
+                    }
+
+                ),
           )
               .toList();
 

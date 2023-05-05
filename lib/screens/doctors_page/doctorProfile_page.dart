@@ -63,7 +63,7 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     return Column(
       children: appointmentTimes.map((time) {
         return FutureBuilder(
-          future: MongoDataBase.appointmentsorgu(time,"2023-05-20"),
+          future: MongoDataBase.appointmentsorgu(time),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             bool isTimeAvailable =
                 snapshot.hasData ? snapshot.data == null : true;

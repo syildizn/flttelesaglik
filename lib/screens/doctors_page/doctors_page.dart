@@ -72,7 +72,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                   onPress: () {
                                     DoctorProfilePage.imageUrl = 'assets/images/doctorxx.jpg';
                                     AppointmentPage.doctor = Doctor.fromJson(
-                                        snapshot.data[index * 2 + 1]);
+                                        snapshot.data[index * 2]);
                                     DoctorProfilePage.doctor = Doctor.fromJson(
                                         snapshot.data[index * 2]);
                                     Navigator.pushNamed(
