@@ -76,17 +76,17 @@ class MongoDataBase {
     }
   }
 
-  static Future<String?> appointmentsorgu(String date) async {
+  static Future<bool> appointmentsorgu(String date,String time) async {
 
-    var resi = await appointnmentCollection.findOne(where.eq('time', "$date"));
+    var resi = await appointnmentCollection.findOne(where.eq('date', "$date").eq("time", time));
     a = "${resi["_id"]} randevu id";
     print(a);
     if (resi != null) {
       print('randevu bulundu:${resi['date']} - ${resi['time']}');
-      return "${resi['time']}-${resi["date"]}";
+      return false;
     } else {
       print('Randevu Bulunamadı');
-      return null;
+      return true;
     }
   }
 
