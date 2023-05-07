@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -42,15 +44,19 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: homepagefont,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {  },
-          icon: Icon(Icons.menu_rounded,color: kBkrColor,),),
-        title: Text("Telesağlık",textScaleFactor: 1,style: GoogleFonts.sourceSansPro(textStyle:
-        TextStyle(
-          fontSize: 25.0,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.normal,
-          color: kBkrColor,))) ,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Image.asset('assets/images/bakircayiconlogo.png'),
+        ),
+        title: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Text("Telesağlık",textScaleFactor: 1,style: GoogleFonts.sourceSansPro(textStyle:
+          TextStyle(
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.normal,
+            color: kBkrColor,))),
+        ) ,
         // actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
         // // go to profile detail screen here
         // Navigator.pushNamed(
@@ -168,8 +174,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeCard(
                             onPress: () {
                               //go to assignment screen here
-                              Navigator.pushNamed(
-                                  context, AssignmentScreen.routeName);
+                              // Navigator.pushNamed(
+                              //     context, AssignmentScreen.routeName);
                             },
                             icon: 'assets/icons/health.svg',
                             title: 'Sağlık\nKayıtlarım',
@@ -392,7 +398,10 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 50,
               height: 50,
             ), ), //Icon(Icons.home_outlined),),
-            IconButton(onPressed: () {}, icon: SvgPicture.asset(
+            IconButton(onPressed: () {
+              Navigator.pushNamed(
+                  context, AssignmentScreen.routeName);
+            }, icon: SvgPicture.asset(
               'assets/icons/conferance.svg',
               width: 50,
               height: 50,

@@ -15,14 +15,11 @@ class AssignmentDetailRow extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context)
-              .textTheme
-              .caption!
-              .copyWith(color: kTextBlackColor, fontWeight: FontWeight.w900),
+          style: TextStyle(color: Colors.black,fontSize: 16),
         ),
         Text(
           statusValue,
-          style: Theme.of(context).textTheme.caption,
+          style: TextStyle(color: Colors.black,fontSize: 13),
         ),
       ],
     );
@@ -43,19 +40,20 @@ class AssignmentButton extends StatelessWidget {
         width: 100.w,
         height: 7.h,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [kSecondaryColor, kPrimaryColor],
-            begin: const FractionalOffset(0.0, 0.0),
-            end: const FractionalOffset(0.5, 0.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
-          ),
+          // gradient: LinearGradient(
+          //   colors: [homepagefont, kBkrColor],
+          //   begin: const FractionalOffset(0.0, 0.0),
+          //   end: const FractionalOffset(0.5, 0.0),
+          //   stops: [0.0, 1.0],
+          //   tileMode: TileMode.clamp,
+          // ),
+          color: kBkrColor,
           borderRadius: BorderRadius.circular(kDefaultPadding),
         ),
         child: Center(
           child: Text(
               title,
-              style: Theme.of(context).textTheme.subtitle2
+              style: Theme.of(context).textTheme.subtitle1
           ),
         ),
       ),

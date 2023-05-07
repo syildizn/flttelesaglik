@@ -1,3 +1,5 @@
+import 'package:telesaglikk/models/doctors_model.dart';
+
 class AssignmentData {
   final String subjectName;
   final String topicName;
@@ -11,11 +13,27 @@ class AssignmentData {
 
 List<AssignmentData> assignment = [
   AssignmentData(
-      'Biology', 'Red Blood Cells', '17 Nov 2021', '20 Nov 2021', 'Pending'),
-  AssignmentData(
-      'Physics', 'bohr theory', '11 Nov 2021', '20 Nov 2021', 'Submitted'),
-  AssignmentData('Chemistry', 'Organic Chemistry', '21 Oct 2021', '27 Oct 2021',
-      'Not Submitted'),
-  AssignmentData(
-      'Mathematics', 'Algebra', '17 Sep 2021', '30 Sep 2021', 'Pending'),
+      'AT', 'ZÜRAFA', 'BLA BLA', 'AYNEN MAHMUT', 'Pending'),
 ];
+
+class FindDoctor{
+   Doctor? doctor;
+
+
+}
+
+class MyAppoinment{
+
+   String? doctorId;
+   String? patientId;
+   String? patientFirstName;
+   String? patientLastName;
+   String?  date;
+   String? hour;
+   String? accepted;
+
+   MyAppoinment(this.doctorId,this.patientId,this.patientFirstName,this.patientLastName,this.date,this.hour,this.accepted);
+
+
+
+}

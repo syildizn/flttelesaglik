@@ -11,15 +11,17 @@ class AssignmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: homepagefont,
       appBar: AppBar(
-        title: Text('Assignments'),
+        backgroundColor: kBkrColor,
+        title: Text('Randevularım'),
       ),
       body: Column(
         children: [
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: kOtherColor,
+                color: homepagefont,
                 borderRadius: kTopBorderRadius,
               ),
               child: ListView.builder(
@@ -36,7 +38,7 @@ class AssignmentScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius:
                               BorderRadius.circular(kDefaultPadding),
-                              color: kOtherColor,
+                              color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
                                   color: kTextLightColor,
@@ -58,7 +60,7 @@ class AssignmentScreen extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       assignment[index].subjectName,
-                                      style: Theme.of(context).textTheme.caption,
+                                      style: TextStyle(color: Colors.black,fontSize: 13),
                                     ),
                                   ),
                                 ),
@@ -72,17 +74,17 @@ class AssignmentScreen extends StatelessWidget {
                                 ),
                                 kHalfSizedBox,
                                 AssignmentDetailRow(
-                                  title: 'Assign Date',
+                                  title: 'Randevu Günü',
                                   statusValue: assignment[index].assignDate,
                                 ),
                                 kHalfSizedBox,
                                 AssignmentDetailRow(
-                                  title: 'Last Date',
+                                  title: 'Randevu saati',
                                   statusValue: assignment[index].lastDate,
                                 ),
                                 kHalfSizedBox,
                                 AssignmentDetailRow(
-                                  title: 'Status',
+                                  title: 'Durum',
                                   statusValue: assignment[index].status,
                                 ),
                                 kHalfSizedBox,
@@ -93,10 +95,11 @@ class AssignmentScreen extends StatelessWidget {
                                     onPress: () {
                                       //submit here
                                     },
-                                    title: 'To be Submitted',
+                                    title: 'TUŞ',
                                   ),
                               ],
-                            ),
+                            )
+
                           ),
                         ],
                       ),

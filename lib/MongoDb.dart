@@ -76,9 +76,9 @@ class MongoDataBase {
     }
   }
 
-  static Future<bool> appointmentsorgu(String date,String time) async {
+  static Future<bool> appointmentsorgu(String date,String time,String? doctori) async {
 
-    var resi = await appointnmentCollection.findOne(where.eq('date', "$date").eq("time", time));
+    var resi = await appointnmentCollection.findOne(where.eq('date', "$date").eq("time", time).eq("doctorId","$doctori"));
     a = "${resi["_id"]} randevu id";
     print(a);
     if (resi != null) {
@@ -89,6 +89,19 @@ class MongoDataBase {
       return true;
     }
   }
+
+
+  static Future<List> myappointmentsorgu(String patientId) async {
+
+    //var resi = await appointnmentCollection.find(where.eq('patientId', "$patientId"));
+    List al = await appointnmentCollection.find(where.eq('patientId', "$patientId")); ;
+
+    print("istediğim randevular: $al");
+    return al;
+
+
+  }
+
 
 
   static Future<String?> sorgu(String email, String password) async {

@@ -56,12 +56,12 @@ class _AppointmentPage extends State<AppointmentPage> {
           final tarihStr = DateFormat('yyyy-MM-dd').format(tarih);
           final saatDilimleri = List.generate(8, (index) => '${9 + index}:00')
               .map((saat) => FutureBuilder(
-              future: MongoDataBase.appointmentsorgu(tarihStr, saat),
+              future: MongoDataBase.appointmentsorgu(tarihStr, saat,doctor?.id?.$oid),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return InkWell(
                     onTap: () async {
-                      bool isAppointmentAvailable = await MongoDataBase.appointmentsorgu(tarihStr, saat);
+                      bool isAppointmentAvailable = await MongoDataBase.appointmentsorgu(tarihStr, saat,doctor?.id?.$oid);
                       if(isAppointmentAvailable){
                         setState(() {
                           colorssaat = Colors.black;
