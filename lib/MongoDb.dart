@@ -57,7 +57,7 @@ class MongoDataBase {
         "patientFirstName": sfirstName,
         "patientLastName": slastName,
         'date': day,
-        'time': time,
+        'hour': time,
         "accepted": "1",
 
         // 'accepted' : "0"
@@ -78,7 +78,7 @@ class MongoDataBase {
 
   static Future<bool> appointmentsorgu(String date,String time,String? doctori) async {
 
-    var resi = await appointnmentCollection.findOne(where.eq('date', "$date").eq("time", time).eq("doctorId","$doctori"));
+    var resi = await appointnmentCollection.findOne(where.eq('date', "$date").eq("hour", time).eq("doctorId","$doctori"));
     a = "${resi["_id"]} randevu id";
     print(a);
     if (resi != null) {
@@ -94,7 +94,7 @@ class MongoDataBase {
   static Future<List> myappointmentsorgu(String patientId) async {
 
     //var resi = await appointnmentCollection.find(where.eq('patientId', "$patientId"));
-    List al = await appointnmentCollection.find(where.eq('patientId', "$patientId")); ;
+    var al = await appointnmentCollection.find(where.eq('patientId', "$sstudentno")); ;
 
     print("istediğim randevular: $al");
     return al;
