@@ -70,15 +70,25 @@ class AssignmentScreen extends StatelessWidget {
                                                 borderRadius:
                                                 BorderRadius.circular(kDefaultPadding),
                                               ),
-                                              child: Center(
-                                                child: Text( appointment["doctorId"],
-                                                  //snapshot.data[index].doctorId,
-                                                  style: TextStyle(color: Colors.black,fontSize: 13),
-                                                ),
-                                              ),
+                                              child: FutureBuilder(
+                                                future: MongoDataBase.doctorappointmentsorgu(appointment["doctorId"]),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot.hasData) {
+                                                    final doctorName = snapshot.data;
+                                                    return Text(
+                                                      doctorName!,
+                                                      style: TextStyle(color: Colors.black, fontSize: 13),
+                                                    );
+                                                  } else if (snapshot.hasError) {
+                                                    return Text('Bir hata oluştu');
+                                                  } else {
+                                                    return CircularProgressIndicator();
+                                                  }
+                                                },
+                                              )
                                             ),
                                             kHalfSizedBox,
-                                            Text(appointment["doctorId"],
+                                            Text("Hasta: ${appointment["patientFirstName"]} ${appointment["patientLastName"]}"/*"null "*/,
                                               //snapshot.data[index].patientId,
                                               style: Theme.of(context).textTheme.subtitle2!.copyWith(
                                                 color: kTextBlackColor,
@@ -93,17 +103,17 @@ class AssignmentScreen extends StatelessWidget {
                                             kHalfSizedBox,
                                             AssignmentDetailRow(
                                               title: "Randevu Tarihi:" ,
-                                              statusValue: appointment["date"],
+                                              statusValue: appointment["date"]/*"null "*/,
                                             ),
 
                                             kHalfSizedBox,
                                             AssignmentDetailRow(
                                               title: 'Randevu Saati',
-                                              statusValue: appointment["hour"],
+                                              statusValue: appointment["hour"]/*"null "*/,
                                             ),
                                             kHalfSizedBox,
                                             //use condition here to display button
-                                            if ( appointment[""] == 'Pending')
+                                            if ( appointment["accepted"] == '1')
                                             //then show button
                                               AssignmentButton(
                                                 onPress: () {

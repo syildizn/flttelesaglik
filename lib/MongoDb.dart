@@ -107,6 +107,22 @@ class MongoDataBase {
 
   }
 
+  static Future<String> doctorappointmentsorgu(String id) async {
+
+    //String id = "6423414237db04a7fd70fa61";
+    var objectIdDoctor = ObjectId.fromHexString(id);
+    var resi = await doctorCollection.findOne(where.eq('_id', objectIdDoctor));
+    String b = "Doktor: ${resi["firstName"]} ${resi["lastName"]}";
+    print(b);
+    if (resi != null) {
+      print('doctor has find');
+      return b;
+    } else {
+      print('doctor has not find');
+      return "Doktor: null";
+    }
+  }
+
 
 
   static Future<String?> sorgu(String email, String password) async {
