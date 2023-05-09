@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:telesaglikk/models/doctors_model.dart';
+
+MyAppoinment myAppointmentFromJson(String str) => MyAppoinment.fromJson(jsonDecode(str));
 
 class AssignmentData {
   final String subjectName;
@@ -24,6 +28,7 @@ class FindDoctor{
 
 class MyAppoinment{
 
+   String? id;
    String? doctorId;
    String? patientId;
    String? patientFirstName;
@@ -34,6 +39,28 @@ class MyAppoinment{
 
    MyAppoinment(this.doctorId,this.patientId,this.patientFirstName,this.patientLastName,this.date,this.hour,this.accepted);
 
-
+   // factory  MyAppoinment.fromJson(Map<String, dynamic> json) {
+   //   return MyAppoinment(
+   //     id:  json["_id"],
+   //     patientFirstName: json['patientFirstName'],
+   //     patientLastName: json['lastName'],
+   //     doctorId: json['doctorId'],
+   //     date: json["date"],
+   //     hour: json['hour'],
+   //     patientId: json['patientId'],
+   //     accepted: json["accepted"],
+   //   );
+   // }
+   factory MyAppoinment.fromJson(Map<String, dynamic> json) {
+     return MyAppoinment(
+       json['doctorId'],
+       json['patientId'],
+       json['patientFirstName'],
+       json['lastName'],
+       json["date"],
+       json['hour'],
+       json["accepted"],
+     );
+   }
 
 }

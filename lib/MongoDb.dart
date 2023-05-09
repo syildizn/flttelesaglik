@@ -91,13 +91,18 @@ class MongoDataBase {
   }
 
 
-  static Future<List> myappointmentsorgu(String patientId) async {
+  static Future<List<Map<String,dynamic>>> myappointmentsorgu(String patientId) async {
 
     //var resi = await appointnmentCollection.find(where.eq('patientId', "$patientId"));
-    var al = await appointnmentCollection.find(where.eq('patientId', "$sstudentno")); ;
+   // var al = await appointnmentCollection.find(where.eq('patientId', "$sstudentno")); ;
 
-    print("istediğim randevular: $al");
-    return al;
+    final query = where.eq('patientId', "$patientId"); // patientId değerine göre filtreleme
+
+    final cursor = appointnmentCollection.find(query);
+    final myappointments = await cursor.toList();
+    //var al = await appointnmentCollection.find().toList();
+    print("istediğim randevular: $myappointments");
+    return myappointments;
 
 
   }
