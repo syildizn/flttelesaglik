@@ -10,8 +10,10 @@ class DateSheetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBkrColor,
       appBar: AppBar(
-        title: Text('DateSheet'),
+        title: Text('Nöroloji'),
+        backgroundColor: kBkrColor,
       ),
       body: Container(
         width: 100.w,

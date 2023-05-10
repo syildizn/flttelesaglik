@@ -263,6 +263,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       StudentDataCard(
                         onPress: () {
                           //go to attendance screen
+                          Navigator.pushNamed(
+                              context, DateSheetScreen.routeName);
                         },
                         //title: 'Sağlık Kayıtlarım',
                         value: 'Nöroloji',
