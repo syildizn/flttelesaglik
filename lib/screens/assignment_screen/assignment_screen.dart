@@ -1,13 +1,34 @@
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/screens/assignment_screen/data/assignment_data.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'widgets/assignment_widgets.dart';
 
 class AssignmentScreen extends StatelessWidget {
   const AssignmentScreen({Key? key}) : super(key: key);
   static String routeName = 'AssignmentScreen';
+
+  final String websiteURL = "https://mmf.bakircay.edu.tr/";
+
+  // void _launchURL() async {
+  //   if (await canLaunch(websiteURL)) {
+  //     print("aynen tuşa basıldı");
+  //     await launch(websiteURL, forceSafariVC: true);
+  //   } else {
+  //     print("yok tuşa basılmadı");
+  //     throw 'Could not launch $websiteURL';
+  //   }
+  // }
+
+  void _launchURL() async {
+    print("tuşa basıldı");
+   //await InAppWebView.openWithSystemBrowser(websiteURL);
+    await InAppBrowser.openWithSystemBrowser(url: Uri.parse(websiteURL) );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,11 +134,13 @@ class AssignmentScreen extends StatelessWidget {
                                             ),
                                             kHalfSizedBox,
                                             //use condition here to display button
-                                            if ( appointment["accepted"] == '1')
+                                            //if ( appointment["accepted"] == '1')
                                             //then show button
                                               AssignmentButton(
                                                 onPress: () {
                                                   //submit here
+                                                  print(" tuşa basıldı");
+                                                  _launchURL();
                                                 },
                                                 title: 'TUŞ',
                                               ),
