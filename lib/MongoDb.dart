@@ -112,7 +112,7 @@ class MongoDataBase {
     //String id = "6423414237db04a7fd70fa61";
     var objectIdDoctor = ObjectId.fromHexString(id);
     var resi = await doctorCollection.findOne(where.eq('_id', objectIdDoctor));
-    String b = "Doktor: ${resi["firstName"]} ${resi["lastName"]}";
+    String b = "${resi["firstName"]} ${resi["lastName"]}";
     print(b);
     if (resi != null) {
       print('doctor has find');

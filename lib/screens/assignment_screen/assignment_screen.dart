@@ -13,7 +13,7 @@ class AssignmentScreen extends StatelessWidget {
 
   static String? doctorName;
 
-  final String websiteURL = "https://meet.jit.si/emreturanMauroIcardi1234567890";
+  final String websiteURL = "https://www.google.com/";//"https://meet.jit.si/emreturanMauroIcardi1234567890";
 
   // void _launchURL() async {
   //   if (await canLaunch(websiteURL)) {
@@ -98,9 +98,11 @@ class AssignmentScreen extends StatelessWidget {
                                                 builder: (context, snapshot) {
                                                   if (snapshot.hasData) {
                                                      doctorName = snapshot.data;
-                                                    return Text(
-                                                      doctorName!,
-                                                      style: TextStyle(color: Colors.black, fontSize: 13),
+                                                    return Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Text("Doktor:$doctorName!",
+                                                        style: TextStyle(color: Colors.black, fontSize: 13),
+                                                      ),
                                                     );
                                                   } else if (snapshot.hasError) {
                                                     return Text('Bir hata oluştu');
@@ -111,7 +113,7 @@ class AssignmentScreen extends StatelessWidget {
                                               )
                                             ),
                                             kHalfSizedBox,
-                                            Text("Hasta: ${appointment["patientFirstName"]} ${appointment["patientLastName"]}"/*"null "*/,
+                                            Text("Hasta: ${appointment["patientFirstName"]} ${appointment["patientFirstName"]}"/*"null "*/,
                                               //snapshot.data[index].patientId,
                                               style: Theme.of(context).textTheme.subtitle2!.copyWith(
                                                 color: kTextBlackColor,
@@ -141,8 +143,9 @@ class AssignmentScreen extends StatelessWidget {
                                               AssignmentButton(
                                                 onPress: () {
                                                   //submit here
-                                                  print("doktor adı $doctorName");
-                                                  final String tahta = "https://meet.jit.si/";
+                                                  final String mahmut= "${appointment["_id"].$oid}" ;
+                                                  final String tahta = "https://meet.jit.si/$mahmut";
+                                                  print("link: $tahta");
                                                   print(" tuşa basıldı");
                                                   _launchURL();
                                                 },
