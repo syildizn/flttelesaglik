@@ -11,7 +11,9 @@ class AssignmentScreen extends StatelessWidget {
   const AssignmentScreen({Key? key}) : super(key: key);
   static String routeName = 'AssignmentScreen';
 
-  final String websiteURL = "https://mmf.bakircay.edu.tr/";
+  static String? doctorName;
+
+  final String websiteURL = "https://meet.jit.si/emreturanMauroIcardi1234567890";
 
   // void _launchURL() async {
   //   if (await canLaunch(websiteURL)) {
@@ -95,7 +97,7 @@ class AssignmentScreen extends StatelessWidget {
                                                 future: MongoDataBase.doctorappointmentsorgu(appointment["doctorId"]),
                                                 builder: (context, snapshot) {
                                                   if (snapshot.hasData) {
-                                                    final doctorName = snapshot.data;
+                                                     doctorName = snapshot.data;
                                                     return Text(
                                                       doctorName!,
                                                       style: TextStyle(color: Colors.black, fontSize: 13),
@@ -139,6 +141,8 @@ class AssignmentScreen extends StatelessWidget {
                                               AssignmentButton(
                                                 onPress: () {
                                                   //submit here
+                                                  print("doktor adı $doctorName");
+                                                  final String tahta = "https://meet.jit.si/";
                                                   print(" tuşa basıldı");
                                                   _launchURL();
                                                 },
