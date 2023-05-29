@@ -12,11 +12,14 @@ class AssignmentScreen extends StatelessWidget {
   static String routeName = 'AssignmentScreen';
 
   static String? doctorName;
+  static String? patientNo;
+
 
   final String websiteURL =
       "https://www.google.com/"; //"https://meet.jit.si/emreturanMauroIcardi1234567890";
 
   void _launchURL(String link) async {
+    print("öğrenci no: $patientNo");
     print("tuşa basıldı");
     //await InAppWebView.openWithSystemBrowser(websiteURL);
     await InAppBrowser.openWithSystemBrowser(url: Uri.parse(link));
@@ -54,6 +57,7 @@ class AssignmentScreen extends StatelessWidget {
                             itemCount: myappointments.length,
                             itemBuilder: (context, int index) {
                               final appointment = myappointments[index];
+                              patientNo = appointment["patientId"];
                               return Container(
                                 margin:
                                     EdgeInsets.only(bottom: kDefaultPadding),
@@ -102,7 +106,7 @@ class AssignmentScreen extends StatelessWidget {
                                                             const EdgeInsets
                                                                 .all(8.0),
                                                         child: Text(
-                                                          "Doktor:$doctorName!",
+                                                          "Doktor:$doctorName",
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.black,
