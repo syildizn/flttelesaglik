@@ -13,23 +13,13 @@ class AssignmentScreen extends StatelessWidget {
 
   static String? doctorName;
 
-  final String websiteURL = "https://www.google.com/";//"https://meet.jit.si/emreturanMauroIcardi1234567890";
+  final String websiteURL =
+      "https://www.google.com/"; //"https://meet.jit.si/emreturanMauroIcardi1234567890";
 
-  // void _launchURL() async {
-  //   if (await canLaunch(websiteURL)) {
-  //     print("aynen tuşa basıldı");
-  //     await launch(websiteURL, forceSafariVC: true);
-  //   } else {
-  //     print("yok tuşa basılmadı");
-  //     throw 'Could not launch $websiteURL';
-  //   }
-  // }
-
-  void _launchURL() async {
+  void _launchURL(String link) async {
     print("tuşa basıldı");
-   //await InAppWebView.openWithSystemBrowser(websiteURL);
-    await InAppBrowser.openWithSystemBrowser(url: Uri.parse(websiteURL) );
-
+    //await InAppWebView.openWithSystemBrowser(websiteURL);
+    await InAppBrowser.openWithSystemBrowser(url: Uri.parse(link));
   }
 
   @override
@@ -43,14 +33,14 @@ class AssignmentScreen extends StatelessWidget {
       body: SafeArea(
         child: FutureBuilder(
           future: MongoDataBase.myappointmentsorgu("22356"),
-          builder: (context,AsyncSnapshot snapshot){
+          builder: (context, AsyncSnapshot snapshot) {
             final myappointments = snapshot.data;
-            if(snapshot.connectionState == ConnectionState.waiting){
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            }else{
-              if(snapshot.hasData){
+            } else {
+              if (snapshot.hasData) {
                 return Column(
                   children: [
                     Expanded(
@@ -65,15 +55,17 @@ class AssignmentScreen extends StatelessWidget {
                             itemBuilder: (context, int index) {
                               final appointment = myappointments[index];
                               return Container(
-                                margin: EdgeInsets.only(bottom: kDefaultPadding),
+                                margin:
+                                    EdgeInsets.only(bottom: kDefaultPadding),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        padding: EdgeInsets.all(kDefaultPadding),
+                                        padding:
+                                            EdgeInsets.all(kDefaultPadding),
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(kDefaultPadding),
+                                          borderRadius: BorderRadius.circular(
+                                              kDefaultPadding),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -83,42 +75,60 @@ class AssignmentScreen extends StatelessWidget {
                                           ],
                                         ),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                              width: 40.w,
-                                              height: 4.h,
-                                              decoration: BoxDecoration(
-                                                color: kSecondaryColor.withOpacity(0.4),
-                                                borderRadius:
-                                                BorderRadius.circular(kDefaultPadding),
-                                              ),
-                                              child: FutureBuilder(
-                                                future: MongoDataBase.doctorappointmentsorgu(appointment["doctorId"]),
-                                                builder: (context, snapshot) {
-                                                  if (snapshot.hasData) {
-                                                     doctorName = snapshot.data;
-                                                    return Padding(
-                                                      padding: const EdgeInsets.all(8.0),
-                                                      child: Text("Doktor:$doctorName!",
-                                                        style: TextStyle(color: Colors.black, fontSize: 13),
-                                                      ),
-                                                    );
-                                                  } else if (snapshot.hasError) {
-                                                    return Text('Bir hata oluştu');
-                                                  } else {
-                                                    return CircularProgressIndicator();
-                                                  }
-                                                },
-                                              )
-                                            ),
+                                                width: 40.w,
+                                                height: 4.h,
+                                                decoration: BoxDecoration(
+                                                  color: kSecondaryColor
+                                                      .withOpacity(0.4),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          kDefaultPadding),
+                                                ),
+                                                child: FutureBuilder(
+                                                  future: MongoDataBase
+                                                      .doctorappointmentsorgu(
+                                                          appointment[
+                                                              "doctorId"]),
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot.hasData) {
+                                                      doctorName =
+                                                          snapshot.data;
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          "Doktor:$doctorName!",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 13),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                        .hasError) {
+                                                      return Text(
+                                                          'Bir hata oluştu');
+                                                    } else {
+                                                      return CircularProgressIndicator();
+                                                    }
+                                                  },
+                                                )),
                                             kHalfSizedBox,
-                                            Text("Hasta: ${appointment["patientFirstName"]} ${appointment["patientFirstName"]}"/*"null "*/,
+                                            Text(
+                                              "Hasta: ${appointment["patientFirstName"]} ${appointment["patientFirstName"]}" /*"null "*/,
                                               //snapshot.data[index].patientId,
-                                              style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                                                color: kTextBlackColor,
-                                                fontWeight: FontWeight.w900,
-                                              ),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle2!
+                                                  .copyWith(
+                                                    color: kTextBlackColor,
+                                                    fontWeight: FontWeight.w900,
+                                                  ),
                                             ),
                                             kHalfSizedBox,
                                             // AssignmentDetailRow(
@@ -127,34 +137,36 @@ class AssignmentScreen extends StatelessWidget {
                                             // ),
                                             kHalfSizedBox,
                                             AssignmentDetailRow(
-                                              title: "Randevu Tarihi:" ,
-                                              statusValue: appointment["date"]/*"null "*/,
+                                              title: "Randevu Tarihi:",
+                                              statusValue: appointment[
+                                                  "date"] /*"null "*/,
                                             ),
 
                                             kHalfSizedBox,
                                             AssignmentDetailRow(
                                               title: 'Randevu Saati',
-                                              statusValue: appointment["hour"]/*"null "*/,
+                                              statusValue: appointment[
+                                                  "hour"] /*"null "*/,
                                             ),
                                             kHalfSizedBox,
                                             //use condition here to display button
                                             //if ( appointment["accepted"] == '1')
                                             //then show button
-                                              AssignmentButton(
-                                                onPress: () {
-                                                  //submit here
-                                                  final String mahmut= "${appointment["_id"].$oid}" ;
-                                                  final String tahta = "https://meet.jit.si/$mahmut";
-                                                  print("link: $tahta");
-                                                  print(" tuşa basıldı");
-                                                  _launchURL();
-                                                },
-                                                title: 'TUŞ',
-                                              ),
+                                            AssignmentButton(
+                                              onPress: () {
+                                                //submit here
+                                                final String mahmut =
+                                                    "${appointment["_id"].$oid}";
+                                                final String tahta =
+                                                    "https://meet.jit.si/$mahmut";
+                                                print("link: $tahta");
+                                                print(" tuşa basıldı");
+                                                _launchURL(tahta);
+                                              },
+                                              title: 'TUŞ',
+                                            ),
                                           ],
-                                        )
-
-                                    ),
+                                        )),
                                   ],
                                 ),
                               );
@@ -163,14 +175,13 @@ class AssignmentScreen extends StatelessWidget {
                     ),
                   ],
                 );
-              }else{
+              } else {
                 return Center(
                   child: Text("Data has not found"),
                 );
               }
             }
           },
-
         ),
       ),
     );
