@@ -58,7 +58,7 @@ class MongoDataBase {
         "patientLastName": slastName,
         'date': day,
         'hour': time,
-        "accepted": "1",
+        "accepted": "0",
 
         // 'accepted' : "0"
       };

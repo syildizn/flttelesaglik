@@ -12,7 +12,7 @@ class AssignmentScreen extends StatelessWidget {
   static String routeName = 'AssignmentScreen';
 
   static String? doctorName;
-  static String? patientNo;
+  static String? patientNo = MongoDataBase.sstudentno;
 
 
   final String websiteURL =
@@ -35,7 +35,7 @@ class AssignmentScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future: MongoDataBase.myappointmentsorgu("22356"),
+          future: MongoDataBase.myappointmentsorgu(patientNo!),
           builder: (context, AsyncSnapshot snapshot) {
             final myappointments = snapshot.data;
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -57,7 +57,7 @@ class AssignmentScreen extends StatelessWidget {
                             itemCount: myappointments.length,
                             itemBuilder: (context, int index) {
                               final appointment = myappointments[index];
-                              patientNo = appointment["patientId"];
+
                               return Container(
                                 margin:
                                     EdgeInsets.only(bottom: kDefaultPadding),
@@ -154,7 +154,7 @@ class AssignmentScreen extends StatelessWidget {
                                             ),
                                             kHalfSizedBox,
                                             //use condition here to display button
-                                            //if ( appointment["accepted"] == '1')
+                                            if ( appointment["accepted"] == '1')
                                             //then show button
                                             AssignmentButton(
                                               onPress: () {
