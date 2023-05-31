@@ -70,7 +70,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                               Expanded(
                                 child: DoctorCard(
                                   onPress: () {
-                                    DoctorProfilePage.imageUrl = 'assets/images/doctorxx.jpg';
+                                    DoctorProfilePage.imageUrl = 'assets/images/doctoro.png';
                                     AppointmentPage.doctor = Doctor.fromJson(
                                         snapshot.data[index * 2]);
                                     DoctorProfilePage.doctor = Doctor.fromJson(
@@ -83,7 +83,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                   colortext: Colors.black,
                                   doctor: Doctor.fromJson(
                                       snapshot.data[index * 2]),
-                                  icon: 'assets/images/doctorxx.jpg',
+                                  icon: 'assets/images/doctoro.png',
                                 ),
                               ),
                               kWidthSizedBox,
@@ -91,7 +91,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                   ? Expanded(
                                       child: DoctorCard(
                                         onPress: () {
-                                          DoctorProfilePage.imageUrl = 'assets/images/doctorxy.jpg';
+                                          DoctorProfilePage.imageUrl = 'assets/images/doctoro.png';
                                           AppointmentPage.doctor = Doctor.fromJson(
                                               snapshot.data[index * 2 + 1]);
                                           DoctorProfilePage.doctor = Doctor.fromJson(
@@ -103,7 +103,7 @@ class _DoctorPageState extends State<DoctorsPage> {
                                         colortext: Colors.black,
                                         doctor: Doctor.fromJson(
                                             snapshot.data[index * 2 + 1]),
-                                        icon: 'assets/images/doctorxy.jpg',
+                                        icon: 'assets/images/doctoro.png',
                                       ),
                                     )
                                   : SizedBox(),

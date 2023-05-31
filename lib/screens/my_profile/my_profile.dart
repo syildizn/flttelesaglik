@@ -62,7 +62,7 @@ class MyProfileScreen extends StatelessWidget {
                     SizerUtil.deviceType == DeviceType.tablet ? 12.w : 13.w,
                     backgroundColor: kSecondaryColor,
                     backgroundImage:
-                    AssetImage('assets/images/unknown.jpg'),
+                    AssetImage('assets/images/studdent.jpg'),
                   ),
                   kWidthSizedBox,
 
@@ -71,10 +71,10 @@ class MyProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '$firstName $lastName',
+                        'TeleSağlık',
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
-                      Text('$department',
+                      Text('Platformu',
                           style: Theme.of(context).textTheme.subtitle2?.copyWith(
                             fontWeight: FontWeight.w600,
                           )),
@@ -92,37 +92,37 @@ class MyProfileScreen extends StatelessWidget {
             //     ProfileDetailRow(title: 'Academic Year', value: '2020-2021'),
             //   ],
             // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ProfileDetailRow(title: 'Öğrenci No', value: '$studentno'),
-                ProfileDetailRow(title: 'Öğrenci Bilgisi 1', value: 'Null'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ProfileDetailRow(
-                    title: 'Sınıfı', value: '2. Sınıf'),
-                ProfileDetailRow(title: 'Doğum Tarihi', value: '6 Şubat 2003'),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     ProfileDetailRow(title: 'Öğrenci No', value: '$studentno'),
+            //     ProfileDetailRow(title: 'Öğrenci Bilgisi 1', value: 'Null'),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     ProfileDetailRow(
+            //         title: 'Sınıfı', value: '2. Sınıf'),
+            //     ProfileDetailRow(title: 'Doğum Tarihi', value: '6 Şubat 2003'),
+            //   ],
+            // ),
             sizedBox,
             ProfileDetailColumn(
               title: 'Email',
               value: '$email',
             ),
             ProfileDetailColumn(
-              title: 'Öğrenci Bilgisi 2',
-              value: 'Null',
+              title: 'İsim Soyisim',
+              value: '$firstName $lastName',
             ),
             ProfileDetailColumn(
-              title: 'Öğrenci Bilgisi 3',
-              value: 'Null',
+              title: 'Bölüm',
+              value: '$department',
             ),
             ProfileDetailColumn(
-              title: 'Öğrenci Bilgisi 4',
-              value: 'Null',
+              title: 'Öğrenci No',
+              value: '$studentno',
             ),
           ],
         ),

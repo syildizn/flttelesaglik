@@ -341,48 +341,48 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
             ),
           ),
           sizedBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  final secilenogrenci =
-                      '${doctor.firstName}_${doctor.lastName}}';
-                  final roomName =
-                      RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
-
-                  Jitsi.joinMeeting(secilenogrenci!);
-                },
-                child: Text('Görüntülü Arama'),
-                style: ElevatedButton.styleFrom(
-                  primary: kBkrColor, // background
-                  onPrimary: Colors.white, // foreground
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Sesli Arama '),
-                style: ElevatedButton.styleFrom(
-                  primary: kBkrColor, // background
-                  onPrimary: Colors.white, // foreground
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Mesajlaşma'),
-                style: ElevatedButton.styleFrom(
-                  primary: kBkrColor, // background
-                  onPrimary: Colors.white, // foreground
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              )
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         final secilenogrenci =
+          //             '${doctor.firstName}_${doctor.lastName}}';
+          //         final roomName =
+          //             RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
+          //
+          //         Jitsi.joinMeeting(secilenogrenci!);
+          //       },
+          //       child: Text('Görüntülü Arama'),
+          //       style: ElevatedButton.styleFrom(
+          //         primary: kBkrColor, // background
+          //         onPrimary: Colors.white, // foreground
+          //         shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(10)),
+          //       ),
+          //     ),
+          //     ElevatedButton(
+          //       onPressed: () {},
+          //       child: Text('Sesli Arama '),
+          //       style: ElevatedButton.styleFrom(
+          //         primary: kBkrColor, // background
+          //         onPrimary: Colors.white, // foreground
+          //         shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(10)),
+          //       ),
+          //     ),
+          //     ElevatedButton(
+          //       onPressed: () {},
+          //       child: Text('Mesajlaşma'),
+          //       style: ElevatedButton.styleFrom(
+          //         primary: kBkrColor, // background
+          //         onPrimary: Colors.white, // foreground
+          //         shape: RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(10)),
+          //       ),
+          //     )
+          //   ],
+          // ),
           Container(
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10.0),

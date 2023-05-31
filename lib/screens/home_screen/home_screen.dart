@@ -6,10 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
+import 'package:telesaglikk/screens/about_screen/about_screen.dart';
 import 'package:telesaglikk/screens/assignment_screen/assignment_screen.dart';
 import 'package:telesaglikk/screens/datesheet_screen/datesheet_screen.dart';
 import 'package:telesaglikk/screens/doctors_page/doctors_page.dart';
-import 'package:telesaglikk/screens/fee_screen/fee_screen.dart';
+
+import 'package:telesaglikk/screens/general_screen/general_screen.dart';
 import 'package:telesaglikk/screens/my_profile/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -176,6 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               //go to assignment screen here
                               // Navigator.pushNamed(
                               //     context, AssignmentScreen.routeName);
+                              Navigator.pushNamed(context, GeneralScreen.routeName);
                             },
                             icon: 'assets/icons/health.svg',
                             title: 'Sağlık\nKayıtlarım',
@@ -184,7 +187,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           kWidthSizedBox,
                           HomeCard(
-                                  onPress: () {},
+                                  onPress: () {
+                                    Navigator.pushNamed(context, GeneralScreen.routeName);
+                                  },
                                   icon: 'assets/icons/meetingy.svg',
                                   title: 'Geçmiş\nGörüşmelerim',
                                   color: Colors.white,
@@ -192,7 +197,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                           kWidthSizedBox,
                                 HomeCard(
-                                  onPress: () {},
+                                  onPress: () {
+                                    Navigator.pushNamed(context, GeneralScreen.routeName);
+                                  },
                                   icon: 'assets/icons/passwordc.svg',
                                   title: 'Şifreni\nDeğiştir',
                                   color:  Colors.white,
@@ -200,7 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                           kWidthSizedBox,
                           HomeCard(
-                            onPress: () {},
+                            onPress: () {
+                              Navigator.pushNamed(context, GeneralScreen.routeName);
+                            },
                             icon: 'assets/icons/infox.svg',
                             title: 'İstatistikler',
                             color:  Colors.white,
@@ -274,6 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       StudentDataCard(
                         onPress: () {
                           //go to attendance screen
+                          Navigator.pushNamed(context, GeneralScreen.routeName);
                         },
                         //title: 'Sağlık Kayıtlarım',
                         value: 'Psikoloji',
@@ -283,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       StudentDataCard(
                         onPress: () {
                           //go to attendance screen
+                          Navigator.pushNamed(context, GeneralScreen.routeName);
                         },
                         //title: 'Sağlık Kayıtlarım',
                         value: 'Kardiyoloji',
@@ -292,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       StudentDataCard(
                         onPress: () {
                           //go to fee due screen
-                          Navigator.pushNamed(context, FeeScreen.routeName);
+                          Navigator.pushNamed(context, GeneralScreen.routeName);
                         },
                         //title: 'Görüşme Kayıtlarım',
                         value: 'Dahiliye',
@@ -327,7 +338,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushNamed(context, AboutScreen.routeName);
+                  },
                   child: Container(
                     margin: EdgeInsets.only(top: 1.h),
                     width: 90.w,
@@ -408,7 +421,9 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 50,
               height: 50,
             ),),
-            IconButton(onPressed: () {}, icon: SvgPicture.asset(
+            IconButton(onPressed: () {
+              Navigator.pushNamed(context, GeneralScreen.routeName);
+            }, icon: SvgPicture.asset(
               'assets/icons/icecream.svg',
               width: 50,
               height: 50,
