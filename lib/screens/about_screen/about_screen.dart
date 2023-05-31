@@ -9,7 +9,9 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: kBkrColor,
         title: Text('Hakkımızda'),
       ),
       body: Column(
@@ -27,18 +29,21 @@ class AboutScreen extends StatelessWidget {
           ),
           sizedBox,
           Center(
-            child: Text(
-                "Telesağlık platformu, hastaların doktorlarla görüntülü olarak iletişim kurabildiği, "
-                    "online randevu oluşturabildiği ve muayene olabildiği bir dijital sağlık hizmetidir."
-                    " Bu platform, kullanıcıların doktorlarıyla etkileşime geçmelerini sağlayan bir sanal ortam sağlar. "
-                    "Hastalar, cihazlarından (bilgisayar, akıllı telefon veya tablet) telesağlık uygulamasına erişerek randevu alabilir"
-                    " ve ilgili doktorla bir görüntülü görüşme yapabilir. Telesağlık platformu, kullanıcılara çeşitli sağlık hizmetlerine erişim imkanı sunar."
-                    " Hastalar, genel sağlık kontrolü, akut hastalık durumları, kronik rahatsızlıkların takibi, ilaç danışmanlığı, "
-                    "laboratuvar sonuçlarının değerlendirilmesi gibi konularda doktorlarıyla görüşebilir ve gerektiğinde "
-                    "uzaktan muayene olabilir. Ayrıca, doktorlar hastalık tanısı koymak, tedavi planı oluşturmak veya hastaların mevcut "
-                    "tedavilerini yönetmek için telesağlık platformunu kullanabilirler.",
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                  "Telesağlık platformu, hastaların doktorlarla görüntülü olarak iletişim kurabildiği, "
+                      "online randevu oluşturabildiği ve muayene olabildiği bir dijital sağlık hizmetidir."
+                      " Bu platform, kullanıcıların doktorlarıyla etkileşime geçmelerini sağlayan bir sanal ortam sağlar. "
+                      "Hastalar, cihazlarından (bilgisayar, akıllı telefon veya tablet) telesağlık uygulamasına erişerek randevu alabilir"
+                      " ve ilgili doktorla bir görüntülü görüşme yapabilir. Telesağlık platformu, kullanıcılara çeşitli sağlık hizmetlerine erişim imkanı sunar."
+                      " Hastalar, genel sağlık kontrolü, akut hastalık durumları, kronik rahatsızlıkların takibi, ilaç danışmanlığı, "
+                      "laboratuvar sonuçlarının değerlendirilmesi gibi konularda doktorlarıyla görüşebilir ve gerektiğinde "
+                      "uzaktan muayene olabilir. Ayrıca, doktorlar hastalık tanısı koymak, tedavi planı oluşturmak veya hastaların mevcut "
+                      "tedavilerini yönetmek için telesağlık platformunu kullanabilirler.",
 
-                style: TextStyle(fontSize: 15, color: Colors.black)),
+                  style: TextStyle(fontSize: 15, color: Colors.black)),
+            ),
           ),
         ],
       ),

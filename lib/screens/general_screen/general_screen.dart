@@ -8,7 +8,9 @@ class GeneralScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: kBkrColor,
         title: Text('Yapım Aşamasında'),
       ),
       body: Column(
@@ -26,8 +28,11 @@ class GeneralScreen extends StatelessWidget {
           ),
           sizedBox,
           Center(
-            child: Text("Bu sayfa halen yapım aşamasındadır. "
-                "Tahmini tamamlanma tarihi: 30/02/2032",style: TextStyle(fontSize: 45,color: kBkrColor)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text("Bu sayfa halen yapım aşamasındadır. "
+                  "Tahmini tamamlanma tarihi: 30/02/2032",style: TextStyle(fontSize: 25,color: kBkrColor)),
+            ),
           ),
         ],
       ),
