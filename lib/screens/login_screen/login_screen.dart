@@ -46,35 +46,47 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               width: 100.w,
               height: 35.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hoş Geldiniz',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .subtitle1),
-                      Text('Lütfen Giriş Yapınız',
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .subtitle1),
-                      sizedBox,
-                    ],
-                  ),
-                  Image.asset(
-                    'assets/images/logobb.png',
-                    height: 20.h,
-                    width: 40.w,
-                  ),
-                  SizedBox(
-                    height: kDefaultPadding / 2,
-                  ),
-                ],
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Hoş Geldiniz',
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .subtitle1),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Lütfen Giriş Yapınız',
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .subtitle1),
+                          ),
+                          // sizedBox,
+                        ],
+                      ),
+                    ),
+                    Expanded(flex: 2,
+                      child: Image.asset(
+                        'assets/images/logobb.png',
+                        height: 20.h,
+                        width: 40.w,
+                      ),
+                    ),
+                    // SizedBox(
+                    //   height: kDefaultPadding / 2,
+                    // ),
+                  ],
+                ),
               ),
             ),
 

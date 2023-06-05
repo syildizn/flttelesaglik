@@ -40,7 +40,6 @@ dependencies:
   sizer: ^2.0.15
   mongo_dart: ^0.9.1
   shared_preferences: ^2.1.0
-  jitsi_meet:
   intl: ^0.18.1
   flutter_inappwebview: ^5.7.2+3
 

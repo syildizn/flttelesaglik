@@ -1,10 +1,14 @@
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/screens/assignment_screen/data/assignment_data.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 //import 'package:url_launcher/url_launcher.dart';
+import '../general_screen/general_screen.dart';
+import '../home_screen/home_screen.dart';
+import '../my_profile/my_profile.dart';
 import 'widgets/assignment_widgets.dart';
 
 class AssignmentScreen extends StatelessWidget {
@@ -83,8 +87,8 @@ class AssignmentScreen extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                                width: 40.w,
-                                                height: 4.h,
+                                                width: 60.w,
+                                                height: 5.5.h,
                                                 decoration: BoxDecoration(
                                                   color: kSecondaryColor
                                                       .withOpacity(0.4),
@@ -124,7 +128,7 @@ class AssignmentScreen extends StatelessWidget {
                                                 )),
                                             kHalfSizedBox,
                                             Text(
-                                              "Hasta: ${appointment["patientFirstName"]} ${appointment["patientFirstName"]}" /*"null "*/,
+                                              "Hasta: ${appointment["patientFirstName"]} ${appointment["patientLastName"]}" /*"null "*/,
                                               //snapshot.data[index].patientId,
                                               style: Theme.of(context)
                                                   .textTheme
@@ -186,6 +190,69 @@ class AssignmentScreen extends StatelessWidget {
               }
             }
           },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(
+          left: kDefaultPadding * 2,
+          right: kDefaultPadding * 2,
+          bottom: kDefaultPadding,
+        ),
+        height: 70,
+        decoration: BoxDecoration(
+            color: homepagefont, //.withOpacity(0.40),Colors.white,
+            boxShadow: [
+              /* BoxShadow(
+              offset: Offset(0,-10),
+              blurRadius: 35,
+              color: kBkrColor.withOpacity(0.38),
+            )*/
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => false);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/homei.svg',
+                width: 50,
+                height: 50,
+              ),
+            ), //Icon(Icons.home_outlined),),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AssignmentScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/conferance.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, GeneralScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/icecream.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyProfileScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/profilo.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+          ],
         ),
       ),
     );

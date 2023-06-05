@@ -1,8 +1,12 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../MongoDb.dart';
+import '../assignment_screen/assignment_screen.dart';
+import '../general_screen/general_screen.dart';
+import '../home_screen/home_screen.dart';
 
 class MyProfileScreen extends StatelessWidget {
   //const MyProfileScreen({Key? key}) : super(key: key);
@@ -43,7 +47,7 @@ class MyProfileScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        color: kOtherColor,
+        color: homepagefont,
         child: Column(
           children: [
             Container(
@@ -123,6 +127,69 @@ class MyProfileScreen extends StatelessWidget {
             ProfileDetailColumn(
               title: 'Öğrenci No',
               value: '$studentno',
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(
+          left: kDefaultPadding * 2,
+          right: kDefaultPadding * 2,
+          bottom: kDefaultPadding,
+        ),
+        height: 70,
+        decoration: BoxDecoration(
+            color: homepagefont, //.withOpacity(0.40),Colors.white,
+            boxShadow: [
+              /* BoxShadow(
+              offset: Offset(0,-10),
+              blurRadius: 35,
+              color: kBkrColor.withOpacity(0.38),
+            )*/
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => false);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/homei.svg',
+                width: 50,
+                height: 50,
+              ),
+            ), //Icon(Icons.home_outlined),),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AssignmentScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/conferance.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, GeneralScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/icecream.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyProfileScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/profilo.svg',
+                width: 50,
+                height: 50,
+              ),
             ),
           ],
         ),

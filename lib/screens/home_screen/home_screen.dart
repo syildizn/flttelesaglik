@@ -59,327 +59,282 @@ class _HomeScreenState extends State<HomeScreen> {
             fontStyle: FontStyle.normal,
             color: kBkrColor,))),
         ) ,
-        // actions: [ StudentPicture(picAddress: 'assets/images/unknown.jpg', onPress:(){
-        // // go to profile detail screen here
-        // Navigator.pushNamed(
-        // context, MyProfileScreen.routeName);
-        // })],
 
       ),
       backgroundColor: homepagefont,
 
       body: Column(
         children: [
-          //we will divide the screen into two parts
-          //fixed height for first half
-          /*Container(
-            width: 100.w,
-            height: 10.h,
-            padding: EdgeInsets.all(kDefaultPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                /*Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        StudentName(
-                          studentName: 'Öğrenci X',
-                        ),
-                        kHalfSizedBox,
-                        StudentClass(
-                            studentClass: 'Biyomedikal Mühendisliği'),
-                        kHalfSizedBox,
-                        StudentYear(studentYear: '2022-2023'),
-                      ],
-                    ),
-                    kHalfSizedBox,
-                    StudentPicture(
-                        picAddress: 'assets/images/unknown.jpg',
-                        onPress: () {
-                          // go to profile detail screen here
-                          Navigator.pushNamed(
-                              context, MyProfileScreen.routeName);
-                        }),
-                  ],
-                ),*/
-                sizedBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    StudentDataCard(
-                      onPress: () {
-                        //go to attendance screen
-                      },
-                      title: 'Sağlık Kayıtlarım',
-                      value: '6 Adet',
-                    ),
-                    StudentDataCard(
-                      onPress: () {
-                        //go to fee due screen
-                        Navigator.pushNamed(context, FeeScreen.routeName);
-                      },
-                      title: 'Görüşme Kayıtlarım',
-                      value: '3 Adet',
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),*/
+
 
           //other will use all the remaining height of screen
-            Row(
+            Expanded(flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 10.0,),
+                  Text("Menü",style: TextStyle(fontSize: 20.0,
+                    fontWeight: FontWeight.normal,
+                    fontStyle: FontStyle.normal,
+                    color: kBkrColor,),),
+                ],
+              ),
+            ),
+            Expanded(flex: 5,
+              child: Container(
+                  width: 90.w,
+                  decoration: BoxDecoration(
+                    color: homepagefont,
+                    //borderRadius: kTopBorderRadius,
+                  ),
+                  child: SingleChildScrollView(
+                    //for padding
+
+                    scrollDirection: Axis.horizontal,
+                    //physics: BouncingScrollPhysics(),
+                     child: Expanded(
+                       child: Column(mainAxisSize: MainAxisSize.min,
+                        children: [
+
+                          Row(
+
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              kWidthSizedBox,
+
+                              HomeCard(
+
+                                onPress: () {
+                                  Navigator.pushNamed(
+                                      context, DoctorsPage.routeName);
+                                },
+                                icon: 'assets/icons/doctorw.svg',
+                                title: 'Doktorlar',
+                                color: Colors.white,
+                                //colortext:  homecard1,
+                              ),
+                              kWidthSizedBox,
+                              HomeCard(
+                                onPress: () {
+                                  //go to assignment screen here
+                                  // Navigator.pushNamed(
+                                  //     context, AssignmentScreen.routeName);
+                                  Navigator.pushNamed(context, GeneralScreen.routeName);
+                                },
+                                icon: 'assets/icons/health.svg',
+                                title: 'Sağlık\nKayıtlarım',
+                                color: Colors.white,
+                                //colortext:  homecard2,
+                              ),
+                              kWidthSizedBox,
+                              HomeCard(
+                                      onPress: () {
+                                        Navigator.pushNamed(context, GeneralScreen.routeName);
+                                      },
+                                      icon: 'assets/icons/meetingy.svg',
+                                      title: 'Geçmiş\nGörüşmeler',
+                                      color: Colors.white,
+                                      //colortext:  homecard3,
+                                    ),
+                              kWidthSizedBox,
+                                    HomeCard(
+                                      onPress: () {
+                                        Navigator.pushNamed(context, GeneralScreen.routeName);
+                                      },
+                                      icon: 'assets/icons/passwordc.svg',
+                                      title: 'Şifreni\nDeğiştir',
+                                      color:  Colors.white,
+                                      //colortext: homecard4,
+                                    ),
+                              kWidthSizedBox,
+                              HomeCard(
+                                onPress: () {
+                                  Navigator.pushNamed(context, GeneralScreen.routeName);
+                                },
+                                icon: 'assets/icons/infox.svg',
+                                title: 'İstatistikler',
+                                color:  Colors.white,
+                                //colortext: homecard5,
+                              ),
+                              kWidthSizedBox,
+                              HomeCard(
+                                onPress: () {
+                                  Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+                                },
+                                icon: 'assets/icons/exitk.svg',
+                                title: 'Çıkış',
+                                color:  Colors.white,
+                                //colortext: homecard6,
+                              ),
+                            ],
+                          ),
+                          // sizedBox,
+
+
+                        ],
+                    ),
+                     ),
+                  ),
+                ),
+            ),
+          // Expanded(child: sizedBox),
+          Expanded(flex: 1,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(width: 10.0,),
-                Text("Menü",style: TextStyle(fontSize: 25.0,
+                Text("Hastalıklar",style: TextStyle(fontSize: 20.0,
                   fontWeight: FontWeight.normal,
                   fontStyle: FontStyle.normal,
                   color: kBkrColor,),),
               ],
             ),
-            Container(
-                width: 90.w,
-                decoration: BoxDecoration(
-                  color: homepagefont,
-                  //borderRadius: kTopBorderRadius,
-                ),
-                child: SingleChildScrollView(
-                  //for padding
+          ),
 
-                  scrollDirection: Axis.horizontal,
-                  //physics: BouncingScrollPhysics(),
-                   child: Column(
+
+
+
+          Expanded(flex: 3,
+            child: Container(
+              width: 90.w,
+              decoration: BoxDecoration(
+                color: homepagefont,
+                //borderRadius: kTopBorderRadius,
+              ),
+              child: SingleChildScrollView(
+                //for padding
+
+                scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
+                child: Expanded(
+                  child: Column(
                     children: [
 
+                      // sizedBox,
+                      //
+                      // sizedBox,
                       Row(
-
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          kWidthSizedBox,
-
-                          HomeCard(
-
+                          StudentDataCard(
                             onPress: () {
+                              //go to attendance screen
                               Navigator.pushNamed(
-                                  context, DoctorsPage.routeName);
+                                  context, DateSheetScreen.routeName);
                             },
-                            icon: 'assets/icons/doctorw.svg',
-                            title: 'Doktorlar',
-                            color: Colors.white,
-                            //colortext:  homecard1,
+                            //title: 'Sağlık Kayıtlarım',
+                            value: 'Nöroloji',
+                            icon: 'assets/icons/neurology.svg',
                           ),
                           kWidthSizedBox,
-                          HomeCard(
+                          StudentDataCard(
                             onPress: () {
-                              //go to assignment screen here
-                              // Navigator.pushNamed(
-                              //     context, AssignmentScreen.routeName);
+                              //go to attendance screen
                               Navigator.pushNamed(context, GeneralScreen.routeName);
                             },
-                            icon: 'assets/icons/health.svg',
-                            title: 'Sağlık\nKayıtlarım',
-                            color: Colors.white,
-                            //colortext:  homecard2,
+                            //title: 'Sağlık Kayıtlarım',
+                            value: 'Psikoloji',
+                            icon: 'assets/icons/psychology.svg',
                           ),
                           kWidthSizedBox,
-                          HomeCard(
-                                  onPress: () {
-                                    Navigator.pushNamed(context, GeneralScreen.routeName);
-                                  },
-                                  icon: 'assets/icons/meetingy.svg',
-                                  title: 'Geçmiş\nGörüşmelerim',
-                                  color: Colors.white,
-                                  //colortext:  homecard3,
-                                ),
-                          kWidthSizedBox,
-                                HomeCard(
-                                  onPress: () {
-                                    Navigator.pushNamed(context, GeneralScreen.routeName);
-                                  },
-                                  icon: 'assets/icons/passwordc.svg',
-                                  title: 'Şifreni\nDeğiştir',
-                                  color:  Colors.white,
-                                  //colortext: homecard4,
-                                ),
-                          kWidthSizedBox,
-                          HomeCard(
+                          StudentDataCard(
                             onPress: () {
+                              //go to attendance screen
                               Navigator.pushNamed(context, GeneralScreen.routeName);
                             },
-                            icon: 'assets/icons/infox.svg',
-                            title: 'İstatistikler',
-                            color:  Colors.white,
-                            //colortext: homecard5,
+                            //title: 'Sağlık Kayıtlarım',
+                            value: 'Kardiyoloji',
+                            icon: 'assets/icons/cardiology.svg',
                           ),
                           kWidthSizedBox,
-                          HomeCard(
+                          StudentDataCard(
                             onPress: () {
-                              Navigator.pushNamedAndRemoveUntil(context, LoginScreen.routeName, (route) => false);
+                              //go to fee due screen
+                              Navigator.pushNamed(context, GeneralScreen.routeName);
                             },
-                            icon: 'assets/icons/exitk.svg',
-                            title: 'Çıkış',
-                            color:  Colors.white,
-                            //colortext: homecard6,
+                            //title: 'Görüşme Kayıtlarım',
+                            value: 'Dahiliye',
+                            icon: 'assets/icons/internaldisease.svg',
                           ),
                         ],
-                      ),
-                      sizedBox,
+                      )
 
 
                     ],
                   ),
                 ),
               ),
-          sizedBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 10.0,),
-              Text("Hastalıklar",style: TextStyle(fontSize: 25.0,
-                fontWeight: FontWeight.normal,
-                fontStyle: FontStyle.normal,
-                color: kBkrColor,),),
-            ],
-          ),
-
-
-
-
-          Container(
-            width: 90.w,
-            decoration: BoxDecoration(
-              color: homepagefont,
-              //borderRadius: kTopBorderRadius,
-            ),
-            child: SingleChildScrollView(
-              //for padding
-
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: [
-
-                  sizedBox,
-
-                  sizedBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      StudentDataCard(
-                        onPress: () {
-                          //go to attendance screen
-                          Navigator.pushNamed(
-                              context, DateSheetScreen.routeName);
-                        },
-                        //title: 'Sağlık Kayıtlarım',
-                        value: 'Nöroloji',
-                        icon: 'assets/icons/neurology.svg',
-                      ),
-                      kWidthSizedBox,
-                      StudentDataCard(
-                        onPress: () {
-                          //go to attendance screen
-                          Navigator.pushNamed(context, GeneralScreen.routeName);
-                        },
-                        //title: 'Sağlık Kayıtlarım',
-                        value: 'Psikoloji',
-                        icon: 'assets/icons/psychology.svg',
-                      ),
-                      kWidthSizedBox,
-                      StudentDataCard(
-                        onPress: () {
-                          //go to attendance screen
-                          Navigator.pushNamed(context, GeneralScreen.routeName);
-                        },
-                        //title: 'Sağlık Kayıtlarım',
-                        value: 'Kardiyoloji',
-                        icon: 'assets/icons/cardiology.svg',
-                      ),
-                      kWidthSizedBox,
-                      StudentDataCard(
-                        onPress: () {
-                          //go to fee due screen
-                          Navigator.pushNamed(context, GeneralScreen.routeName);
-                        },
-                        //title: 'Görüşme Kayıtlarım',
-                        value: 'Dahiliye',
-                        icon: 'assets/icons/internaldisease.svg',
-                      ),
-                    ],
-                  )
-
-
-                ],
-              ),
             ),
           ),
-          sizedBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 10.0,),
-              Text("Hakkımızda",style: TextStyle(fontSize: 25.0,
-                fontWeight: FontWeight.normal,
-                fontStyle: FontStyle.normal,
-                color: kBkrColor,),),
-            ],
-          ),
-          sizedBox,
-          Container(
-            width: 90.w,
-            decoration: BoxDecoration(
-              color: homepagefont,
-              //borderRadius: kTopBorderRadius,
-            ),
-            child: Column(
+          // Expanded(child: sizedBox),
+          Expanded(flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, AboutScreen.routeName);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(top: 1.h),
-                    width: 90.w,
-                    height: 15.h,
-                    decoration: BoxDecoration(
-
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-                      //       boxShadow: [
-                      //       BoxShadow(
-                      //       offset: Offset(0,-10),
-                      //   blurRadius: 35,
-                      //   color: Colors.black12.withOpacity(0.17),
-                      // )]
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/telesaglikk.svg',
-                          height: 81,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-                          width: 85,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-                          //color: null,
-                        ),
-                        Text(
-                          "Telesağlık Nedir",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: kTextLightColor,fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-
-                )
+                SizedBox(width: 10.0,),
+                Text("Hakkımızda",style: TextStyle(fontSize: 20.0,
+                  fontWeight: FontWeight.normal,
+                  fontStyle: FontStyle.normal,
+                  color: kBkrColor,),),
               ],
+            ),
+          ),
+          // Expanded(child: sizedBox),
+          Expanded(flex: 6,
+            child: Container(
+              width: 90.w,
+              decoration: BoxDecoration(
+                color: homepagefont,
+                //borderRadius: kTopBorderRadius,
+              ),
+              child: Expanded(
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, AboutScreen.routeName);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 1.h),
+                        width: 90.w,
+                        height: 20.h,
+                        decoration: BoxDecoration(
+
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+                          //       boxShadow: [
+                          //       BoxShadow(
+                          //       offset: Offset(0,-10),
+                          //   blurRadius: 35,
+                          //   color: Colors.black12.withOpacity(0.17),
+                          // )]
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/telesaglikk.svg',
+                              height: 81,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                              width: 85,//SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+                              //color: null,
+                            ),
+                            Text(
+                              "Telesağlık Nedir",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                color: kTextLightColor,fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+
+                    )
+                  ],
+                ),
+              ),
             ),
           )
 
@@ -408,7 +363,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            IconButton(onPressed: () {}, icon:SvgPicture.asset(
+            IconButton(onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context,
+                  HomeScreen.routeName, (route) => false);
+            }, icon:SvgPicture.asset(
               'assets/icons/homei.svg',
               width: 50,
               height: 50,
@@ -492,7 +450,7 @@ class HomeCard extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                color: kTextLightColor,fontWeight: FontWeight.bold,
+                color: kTextLightColor,fontWeight: FontWeight.bold,fontSize: 19
               ),
             ),
           ],

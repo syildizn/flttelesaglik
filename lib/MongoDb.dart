@@ -24,13 +24,13 @@ class MongoDataBase {
     await db.open();
     inspect(db);
     var status = db.serverStatus();
-    print(status);
+    // print(status);
     userCollection = db.collection(Collection_Name);
     doctorCollection = db.collection(Collection_Doctor);
     appointnmentCollection = db.collection(Collection_Appointment);
-    print(await userCollection.find().toList());
-    print(await doctorCollection.find().toList());
-    print(await appointnmentCollection.find().toList());
+    // print(await userCollection.find().toList());
+    // print(await doctorCollection.find().toList());
+    // print(await appointnmentCollection.find().toList());
   }
 
   static Future<String?> insert(Student data) async {

@@ -9,6 +9,10 @@ import 'package:telesaglikk/screens/appointment_screen/appointment_page.dart';
 import 'package:telesaglikk/screens/doctors_page/doctorProfile_page.dart';
 
 import '../../models/doctors_model.dart';
+import '../assignment_screen/assignment_screen.dart';
+import '../general_screen/general_screen.dart';
+import '../home_screen/home_screen.dart';
+import '../my_profile/my_profile.dart';
 
 class DoctorsPage extends StatefulWidget {
   static String routeName = 'DoctorPage';
@@ -24,190 +28,253 @@ class _DoctorPageState extends State<DoctorsPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        backgroundColor: homepagefont,
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: kBkrColor,
-            size: 25,
-          ),
-          backgroundColor: homepagefont,
-          title: Text("Doktorlar",
-              textScaleFactor: 1,
-              style: GoogleFonts.sourceSansPro(
-                  textStyle: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-                color: kBkrColor,
-              ))),
+      backgroundColor: homepagefont,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: kBkrColor,
+          size: 25,
         ),
-        body: SafeArea(
-          child: FutureBuilder(
-              future: MongoDataBase.getData(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+        backgroundColor: homepagefont,
+        title: Text("Doktorlar",
+            textScaleFactor: 1,
+            style: GoogleFonts.sourceSansPro(
+                textStyle: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal,
+              color: kBkrColor,
+            ))),
+      ),
+      body: SafeArea(
+        child: FutureBuilder(
+            future: MongoDataBase.getData(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                if (snapshot.hasData) {
+                  var totaldata = snapshot.data.length;
+                  print("Total data: $totaldata");
+                  // return ListView.builder(
+                  //     itemCount: snapshot.data.length,
+                  //     itemBuilder: (context,index){
+                  //         //return doctorCard(Student.fromJson(snapshot.data[index]));
+                  //           return DoctorCard(onPress: () {}, color: Colors.white, colortext: Colors.black, doctor: Student.fromJson(snapshot.data[index]));
+                  //       }
+                  //     );
+                  return ListView.builder(
+                    itemCount: (totaldata / 2).ceil(),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: DoctorCard(
+                                onPress: () {
+                                  DoctorProfilePage.imageUrl =
+                                      'assets/images/doctoro.png';
+                                  AppointmentPage.doctor =
+                                      Doctor.fromJson(snapshot.data[index * 2]);
+                                  DoctorProfilePage.doctor =
+                                      Doctor.fromJson(snapshot.data[index * 2]);
+                                  Navigator.pushNamed(
+                                      context, DoctorProfilePage.routeName);
+                                },
+                                color: Colors.white,
+                                colortext: Colors.black,
+                                doctor:
+                                    Doctor.fromJson(snapshot.data[index * 2]),
+                                icon: 'assets/images/doctoro.png',
+                              ),
+                            ),
+                            kWidthSizedBox,
+                            (index * 2 + 1 < totaldata)
+                                ? Expanded(
+                                    child: DoctorCard(
+                                      onPress: () {
+                                        DoctorProfilePage.imageUrl =
+                                            'assets/images/doctoro.png';
+                                        AppointmentPage.doctor =
+                                            Doctor.fromJson(
+                                                snapshot.data[index * 2 + 1]);
+                                        DoctorProfilePage.doctor =
+                                            Doctor.fromJson(
+                                                snapshot.data[index * 2 + 1]);
+                                        Navigator.pushNamed(context,
+                                            DoctorProfilePage.routeName);
+                                      },
+                                      color: Colors.white,
+                                      colortext: Colors.black,
+                                      doctor: Doctor.fromJson(
+                                          snapshot.data[index * 2 + 1]),
+                                      icon: 'assets/images/doctoro.png',
+                                    ),
+                                  )
+                                : SizedBox(),
+                          ],
+                        ),
+                      );
+                    },
                   );
                 } else {
-                  if (snapshot.hasData) {
-                    var totaldata = snapshot.data.length;
-                    print("Total data: $totaldata");
-                    // return ListView.builder(
-                    //     itemCount: snapshot.data.length,
-                    //     itemBuilder: (context,index){
-                    //         //return doctorCard(Student.fromJson(snapshot.data[index]));
-                    //           return DoctorCard(onPress: () {}, color: Colors.white, colortext: Colors.black, doctor: Student.fromJson(snapshot.data[index]));
-                    //       }
-                    //     );
-                    return ListView.builder(
-                      itemCount: (totaldata / 2).ceil(),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: DoctorCard(
-                                  onPress: () {
-                                    DoctorProfilePage.imageUrl = 'assets/images/doctoro.png';
-                                    AppointmentPage.doctor = Doctor.fromJson(
-                                        snapshot.data[index * 2]);
-                                    DoctorProfilePage.doctor = Doctor.fromJson(
-                                        snapshot.data[index * 2]);
-                                    Navigator.pushNamed(
-
-                                        context, DoctorProfilePage.routeName);
-                                  },
-                                  color: Colors.white,
-                                  colortext: Colors.black,
-                                  doctor: Doctor.fromJson(
-                                      snapshot.data[index * 2]),
-                                  icon: 'assets/images/doctoro.png',
-                                ),
-                              ),
-                              kWidthSizedBox,
-                              (index * 2 + 1 < totaldata)
-                                  ? Expanded(
-                                      child: DoctorCard(
-                                        onPress: () {
-                                          DoctorProfilePage.imageUrl = 'assets/images/doctoro.png';
-                                          AppointmentPage.doctor = Doctor.fromJson(
-                                              snapshot.data[index * 2 + 1]);
-                                          DoctorProfilePage.doctor = Doctor.fromJson(
-                                              snapshot.data[index * 2 + 1]);
-                                          Navigator.pushNamed(
-                                              context, DoctorProfilePage.routeName);
-                                        },
-                                        color: Colors.white,
-                                        colortext: Colors.black,
-                                        doctor: Doctor.fromJson(
-                                            snapshot.data[index * 2 + 1]),
-                                        icon: 'assets/images/doctoro.png',
-                                      ),
-                                    )
-                                  : SizedBox(),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    return Center(
-                      child: Text("No data available "),
-                    );
-                  }
+                  return Center(
+                    child: Text("No data available "),
+                  );
                 }
-              }),
-        ));
+              }
+            }),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(
+          left: kDefaultPadding * 2,
+          right: kDefaultPadding * 2,
+          bottom: kDefaultPadding,
+        ),
+        height: 70,
+        decoration: BoxDecoration(
+            color: homepagefont, //.withOpacity(0.40),Colors.white,
+            boxShadow: [
+              /* BoxShadow(
+              offset: Offset(0,-10),
+              blurRadius: 35,
+              color: kBkrColor.withOpacity(0.38),
+            )*/
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => false);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/homei.svg',
+                width: 50,
+                height: 50,
+              ),
+            ), //Icon(Icons.home_outlined),),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AssignmentScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/conferance.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, GeneralScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/icecream.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyProfileScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/profilo.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
+}
 
-  }
+class DoctorCard extends StatelessWidget {
+  const DoctorCard({
+    Key? key,
+    required this.onPress,
+    required this.icon,
+    //required this.title,
+    required this.color,
+    required this.colortext,
+    required this.doctor,
+  }) : super(key: key);
+  final VoidCallback onPress;
+  final String icon;
+  //final String title;
+  final Color color;
+  final Color colortext;
+  final Doctor doctor;
 
-
-
-  class DoctorCard extends StatelessWidget {
-    const DoctorCard({
-      Key? key,
-      required this.onPress,
-      required this.icon,
-      //required this.title,
-      required this.color,
-      required this.colortext,
-      required this.doctor,
-    }) : super(key: key);
-    final VoidCallback onPress;
-    final String icon;
-    //final String title;
-    final Color color;
-    final Color colortext;
-    final Doctor doctor;
-
-    @override
-    Widget build(BuildContext context) {
-      return InkWell(
-        onTap: onPress,
-        child: Container(
-          margin: EdgeInsets.only(top: 1.h),
-          width: 40.w,
-          height: 30.h,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-            //       boxShadow: [
-            //       BoxShadow(
-            //       offset: Offset(0,-10),
-            //   blurRadius: 35,
-            //   color: Colors.black12.withOpacity(0.17),
-            // )]
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPress,
+      child: Container(
+        margin: EdgeInsets.only(top: 1.h),
+        width: 40.w,
+        height: 30.h,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(kDefaultPadding / 2),
+          //       boxShadow: [
+          //       BoxShadow(
+          //       offset: Offset(0,-10),
+          //   blurRadius: 35,
+          //   color: Colors.black12.withOpacity(0.17),
+          // )]
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
               height: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
               width: SizerUtil.deviceType == DeviceType.tablet ? 24.w : 26.w,
-
-                child:CircleAvatar(
-                  backgroundColor: kSecondaryColor,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(icon),
-                        fit: BoxFit.cover,
-                      ),
+              child: CircleAvatar(
+                backgroundColor: kSecondaryColor,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage(icon),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
-              // SvgPicture.asset(
-              //   icon,
-              //   height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-              //   width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
-              //   color: colortext,
-              // ),
-              // Text(
-              //   title,
-              //   textAlign: TextAlign.left,
-              //   style: Theme.of(context).textTheme.subtitle2?.copyWith(color: colortext, fontSize: 22, fontWeight: FontWeight.bold),
-              // ),
-              Text(
-                "${doctor.firstName} ${doctor.lastName}",
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                    color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "${doctor.department}",
-                textAlign: TextAlign.right,
-                style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                    color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
+            ),
+            // SvgPicture.asset(
+            //   icon,
+            //   height: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+            //   width: SizerUtil.deviceType == DeviceType.tablet ? 30.sp : 40.sp,
+            //   color: colortext,
+            // ),
+            // Text(
+            //   title,
+            //   textAlign: TextAlign.left,
+            //   style: Theme.of(context).textTheme.subtitle2?.copyWith(color: colortext, fontSize: 22, fontWeight: FontWeight.bold),
+            // ),
+            Text(
+              "${doctor.firstName} ${doctor.lastName}",
+              textAlign: TextAlign.left,
+              style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                  color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "${doctor.department}",
+              textAlign: TextAlign.right,
+              style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                  color: colortext, fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
+}

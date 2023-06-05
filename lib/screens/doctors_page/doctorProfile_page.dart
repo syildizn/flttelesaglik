@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:telesaglikk/MongoDb.dart';
 import 'package:telesaglikk/constants.dart';
 import 'package:telesaglikk/models/students_model.dart';
 import 'package:telesaglikk/screens/appointment_screen/appointment_page.dart';
-import '../../jitsi.dart';
 import '../../models/doctors_model.dart';
+import '../assignment_screen/assignment_screen.dart';
+import '../general_screen/general_screen.dart';
+import '../home_screen/home_screen.dart';
+import '../my_profile/my_profile.dart';
 
 class DoctorProfilePage extends StatefulWidget {
   static String routeName = 'DoctorProfilePage';
@@ -194,118 +198,6 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
     }
   }
 
-  // Future<String> randevusorgu() async {
-  //   var s = await MongoDataBase.appointmentsorgu(selectedTime,selectedDate);
-  //   if (s != null && s == "bulundu") {
-  //     print("bulundumu: $s");
-  //     return "a";
-  //   } else {
-  //     print("bulundumu: nah bulundu");
-  //     return "b";
-  //   }
-  // }
-
-  // Widget buildAppointmentTimes(BuildContext context) {
-  //   return Column(
-  //     children: appointmentTimes.map((time) {
-  //       return FutureBuilder(
-  //         future: MongoDataBase.appointmentsorgu(time, selectedDate),
-  //         builder: (BuildContext context, AsyncSnapshot snapshot) {
-  //           bool isTimeAvailable =
-  //           snapshot.hasData ? snapshot.data == null : true;
-  //           return ElevatedButton(
-  //             onPressed: isTimeAvailable
-  //                 ? () {
-  //               final timeParts = time.split(':');
-  //               final hour = int.parse(timeParts[0]);
-  //               final minute = int.parse(timeParts[1]);
-  //               var selectedTime = TimeOfDay(hour: hour, minute: minute);
-  //               Navigator.of(context).pop(selectedTime);
-  //               _createAppointment(time);
-  //             }
-  //                 : null,
-  //             child: Text(time),
-  //           );
-  //         },
-  //       );
-  //     }).toList(),
-  //   );
-  // }
-  //
-  // // void initState() {
-  // //
-  // // }
-  //
-  // List<String> _generateTimes(DateTime date) {
-  //   List<String> times = [];
-  //   final now = DateTime.now();
-  //   var startDate = DateTime(date.year, date.month, date.day, 9, 0);
-  //   final endDate = DateTime(date.year, date.month, date.day, 17, 0);
-  //   if (date.day == now.day) {
-  //     final startHour = now.hour + 1;
-  //     startDate = startDate.add(Duration(hours: startHour - startDate.hour));
-  //
-  //   }
-  //   while (startDate.isBefore(endDate)) {
-  //     times.add('${startDate.hour.toString().padLeft(2, '0')}:00');
-  //     times.add('${startDate.hour.toString().padLeft(2, '0')}:30');
-  //     startDate = startDate.add(Duration(minutes: 30));
-  //   }
-  //   return times;
-  // }
-  //
-  // void _selectDateAndTime(BuildContext context) async {
-  //   final DateTime? picked = await showDatePicker(
-  //       context: context,
-  //       initialDate: selectedDate,
-  //       firstDate: DateTime.now(),
-  //       lastDate: DateTime(2100));
-  //   if (picked != null) {
-  //     setState(() {
-  //       selectedDate = picked;
-  //       appointmentTimes = _generateTimes(selectedDate);
-  //     });
-  //     final TimeOfDay? timePicked = await showTimePicker(
-  //         context: context,
-  //         initialTime: TimeOfDay.now(),
-  //         builder: (BuildContext context, Widget? child) {
-  //           return MediaQuery(
-  //             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-  //             child: child!,
-  //           );
-  //         });
-  //     if (timePicked != null){
-  //       final selectedDateTime = DateTime(
-  //         picked.year,
-  //         picked.month,
-  //         picked.day,
-  //         timePicked.hour,
-  //         timePicked.minute,
-  //       );
-  //       final now = DateTime.now();
-  //       if (selectedDateTime.isBefore(now)) {
-  //         ScaffoldMessenger.of(context).showSnackBar(
-  //           SnackBar(
-  //             content: Text('Geçmiş bir zaman seçilemez.'),
-  //             duration: Duration(seconds: 2),
-  //           ),
-  //         );
-  //       } else {
-  //         _createAppointment(selectedDateTime.toString());
-  //         Navigator.of(context).pop();
-  //       }
-  //     }
-  //   }
-  //
-  // }
-  //   void _createAppointment(String time) async{
-  //     setState(() {
-  //       appointments.add(time);
-  //     });
-  //     //MongoDataBase.createAppointment(time, selectedDate);
-  //     await MongoDataBase.appointment(selectedDate, selectedTime, doctor?.id?.$oid);
-  //   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -331,100 +223,128 @@ class _DoctorProfilePageState extends State<DoctorProfilePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.34,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imageUrl!),
-                fit: BoxFit.cover,
+          Expanded(flex: 2,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.34,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(imageUrl!),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-          sizedBox,
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     ElevatedButton(
-          //       onPressed: () {
-          //         final secilenogrenci =
-          //             '${doctor.firstName}_${doctor.lastName}}';
-          //         final roomName =
-          //             RegExp(r'^[a-zA-Z0-9_-]+$').stringMatch(secilenogrenci);
-          //
-          //         Jitsi.joinMeeting(secilenogrenci!);
-          //       },
-          //       child: Text('Görüntülü Arama'),
-          //       style: ElevatedButton.styleFrom(
-          //         primary: kBkrColor, // background
-          //         onPrimary: Colors.white, // foreground
-          //         shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(10)),
-          //       ),
-          //     ),
-          //     ElevatedButton(
-          //       onPressed: () {},
-          //       child: Text('Sesli Arama '),
-          //       style: ElevatedButton.styleFrom(
-          //         primary: kBkrColor, // background
-          //         onPrimary: Colors.white, // foreground
-          //         shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(10)),
-          //       ),
-          //     ),
-          //     ElevatedButton(
-          //       onPressed: () {},
-          //       child: Text('Mesajlaşma'),
-          //       style: ElevatedButton.styleFrom(
-          //         primary: kBkrColor, // background
-          //         onPrimary: Colors.white, // foreground
-          //         shape: RoundedRectangleBorder(
-          //             borderRadius: BorderRadius.circular(10)),
-          //       ),
-          //     )
-          //   ],
-          // ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Kalp Damar Cerrahı",
-                  style: TextStyle(color: Colors.black),
-                ),
-                sizedBox,
-                Text(
-                  "Hakkında ",
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-                SizedBox(height: 7),
-                Text(
-                  "${doctor.bio}",
-                  style: TextStyle(color: Colors.black, fontSize: 15),
-                ),
-                sizedBox,
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                     // _selectDateAndTime(context);
-                      Navigator.pushNamed(
+          // sizedBox,
 
-                          context, AppointmentPage.routeName);
-                    },
-                    child: Text('Randevu Oluştur'),
-                    style: ElevatedButton.styleFrom(
-                      primary: kBkrColor, // background
-                      onPrimary: Colors.white, // foreground
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+          Expanded(flex: 3,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(10.0),
+              child: SingleChildScrollView(scrollDirection:Axis.vertical,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Kalp Damar Cerrahı",
+                      style: TextStyle(color: Colors.black),
                     ),
-                  ),
+                    sizedBox,
+                    Text(
+                      "Hakkında ",
+                      style: TextStyle(color: Colors.black, fontSize: 25),
+                    ),
+                    SizedBox(height: 7),
+                    Text(
+                      "${doctor.bio}",
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                    sizedBox,
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                         // _selectDateAndTime(context);
+                          Navigator.pushNamed(
+
+                              context, AppointmentPage.routeName);
+                        },
+                        child: Text('Randevu Oluştur'),
+                        style: ElevatedButton.styleFrom(
+                          primary: kBkrColor, // background
+                          onPrimary: Colors.white, // foreground
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           )
         ],
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(
+          left: kDefaultPadding * 2,
+          right: kDefaultPadding * 2,
+          bottom: kDefaultPadding,
+        ),
+        height: 70,
+        decoration: BoxDecoration(
+            color: homepagefont, //.withOpacity(0.40),Colors.white,
+            boxShadow: [
+              /* BoxShadow(
+              offset: Offset(0,-10),
+              blurRadius: 35,
+              color: kBkrColor.withOpacity(0.38),
+            )*/
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, HomeScreen.routeName, (route) => false);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/homei.svg',
+                width: 50,
+                height: 50,
+              ),
+            ), //Icon(Icons.home_outlined),),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AssignmentScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/conferance.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, GeneralScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/icecream.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyProfileScreen.routeName);
+              },
+              icon: SvgPicture.asset(
+                'assets/icons/profilo.svg',
+                width: 50,
+                height: 50,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
