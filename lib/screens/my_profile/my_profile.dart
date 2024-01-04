@@ -15,7 +15,7 @@ class MyProfileScreen extends StatelessWidget {
   String? lastName = MongoDataBase.slastName;
   String? department = MongoDataBase.sdepartment;
   String? email = MongoDataBase.semail;
-  String? studentno = MongoDataBase.sstudentno ;
+  String? studentno = MongoDataBase.sstudentno;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,6 @@ class MyProfileScreen extends StatelessWidget {
               //send report to school management, in case if you want some changes to your profile
             },
             child: Container(
-
               padding: EdgeInsets.only(right: kDefaultPadding / 2),
               child: Row(
                 children: [
@@ -61,15 +60,12 @@ class MyProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-
                     radius:
-                    SizerUtil.deviceType == DeviceType.tablet ? 12.w : 13.w,
+                        SizerUtil.deviceType == DeviceType.tablet ? 12.w : 13.w,
                     backgroundColor: kSecondaryColor,
-                    backgroundImage:
-                    AssetImage('assets/images/studdent.jpg'),
+                    backgroundImage: AssetImage('assets/images/studdent.jpg'),
                   ),
                   kWidthSizedBox,
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -79,38 +75,16 @@ class MyProfileScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       Text('Platformu',
-                          style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          )),
+                          style:
+                              Theme.of(context).textTheme.subtitle2?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  )),
                     ],
                   )
                 ],
               ),
             ),
             sizedBox,
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     ProfileDetailRow(
-            //         title: 'Registration Number', value: '2020-ASDF-2021'),
-            //     ProfileDetailRow(title: 'Academic Year', value: '2020-2021'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     ProfileDetailRow(title: 'Öğrenci No', value: '$studentno'),
-            //     ProfileDetailRow(title: 'Öğrenci Bilgisi 1', value: 'Null'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     ProfileDetailRow(
-            //         title: 'Sınıfı', value: '2. Sınıf'),
-            //     ProfileDetailRow(title: 'Doğum Tarihi', value: '6 Şubat 2003'),
-            //   ],
-            // ),
             sizedBox,
             ProfileDetailColumn(
               title: 'Email',
@@ -198,55 +172,6 @@ class MyProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileDetailRow extends StatelessWidget {
-  const ProfileDetailRow({Key? key, required this.title, required this.value})
-      : super(key: key);
-  final String title;
-  final String value;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 40.w,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  color: Colors.black,
-                  fontSize: SizerUtil.deviceType == DeviceType.tablet
-                      ? 7.sp
-                      : 9.sp,
-                ),
-              ),
-              kHalfSizedBox,
-              Text(value, style: Theme.of(context).textTheme.caption?.copyWith(
-                color: Colors.black,
-                fontSize: 11.5,
-              )),
-              kHalfSizedBox,
-              SizedBox(
-                width: 35.w,
-                child: Divider(
-                  thickness: 1.0,
-                ),
-              ),
-            ],
-          ),
-          Icon(
-            Icons.lock_outline,
-            size: 10.sp,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class ProfileDetailColumn extends StatelessWidget {
   const ProfileDetailColumn(
       {Key? key, required this.title, required this.value})
@@ -255,41 +180,48 @@ class ProfileDetailColumn extends StatelessWidget {
   final String value;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  color: kTextBlackColor,
-                  fontSize: SizerUtil.deviceType == DeviceType.tablet
-                      ? 7.sp
-                      : 11.sp,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(alignment: Alignment.topRight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: Colors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: kTextBlackColor,
+                          fontSize: 18,
+                        ),
+                  ),
                 ),
+                kHalfSizedBox,
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, right: 12,bottom: 12),
+                  child: Text(value,
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.black45, fontSize: 16,fontWeight:  FontWeight.bold)),
+                ),
+
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Icon(
+                Icons.lock_outline,
+                size: 10.sp,
               ),
-              kHalfSizedBox,
-              Text(value, style: Theme.of(context).textTheme.caption?.copyWith(
-                color: Colors.black,
-                fontSize: 11.5,)),
-              kHalfSizedBox,
-              SizedBox(
-                width: 92.w,
-                child: Divider(
-                  thickness: 1.0,
-                ),
-              )
-            ],
-          ),
-          Icon(
-            Icons.lock_outline,
-            size: 10.sp,
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

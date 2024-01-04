@@ -18,7 +18,6 @@ class AssignmentScreen extends StatelessWidget {
   static String? doctorName;
   static String? patientNo = MongoDataBase.sstudentno;
 
-
   final String websiteURL =
       "https://www.google.com/"; //"https://meet.jit.si/emreturanMauroIcardi1234567890";
 
@@ -158,21 +157,21 @@ class AssignmentScreen extends StatelessWidget {
                                             ),
                                             kHalfSizedBox,
                                             //use condition here to display button
-                                            if ( appointment["accepted"] == '1')
-                                            //then show button
-                                            AssignmentButton(
-                                              onPress: () {
-                                                //submit here
-                                                final String mahmut =
-                                                    "${appointment["_id"].$oid}";
-                                                final String tahta =
-                                                    "https://meet.jit.si/$mahmut";
-                                                print("link: $tahta");
-                                                print(" tuşa basıldı");
-                                                _launchURL(tahta);
-                                              },
-                                              title: 'TUŞ',
-                                            ),
+                                            if (appointment["accepted"] == '1')
+                                              //then show button
+                                              AssignmentButton(
+                                                onPress: () {
+                                                  //submit here
+                                                  final String mahmut =
+                                                      "${appointment["_id"].$oid}";
+                                                  final String tahta =
+                                                      "https://meet.jit.si/$mahmut";
+                                                  print("link: $tahta");
+                                                  print(" tuşa basıldı");
+                                                  _launchURL(tahta);
+                                                },
+                                                title: 'TUŞ',
+                                              ),
                                           ],
                                         )),
                                   ],
